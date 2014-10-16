@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('hermesApp')
-  .controller('MainCtrl', function ($scope, $http) {
+  .controller('MainController', function ($scope, $http) {
     $scope.awesomeThings = [];
 
     $http.get('/api/things').success(function(awesomeThings) {
