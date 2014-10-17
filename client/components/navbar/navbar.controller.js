@@ -1,13 +1,24 @@
 'use strict';
 
 angular.module('hermesApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth) {
+  .controller('NavbarController', function ($scope, $location, Auth) {
     $scope.menu = [{
-      'title': 'Home',
-      'link': '/'
+      title: 'Home',
+      link: '/' 
+    }, {
+      title: 'Photos',
+      link: '/photos'
+    }, {
+      title: 'Contacts',
+      link: '/contacts'
+    }, {
+      title: 'About',
+      link: '/about'
     }];
 
     $scope.isCollapsed = true;
+
+    // not used yet, but will once we get a Users API
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
     $scope.getCurrentUser = Auth.getCurrentUser;
