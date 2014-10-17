@@ -577,6 +577,15 @@ module.exports = function (grunt) {
       ]);
     }
 
+    if (target === 'web') {
+      return grunt.task.run([
+        'express:dev',
+        'wait',
+        'open',
+        'express-keepalive'
+      ]);
+    }
+
     grunt.task.run([
       'clean:server',
       'env:all',
