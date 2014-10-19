@@ -5,12 +5,16 @@ var Schema = mongoose.Schema;
 var crypto = require('crypto');
 
 var UserSchema = new Schema({
-  name: String,
+  firstName: String,
+  lastName: String,
   email: { type: String, lowercase: true },
   role: {
     type: String,
     default: 'user'
   },
+  address: String,
+  homePhone: String,
+  cellPhone: String,
   hashedPassword: String,
   provider: String,
   salt: String
@@ -35,7 +39,12 @@ UserSchema
   .virtual('profile')
   .get(function() {
     return {
-      'name': this.name,
+      'firstName': this.firstName,
+      'lastName': this.lastName,
+      'email': this.email,
+      'address': this.address,
+      'homePhone': this.homePhone,
+      'cellPhone': this.cellPhone,
       'role': this.role
     };
   });

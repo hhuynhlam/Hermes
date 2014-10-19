@@ -33,14 +33,22 @@ Thing.find({}).remove(function() {
 User.find({}).remove(function() {
   User.create({
     provider: 'local',
-    name: 'Test User',
-    email: 'test@test.com',
-    password: 'test'
+    firstName: 'Hai',
+    lastName: 'Huynhlam',
+    email: 'hhuynhlam@gmail.com',
+    address: '159 Hornfels Ave.',
+    homePhone: '209-234-3907',
+    cellPhone: '408-623-2254',
+    password: 'algebra1'
   }, {
     provider: 'local',
     role: 'admin',
-    name: 'Admin',
+    firstName: 'Admin',
+    lastName: 'Admin',
     email: 'admin@admin.com',
+    address: '159 Hornfels Ave.',
+    homePhone: '111-222-3333',
+    cellPhone: '222-444-6666',
     password: 'admin'
   }, function() {
       console.log('finished populating users');

@@ -10,8 +10,12 @@ angular.module('hermesApp')
 
       if(form.$valid) {
         Auth.createUser({
-          name: $scope.user.name,
+          firstName: $scope.user.firstName,
+          lastName: $scope.user.lastName,
           email: $scope.user.email,
+          address: $scope.user.address,
+          homePhone: $scope.user.homePhone,
+          cellPhone: $scope.user.cellPhone,
           password: $scope.user.password
         })
         .then( function() {
