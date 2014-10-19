@@ -12,12 +12,30 @@
 var _ = require('lodash');
 var cloudinary = require('cloudinary');
 
-// Get list of things
+/*
+*	 Get all uploaded images from cloudinary server
+*	@params req, res
+*	@return {String}
+*/
 exports.index = function(req, res) {
-  cloudinary.api.resource('resources/image/upload', function(result) {
-    return result;
-  });
-  //if(err) { return handleError(res, err); }
+  	
+	// get list of uploaded images
+  	cloudinary.api.resources(function (results)	{ 
+  		var resultArray = [];
+
+  		// if has options, get a version with the passed options
+  		if(req.query) {
+	  		results.resources.forEach(function (result) {
+	  			resultArray.push(cloudinary.image(result.public_id, req.query));
+	  		});
+  		} else {
+  			results.resources.forEach(function (result) {
+	  			resultArray.push('<img src="' + result.url + '">');
+	  		});
+  		}
+
+  		res.send(resultArray);
+  	});
 };
 
 // Get a single thing

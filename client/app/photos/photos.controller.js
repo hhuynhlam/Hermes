@@ -2,7 +2,9 @@
 
 angular.module('hermesApp')
   .controller('PhotosController', function ($scope, $http) {
-		$http.get('/api/photos')
+
+  		// load photos from server, passing cloudinary options
+		$http.get('/api/photos?width=400&crop=scale')
 		.success(function(data) {
 			$scope.photos = data;
 		})
