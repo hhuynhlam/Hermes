@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('hermesApp')
-  .controller('SignupCtrl', function ($scope, Auth, $location) {
+  .controller('SignupController', function ($scope, Auth, $location) {
     $scope.user = {};
     $scope.errors = {};
 
