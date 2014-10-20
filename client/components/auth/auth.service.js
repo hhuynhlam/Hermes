@@ -93,6 +93,65 @@ angular.module('hermesApp')
       },
 
       /**
+       * Change address
+       *
+       * @param  {String}   newAddress
+       * @param  {Function} callback    - optional
+       * @return {Promise}
+       */
+      changeAddress: function(newAddress, callback) {
+        var cb = callback || angular.noop;
+
+        return User.changeAddress({ id: currentUser._id }, {
+          address: newAddress
+        }, function(user) {
+          return cb(user);
+        }, function(err) {
+          return cb(err);
+        }).$promise;
+      },
+
+      /**
+       * Change password
+       *
+       * @param  {String}   oldPassword
+       * @param  {String}   newPassword
+       * @param  {Function} callback    - optional
+       * @return {Promise}
+       */
+      changeHomePhone: function(newHomePhone, callback) {
+        var cb = callback || angular.noop;
+
+        return User.changeHomePhone({ id: currentUser._id }, {
+          homePhone: newHomePhone
+        }, function(user) {
+          return cb(user);
+        }, function(err) {
+          return cb(err);
+        }).$promise;
+      },
+
+      /**
+       * Change password
+       *
+       * @param  {String}   oldPassword
+       * @param  {String}   newPassword
+       * @param  {Function} callback    - optional
+       * @return {Promise}
+       */
+      changeCellPhone: function(newCellPhone, callback) {
+        var cb = callback || angular.noop;
+
+        return User.changeCellPhone({ id: currentUser._id }, {
+          cellPhone: newCellPhone
+        }, function(user) {
+          return cb(user);
+        }, function(err) {
+          return cb(err);
+        }).$promise;
+      },
+
+      /**
        * Gets all available info on authenticated user
        *
        * @return {Object} user

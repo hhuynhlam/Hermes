@@ -79,6 +79,54 @@ exports.changePassword = function(req, res, next) {
 };
 
 /**
+ * Change a users address
+ */
+exports.changeAddress = function(req, res, next) {
+  var userId = req.user._id;
+  var newAddress = String(req.body.address);
+
+  User.findById(userId, function (err, user) {
+    user.address = newAddress;
+    user.save(function(err) {
+        if (err) return validationError(res, err);
+        res.send(200);
+    });
+  });
+};
+
+/**
+ * Change a users cell phone number
+ */
+exports.changeCellPhone = function(req, res, next) {
+  var userId = req.user._id;
+  var newCellPhone = String(req.body.cellPhone);
+
+  User.findById(userId, function (err, user) {
+    user.cellPhone = newCellPhone;
+    user.save(function(err) {
+        if (err) return validationError(res, err);
+        res.send(200);
+    });
+  });
+};
+
+/**
+ * Change a users home phone number
+ */
+exports.changeHomePhone = function(req, res, next) {
+  var userId = req.user._id;
+  var newHomePhone = String(req.body.homePhone);
+
+  User.findById(userId, function (err, user) {
+    user.homePhone = newHomePhone;
+    user.save(function(err) {
+        if (err) return validationError(res, err);
+        res.send(200);
+    });
+  });
+};
+
+/**
  * Get my info
  */
 exports.me = function(req, res, next) {
