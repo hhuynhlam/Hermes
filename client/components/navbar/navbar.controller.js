@@ -5,15 +5,14 @@ angular.module('hermesApp')
     $scope.menu = [{
       title: 'Home',
       link: '/' 
-    }, {
-      title: 'Photos',
-      link: '/photos'
-    }, {
+    }, 
+    // {
+    //   title: 'Photos',
+    //   link: '/photos'
+    // }, 
+    {
       title: 'Contacts',
       link: '/contacts'
-    }, {
-      title: 'About',
-      link: '/about'
     }];
 
     $scope.isCollapsed = true;
