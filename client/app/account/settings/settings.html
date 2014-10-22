@@ -1,13 +1,20 @@
 <div class="container">
   <div class="row">
+
     <div class="col-sm-12">
       <h1>Settings</h1>
     </div>
+
     <div class="col-sm-12">
 
-      <form class="form" name="form" ng-submit="changeSettings(form)" novalidate>
+      <div class="pull-right">
+        <a ng-click="toggleChangePassword(form)" ng-hide="showChangePassword">Change Password</a>
+        <a ng-click="toggleChangePassword(form)" ng-show="showChangePassword">Change Contact Information</a>
+      </div>
 
-        <!-- <div class="form-group">
+      <!-- Change Password Form-->
+      <form class="form" name="changePasswordForm" ng-submit="changePassword(changePasswordForm)" ng-show="showChangePassword" novalidate>
+        <div class="form-group">
           <label>Change Password</label>
           <input type="password" name="password" placeholder="Old Password" class="form-control" ng-model="user.oldPassword"
                  mongoose-error/>
@@ -23,35 +30,33 @@
             Password must be at least 3 characters.
           </p>
         </div>
- -->
+
+        <p class="help-block alert alert-success" ng-show="message"> {{ message }} </p>
+        <p class="help-block alert alert-danger" ng-show="error"> {{ error }} </p>
+        <button class="btn btn-lg btn-primary" type="submit">Save</button>
+      </form>
+
+      <!-- Change Contact Info Form-->
+      <form class="form" name="changeInfoForm" ng-submit="changeContactInformation(changeInfoForm)" ng-hide="showChangePassword" novalidate>
         <div class="form-group">
           <label>Change Contact Information</label>
 
-          <input type="text" name="address" placeholder="Address" class="form-control" ng-model="user.address"
-                 ng-minlength="3" />
-          <p class="help-block" ng-show="form.password.$error.mongoose">
-              {{ errors.other }}
-          </p>
+          <input type="text" name="address" placeholder="Address" class="form-control" ng-model="user.address" />
 
           <input type="text" name="homePhone" placeholder="Home Phone Number" class="form-control" ng-model="user.homePhone"
-                 ng-minlength="3" />
-          <p class="help-block" ng-show="form.password.$error.mongoose">
-              {{ errors.other }}
-          </p>
+                 ng-minlength="7" />
 
           <input type="text" name="cellPhone" placeholder="Cell Phone Number" class="form-control" ng-model="user.cellPhone"
-                 ng-minlength="3" />
-          <p class="help-block" ng-show="form.password.$error.mongoose">
-              {{ errors.other }}
-          </p>
+                 ng-minlength="7" />
         </div>
 
         <p class="help-block alert alert-success" ng-show="message"> {{ message }} </p>
+        <p class="help-block alert alert-danger" ng-show="error"> {{ error }} </p>
 
-        <button class="btn btn-lg btn-primary" type="submit">Save changes</button>
-
+        <button class="btn btn-lg btn-primary" type="submit">Save</button>
       </form>
 
-    </div>
-  </div>
-</div>
+    </div><!-- .col-sm-12 -->
+  </div><!-- .row -->
+
+</div><!-- .container -->

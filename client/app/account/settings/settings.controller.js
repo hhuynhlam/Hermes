@@ -2,12 +2,30 @@
 
 angular.module('hermesApp')
   .controller('SettingsController', function ($scope, $q, User, Auth) {
-    $scope.errors = {};
+    
+    var _this = this;
+    var _defaultForm = {
+      address: '',
+      homePhone: '',
+      cellPhone: '',
+      oldPassword: '',
+      newPassword: ''
+    };
 
-    $scope.changeSettings= function(form) {
+    $scope.errors = {}; 
+    $scope.showChangePassword = false;
+
+    $scope.toggleChangePassword = function() {
+      _this._resetForm();
+      $scope.showChangePassword = !$scope.showChangePassword;
+    };
+
+    $scope.changeContactInformation = function(form) {
       var promiseArray = [];
       $scope.submitted = true;
-      
+      _this._resetMessages();
+
+      // check what input has values and update only those settings
       if(form.$valid) {
         if ($scope.user.address) {
           promiseArray.push(Auth.changeAddress($scope.user.address));
@@ -21,33 +39,49 @@ angular.module('hermesApp')
 
         // resolve promises
         $q.all(promiseArray).then(function () {
-            $scope.message = 'You have successfully changed your settings.';
+            _this._resetForm();
+            $scope.message = 'You have successfully changed your contact information.';
           },
           function (errors) {
-            $scope.errors.other = 'There was an error saving your contact information. Please check your form. (' + errors + ')';
+            $scope.error = 'There was an error saving your contact information. Please check your form. (' + errors + ')';
           }
         );
       }
 
       // form isn't valid
       else {
-          $scope.errors.other = 'There was an error saving your contact information. Please check your form.';
+          $scope.error = 'There was an error saving your contact information. Please check your form.';
       }
     };
 
-
     $scope.changePassword = function(form) {
+      _this._resetMessages();
+
       $scope.submitted = true;
       if(form.$valid) {
         Auth.changePassword( $scope.user.oldPassword, $scope.user.newPassword )
         .then( function() {
+          _this._resetForm();
           $scope.message = 'Password successfully changed.';
         })
         .catch( function() {
           form.password.$setValidity('mongoose', false);
-          $scope.errors.other = 'Incorrect password';
+          $scope.error= 'Incorrect password';
           $scope.message = '';
         });
       }
 		};
+
+    _this._resetForm = function() {
+      $scope.user = angular.copy(_defaultForm);
+      $scope.changePasswordForm.$setPristine();
+      $scope.changeInfoForm.$setPristine();
+      _this._resetMessages();
+    };
+
+    _this._resetMessages = function() {
+      $scope.message = '';
+      $scope.error = '';
+    };
+
   });
