@@ -112,10 +112,9 @@ angular.module('hermesApp')
       },
 
       /**
-       * Change password
+       * Change home phone
        *
-       * @param  {String}   oldPassword
-       * @param  {String}   newPassword
+       * @param  {String}   newHomePhone
        * @param  {Function} callback    - optional
        * @return {Promise}
        */
@@ -132,10 +131,9 @@ angular.module('hermesApp')
       },
 
       /**
-       * Change password
+       * Change cell phone
        *
-       * @param  {String}   oldPassword
-       * @param  {String}   newPassword
+       * @param  {String}   newCellPhone
        * @param  {Function} callback    - optional
        * @return {Promise}
        */
