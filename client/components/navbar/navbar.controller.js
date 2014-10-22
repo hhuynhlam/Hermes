@@ -13,6 +13,10 @@ angular.module('hermesApp')
     {
       title: 'Contacts',
       link: '/contacts'
+    },
+    {
+      title: 'Calendar',
+      link: '/calendar'
     }];
 
     $scope.isCollapsed = true;
