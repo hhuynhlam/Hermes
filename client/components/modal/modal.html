@@ -1,11 +1,34 @@
 <div class="modal-header">
-  <button ng-if="modal.dismissable" type="button" ng-click="$dismiss()" class="close">&times;</button>
-  <h4 ng-if="modal.title" ng-bind="modal.title" class="modal-title"></h4>
+    <h3 class="modal-title">{{ modal.title }}</h3>
 </div>
 <div class="modal-body">
-  <p ng-if="modal.text" ng-bind="modal.text"></p>
-  <div ng-if="modal.html" ng-bind-html="modal.html"></div>
-</div>
-<div class="modal-footer">
-  <button ng-repeat="button in modal.buttons" ng-class="button.classes" ng-click="button.click($event)" ng-bind="button.text" class="btn"></button>
+	<!-- {{ modal.body }} -->
+	<form class="form row" name="createAnEvent" ng-submit="createEvent" novalidate>
+		<div class="form-group">
+			<div class="col-lg-12">
+				<input type="text" name="title" placeholder="Title" class="form-control" ng-model="event.title"/>
+			</div>
+
+			<div class="col-lg-12">
+				<input type="text" name="title" placeholder="Info" class="form-control" ng-model="event.info"/>
+			</div>
+
+			<div class="col-lg-6">
+				<input type="text" class="form-control"  placeholder="Start Date" datepicker-popup="MMMM dd, yyyy" 
+					ng-model="event.start" is-open="startOpened" ng-focus="showCalendar('start')" ng-required="true" close-text="Close" />
+			</div>
+
+			<div class="col-lg-6">
+				<input type="text" class="form-control col-lg-6"  placeholder="End Date (Optional)" datepicker-popup="MMMM dd, yyyy" 
+					ng-model="event.end" is-open="endOpened" ng-focus="showCalendar('end')" ng-required="false" close-text="Close" />
+			</div>
+		</div>
+
+		<div class="col-lg-12">
+			<p class="help-block alert alert-success" ng-show="message"> {{ message }} </p>
+			<p class="help-block alert alert-danger" ng-show="error"> {{ error }} </p>
+			<button class="btn btn-md btn-primary pull-right" type="submit">Save</button>
+			<button class="btn btn-md btn-warning pull-right" type="reset">Cancel</button>
+		</div>
+	</form> 
 </div>

@@ -1,24 +1,14 @@
 'use strict';
 
 angular.module('hermesApp')
-  .controller('CalendarController', function ($scope) {
-  	$scope.eventSources = [{
-	    events: [{
-	        title  : 'event1',
-	        start  : '2014-10-01'
-	    },
-	    {
-	        title  : 'event2',
-	        start  : '2014-10-05',
-	        end    : '2014-10-07'
-	    },
-	    {
-	        title  : 'event3',
-	        start  : '2014-10-09T12:30:00',
-	        allDay : false // will make the time show
-	    }]
-	}];
-  	$scope.uiConfig = {
+  .controller('CalendarController', function ($scope, $modal, Event) {
+
+    $scope.events = [];
+    $scope.eventSources = [];
+    $scope.startOpened = false;
+    $scope.endOpened = false;
+  	
+    $scope.uiConfig = {
       calendar:{
       	dayClick: $scope.alertEventOnClick,
       	editable: true,
@@ -32,4 +22,48 @@ angular.module('hermesApp')
         height: 'auto'
       }
     };
+
+    $scope.modal = {
+        title: 'Create an Event',
+        body: 'Hello World!'
+    };
+
+    // $scope.addEvent = function ()  {
+    //   Event.save({
+    //     name: 'Event 1',
+    //     info: 'A Test Event',
+    //     active: true
+    //   });
+    // };
+
+    $scope.createEventModal = function(size) {
+      _openModal(size);
+    };
+
+    $scope.showCalendar = function (option) {
+      if (option === 'start') {
+        $scope.startOpened = true;
+      }
+      else if (option === 'end') {
+        $scope.endOpened = true;
+      }
+    };
+
+    var _openModal = function (size) {
+      $modal.open({
+        templateUrl: 'components/modal/modal.html',
+        controller: 'CalendarController',
+        size: size,
+        scope: $scope
+      });
+    };
+
+    var _getEvents = function ()  {
+      Event.query(function (data) {
+        data.forEach(function (item) {
+          $scope.events.push(item);
+        });
+      });
+    };
+
   });
