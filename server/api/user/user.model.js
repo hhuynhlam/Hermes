@@ -118,7 +118,6 @@ UserSchema.methods = {
    *
    * @param {String} plainText
    * @return {Boolean}
-   * @api public
    */
   authenticate: function(plainText) {
     return this.encryptPassword(plainText) === this.hashedPassword;
@@ -128,7 +127,6 @@ UserSchema.methods = {
    * Make salt
    *
    * @return {String}
-   * @api public
    */
   makeSalt: function() {
     return crypto.randomBytes(16).toString('base64');
@@ -139,7 +137,6 @@ UserSchema.methods = {
    *
    * @param {String} password
    * @return {String}
-   * @api public
    */
   encryptPassword: function(password) {
     if (!password || !this.salt) return '';
