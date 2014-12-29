@@ -1,17 +1,22 @@
 'use strict';
 
 angular.module('hermesApp')
+
+  /**
+   * Calendar Controller
+   * @param  $scope [Angular $scope]
+   * @param  $modal [Bootstrap $modal]
+   * @param  Event  [Angular Service]
+   */
   .controller('CalendarController', function ($scope, $modal, Event) {
 
-    $scope.events = [];
     $scope.eventSources = [];
-    $scope.startOpened = false;
-    $scope.endOpened = false;
-  	
+    $scope.event = {};  
+    
     $scope.uiConfig = {
       calendar:{
-      	dayClick: $scope.alertEventOnClick,
-      	editable: true,
+        dayClick: $scope.alertEventOnClick,
+        editable: true,
         eventDrop: $scope.alertOnDrop,
         eventResize: $scope.alertOnResize,
         header:{
@@ -23,47 +28,52 @@ angular.module('hermesApp')
       }
     };
 
-    $scope.modal = {
-        title: 'Create an Event',
-        body: 'Hello World!'
-    };
-
-    // $scope.addEvent = function ()  {
-    //   Event.save({
-    //     name: 'Event 1',
-    //     info: 'A Test Event',
-    //     active: true
-    //   });
-    // };
-
-    $scope.createEventModal = function(size) {
-      _openModal(size);
-    };
-
-    $scope.showCalendar = function (option) {
-      if (option === 'start') {
-        $scope.startOpened = true;
-      }
-      else if (option === 'end') {
-        $scope.endOpened = true;
+    $scope.createEvent = function (isValid, param1, param2)  {
+      if (!isValid) {
+        $scope.error = 'The form is not valid.';
       }
     };
 
-    var _openModal = function (size) {
+    $scope.showCalendar = function (type) {
+      if (type && type === 'start') {
+        $scope.startDateOpened = true;
+      }
+      else if (type && type === 'end') {
+        $scope.endDateOpened = true;
+      }
+    };
+
+    $scope.openModal = function (options) {
+      var _templateURL;
+      $scope.modal = { title: 'Create an Event' };
+
+      switch (options.type || '') {
+        case 'createEvent':
+          _templateURL = 'createEvent.html';
+          break;
+        
+        default:
+          _templateURL = 'default.html';
+          break;
+      }
+
       $modal.open({
-        templateUrl: 'components/modal/modal.html',
+        templateUrl: 'components/modal/templates/' + _templateURL,
         controller: 'CalendarController',
-        size: size,
+        size: options.size,
         scope: $scope
       });
+
     };
 
     var _getEvents = function ()  {
       Event.query(function (data) {
-        data.forEach(function (item) {
-          $scope.events.push(item);
-        });
+          $scope.eventSources.push(data);
       });
     };
+
+    (function init() {
+      _getEvents();
+    })();
 
   });

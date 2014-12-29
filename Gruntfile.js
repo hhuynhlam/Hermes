@@ -397,6 +397,16 @@ module.exports = function (grunt) {
       ]
     },
 
+    env: {
+      test: {
+        NODE_ENV: 'test'
+      },
+      prod: {
+        NODE_ENV: 'production'
+      },
+      all: localConfig
+    },
+
     // Compiles Less to CSS
     less: {
       options: {

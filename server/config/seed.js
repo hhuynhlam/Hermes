@@ -5,6 +5,7 @@
 
 'use strict';
 
+// User Seeding
 var User = require('../api/user/user.model');
 
 User.find({}).remove(function() {
@@ -29,6 +30,30 @@ User.find({}).remove(function() {
     password: 'admin'
   }, function() {
       console.log('finished populating users');
+    }
+  );
+});
+
+// Event Seeding
+var Event = require('../api/event/event.model');
+
+Event.find({}).remove(function() {
+  Event.create({
+    title: 'Event Title 1',
+    allDay: false,
+    start: new Date('January 2, 2015 10:00 AM'),
+    end: new Date('January 2, 2015 10:30 AM'),
+    url: null,
+    className: null
+  }, {
+    title: 'Event Title 2',
+    allDay: false,
+    start: new Date('January 3, 2015 10:00 AM'),
+    end: new Date('January 3, 2015 10:30 AM'),
+    url: null,
+    className: null
+  }, function() {
+      console.log('finished populating events');
     }
   );
 });

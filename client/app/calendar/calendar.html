@@ -2,5 +2,7 @@
   	<div class="row">
 		<div class="col-md-12">
 		 	<div ui-calendar="uiConfig.calendar" ng-model="eventSources"></div>
-		 	<button ng-click="createEventModal(lg)">Add Event</button>
+		 	<button ng-click="openModal( {size: 'lg', type: 'createEvent'} )">Add Event</button>
 		</div>
+	</div>
+</div>

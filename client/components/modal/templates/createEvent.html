@@ -1,0 +1,52 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{ modal.title }}</h3>
+</div>
+<div class="modal-body">
+	<!-- {{ modal.body }} -->
+	<form class="form row" name="createEventForm" ng-submit="createEvent(createEventForm.$valid)" novalidate>
+		<div class="form-group">
+			<div class="col-lg-12">
+				<input 
+					class="form-control"
+					name="title"  
+					ng-model="event.title" 
+					ng-required="true" 
+					placeholder="Title"
+					type="text"	/>
+			</div>
+
+			<div class="col-lg-6">
+				<input 
+					class="form-control"
+					close-text="Close"  
+					datepicker-popup="MMMM dd, yyyy"
+					is-open="startDateOpened"
+					placeholder="Start Date" 
+					ng-focus="showCalendar('start')" 
+					ng-model="event.start"   
+					ng-required="true"
+					type="text"	/>
+			</div>
+
+			<div class="col-lg-6">
+				<input 
+					class="form-control"
+					close-text="Close"  
+					datepicker-popup="MMMM dd, yyyy"
+					is-open="endDateOpened"
+					placeholder="End Date" 
+					ng-focus="showCalendar('end')" 
+					ng-model="event.end"   
+					ng-required="false"
+					type="text"	/>
+			</div>
+		</div>
+
+		<div class="col-lg-12">
+			<p class="help-block alert alert-success" ng-show="message"> {{ message }} </p>
+			<p class="help-block alert alert-danger" ng-show="error"> {{ error }} </p>
+			<button class="btn btn-md btn-primary pull-right" type="submit">Save</button>
+			<button class="btn btn-md btn-warning pull-right" type="reset">Cancel</button>
+		</div>
+	</form> 
+</div>
