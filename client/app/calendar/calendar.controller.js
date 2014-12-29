@@ -11,42 +11,54 @@ angular.module('hermesApp')
   .controller('CalendarController', function ($scope, $modal, Event) {
 
     $scope.eventSources = [];
-    $scope.event = {};  
+    $scope.newEvent = {}; 
     
     $scope.uiConfig = {
       calendar:{
-        dayClick: $scope.alertEventOnClick,
         editable: true,
-        eventDrop: $scope.alertOnDrop,
-        eventResize: $scope.alertOnResize,
         header:{
           left: 'month agendaWeek',
           center: 'title',
           right: 'today prev,next'
         },
-        height: 'auto'
+        height: '500'
       }
     };
 
-    $scope.createEvent = function (isValid, param1, param2)  {
-      if (!isValid) {
-        $scope.error = 'The form is not valid.';
+    $scope.createEvent = function (isValid)  {
+      $scope.submitted = true;
+      
+      // check endDate is after startDate
+      if ($scope.newEvent.end < $scope.newEvent.start) {
+        $scope.error = 'End date must be on or after start date.';
       }
+      else if (!isValid) {
+        $scope.error = 'Please check your form.';
+      }
+      else {
+        $scope.error = '';
+      }
+
     };
 
     $scope.showCalendar = function (type) {
-      if (type && type === 'start') {
+      if (!type) {
+        return;
+      }
+      else if (type === 'start') {
         $scope.startDateOpened = true;
       }
-      else if (type && type === 'end') {
+      else if (type === 'end') {
         $scope.endDateOpened = true;
       }
     };
 
     $scope.openModal = function (options) {
-      var _templateURL;
+      var modalInstance = {},
+          _templateURL = '';
       $scope.modal = { title: 'Create an Event' };
 
+      // setup modal template path
       switch (options.type || '') {
         case 'createEvent':
           _templateURL = 'createEvent.html';
@@ -57,11 +69,17 @@ angular.module('hermesApp')
           break;
       }
 
-      $modal.open({
+      // open modal
+      modalInstance = $modal.open({
         templateUrl: 'components/modal/templates/' + _templateURL,
         controller: 'CalendarController',
         size: options.size,
         scope: $scope
+      });
+
+      // setup modal instance controls
+      modalInstance.opened.then(function () {
+        $scope.dismissModal = modalInstance.dismiss;
       });
 
     };
