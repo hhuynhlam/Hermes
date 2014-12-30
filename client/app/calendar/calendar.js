@@ -3,6 +3,7 @@
 angular.module('hermesApp').config(function ($routeProvider) {
     $routeProvider.when('/calendar', {
         templateUrl: 'app/calendar/calendar.html',
-        controller: 'CalendarController'
+        controller: 'CalendarController',
+        authenticate: true
     });
 });

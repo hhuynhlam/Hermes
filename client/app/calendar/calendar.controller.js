@@ -11,7 +11,10 @@ angular.module('hermesApp')
   .controller('CalendarController', function ($scope, $modal, Event) {
 
     $scope.eventSources = [];
-    $scope.newEvent = {}; 
+    $scope.newEvent = {
+      startTime: new Date(),
+      endTime: new Date()
+    }; 
     
     $scope.uiConfig = {
       calendar:{
@@ -24,10 +27,21 @@ angular.module('hermesApp')
         height: '500'
       }
     };
-
+    
     $scope.createEvent = function (isValid)  {
       $scope.submitted = true;
-      
+
+      // concatenate time to date to be stored
+      if ($scope.newEvent.start && $scope.newEvent.startTime) {
+        $scope.newEvent.start.setUTCHours($scope.newEvent.startTime.getHours());
+        $scope.newEvent.start.setUTCMinutes($scope.newEvent.startTime.getMinutes());
+      }
+
+      if ($scope.newEvent.end && $scope.newEvent.endTime) {
+        $scope.newEvent.end.setUTCHours($scope.newEvent.endTime.getHours());
+        $scope.newEvent.end.setUTCMinutes($scope.newEvent.endTime.getMinutes());
+      }
+
       // check endDate is after startDate
       if ($scope.newEvent.end < $scope.newEvent.start) {
         $scope.error = 'End date must be on or after start date.';
@@ -37,6 +51,10 @@ angular.module('hermesApp')
       }
       else {
         $scope.error = '';
+        Event.save($scope.newEvent, function () {
+          $scope.dismissModal();
+          location.reload();
+        });
       }
 
     };
@@ -85,8 +103,8 @@ angular.module('hermesApp')
     };
 
     var _getEvents = function ()  {
-      Event.query(function (data) {
-          $scope.eventSources.push(data);
+     Event.query(function (data) {
+        $scope.eventSources.push(data);
       });
     };
 

@@ -27,9 +27,9 @@
 					name="startDate"
 					ng-focus="showCalendar('start')" 
 					ng-model="newEvent.start"   
-					required
-					type="text"	/>
-				<p 	ng-show="createEventForm.startDate.$invalid && submitted" 
+					required 	/>
+				
+				<p 	ng-show="createEventForm.start.$invalid && submitted" 
 					class="help-block">Start date is required.</p>
 			</div>
 
@@ -41,9 +41,12 @@
 					is-open="endDateOpened"
 					placeholder="End Date (Optional)" 
 					ng-focus="showCalendar('end')" 
-					ng-model="newEvent.end"   
-					type="text"	/>
+					ng-model="newEvent.end"	/>
 			</div>
+
+			<timepicker class="col-lg-6" ng-model="newEvent.startTime" ng-show="newEvent.start"></timepicker>
+			<timepicker class="col-lg-6" ng-model="newEvent.endTime" ng-show="newEvent.end"></timepicker>
+
 		</div>
 
 		<div class="col-lg-12">
