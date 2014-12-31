@@ -10,6 +10,7 @@ angular.module('hermesApp')
    * @param  Event  [Angular Service]
    */
   .controller('EditEventController', function ($scope, $routeParams, $location, Event) {
+    $scope.loading = true;
     
     $scope.cancelDelete = function () {
       $scope.alertDelete = false;
@@ -94,10 +95,13 @@ angular.module('hermesApp')
           _id: data._id,
           title: data.title,
           start: new Date(data.start).toDateString(),
-          startTime: startDate,
-          end: new Date(data.end).toDateString(),
-          endTime: endDate,
+          startTime: startDate
         };
+
+        if (data.end) {
+          $scope.edittedEvent.end = new Date(data.end).toDateString();
+          $scope.edittedEvent.endTime = endDate;
+        }
 
         // FIXME: (BUG) date renders one day off.
         // var _sDate = new Date($scope.edittedEvent.start);
@@ -108,6 +112,8 @@ angular.module('hermesApp')
 
         // $scope.edittedEvent.start = _sDate.toDateString();
         // $scope.edittedEvent.end = _eDate.toDateString();
+
+        $scope.loading = false;
 
       });
     };

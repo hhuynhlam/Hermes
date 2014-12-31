@@ -13,6 +13,7 @@ User.find({}).remove(function() {
     provider: 'local',
     firstName: 'Hai',
     lastName: 'Huynhlam',
+    role: 'admin',
     email: 'hhuynhlam@gmail.com',
     address: '159 Hornfels Ave.',
     homePhone: '209-234-3907',
