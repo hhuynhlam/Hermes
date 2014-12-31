@@ -11,8 +11,8 @@ angular.module('hermesApp')
   .controller('CreateEventController', function ($scope, $location, Event) {
 
       $scope.newEvent = {
-        startTime: new Date(),
-        endTime: new Date()
+        startTime: new Date('1/1/1970 1:00 PM'),
+        endTime: new Date('1/1/1970 1:00 PM')
       }; 
 
       $scope.createEvent = function (isValid)  {
@@ -20,13 +20,13 @@ angular.module('hermesApp')
 
         // concatenate time to date to be stored
         if ($scope.newEvent.start && $scope.newEvent.startTime) {
-          $scope.newEvent.start.setUTCHours($scope.newEvent.startTime.getHours());
-          $scope.newEvent.start.setUTCMinutes($scope.newEvent.startTime.getMinutes());
+          $scope.newEvent.start.setUTCHours($scope.newEvent.startTime.getUTCHours());
+          $scope.newEvent.start.setUTCMinutes($scope.newEvent.startTime.getUTCMinutes());
         }
 
         if ($scope.newEvent.end && $scope.newEvent.endTime) {
-          $scope.newEvent.end.setUTCHours($scope.newEvent.endTime.getHours());
-          $scope.newEvent.end.setUTCMinutes($scope.newEvent.endTime.getMinutes());
+          $scope.newEvent.end.setUTCHours($scope.newEvent.endTime.getUTCHours());
+          $scope.newEvent.end.setUTCMinutes($scope.newEvent.endTime.getUTCMinutes());
         }
 
         // check endDate is after startDate
