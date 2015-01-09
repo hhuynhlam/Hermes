@@ -3,4 +3,4 @@
 
 ##### Project Status : In Development
 
-A family hub for events, contact information and photos.
+<br/>A family hub for events, contact information and photos.
