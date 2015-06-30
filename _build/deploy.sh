@@ -5,3 +5,6 @@ pushd ../client
 GULP clean
 GULP build
 
+# popd
+# scp -r ./_dist huynhfam@huynhfamily.net:~/public_html/
+# ssh user@host 'bash -s' < ./remote.sh
