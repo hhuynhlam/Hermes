@@ -1,0 +1,124 @@
+doctype html
+html.no-js(lang='')
+  head
+    title Style Guide
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge, chrome=1')
+    meta(name='format-detection', content='telephone=no')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='description', content='')
+
+    // Styles
+    link(rel='stylesheet', href='../vendor/bower_components/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', href='../vendor/bower_components/font-awesome/css/font-awesome.min.css')
+    link(rel='stylesheet', href='../vendor/bower_components/fullcalendar/dist/fullcalendar.min.css')
+    link(rel='stylesheet', href='../vendor/bower_components/kendo/styles/kendo.common-bootstrap.min.css')
+    link(rel='stylesheet', href='../assets/css/global.css')
+
+  body
+    nav.navbar.navbar-inverse(role='navigation')
+      // Brand and toggle get grouped for better mobile display
+      .navbar-header
+        button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-ex1-collapse')
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.navbar-brand(href='#') Style Guide
+      // Collect the nav links, forms, and other content for toggling
+      .collapse.navbar-collapse.navbar-ex1-collapse
+        ul.nav.navbar-nav
+          li
+            a(href='/dev') Bootstrap
+          li.active
+            a(href='/dev/kendo') Kendo
+
+    // start container
+    .content(style='display: block;')
+      ol.breadcrumb
+        li.active Kendo Style Guide
+
+      .container
+
+        // Grid
+        .panel.panel-default
+          .panel-heading Grid
+          .panel-body
+            #grid
+        
+        // Modal
+        .panel.panel-default
+          .panel-heading Modal
+          .panel-body
+            a#openModal.btn.btn-primary Open Modal
+            #Modal
+        
+        // Multiselect
+        .panel.panel-default
+          .panel-heading Multiselect
+          .panel-body
+            select#required(multiple='multiple', data-placeholder='Select attendees...')
+              option Steven White
+              option Nancy King
+              option Nancy Davolio
+    // end container
+
+
+    script(src='vendor/bower_components/jquery/dist/jquery.min.js')
+    script(src='vendor/bower_components/kendo/js/kendo.all.min.js')
+    script.
+      $(document).ready(function() {    
+        // grid
+        $('#grid').kendoGrid({
+          dataSource: {
+            type: "odata",
+            transport: {
+              read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+            },
+            pageSize: 5
+          },
+          columns: [{
+            template: "<div class='customer-photo'" +
+            "style='background-image: url(../content/web/Customers/#:data.CustomerID#.jpg);'></div>" +
+            "<div class='customer-name'>#: ContactName #</div>",
+            field: "ContactName",
+            title: "Contact Name",
+            width: 240
+          }, {
+            field: "ContactTitle",
+            title: "Contact Title"
+          }, {
+            field: "CompanyName",
+            title: "Company Name"
+          }, {
+            field: "Country",
+            width: 150
+          }],
+          filterable: true,
+          scrollable: false,
+          pageable: true,
+          selectable: 'row',
+          sortable: true
+        });
+
+        // modal
+        $('#openModal').on('click', function () {
+          var $modal =$('#Modal');
+
+          if($modal.data('kendoWindow')) {
+            $modal.data('kendoWindow').open();
+          } else {
+            $modal.html('<section class="text-center"><div>Are you sure you want to make these changes?</div><div class="top-space"><button class="btn btn-default closeModal">No</button><button class="btn btn-success closeModal">Yes </button></div>');
+            $('.closeModal').on('click', function () {
+              $('#Modal').data('kendoWindow').close();
+            });
+
+            $modal.kendoWindow({ title: 'Modal Title', modal: true });
+            $modal.data('kendoWindow').center();
+          }
+        });
+        
+
+        // multiselect
+        $('#required').kendoMultiSelect().data("kendoMultiSelect");
+      });

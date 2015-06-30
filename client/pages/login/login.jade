@@ -1,0 +1,27 @@
+extends ../_layout.jade
+
+block content
+  section#Login
+    ol.breadcrumb
+            li
+                a(href="#/") Home
+            li.active Login
+
+    .well.col-sm-6.col-sm-offset-3
+      form.form-horizontal
+        fieldset
+          legend Login
+          .form-group
+            .col-sm-12
+              input.form-control(type='text', placeholder='Username', data-bind='value: username')
+          .form-group
+            .col-sm-12
+              input.form-control(type='password', placeholder='Password', data-bind='value: password')
+          .form-group
+            .col-sm-12
+              a(href='mailto:rhorho.webmaster@gmail.com?subject=[APO] Password Recovery&body=Include your name, class, and email address used on the website.')
+                em Forgot your Password?
+          .form-group
+            .col-lg-12.text-center
+              button.btn.btn-primary.pull-right(type='submit', data-bind='click: submit') Submit
+              button.btn.btn-default.pull-right(data-bind='click: cancel') Cancel

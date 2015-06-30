@@ -1,0 +1,76 @@
+extends ../_layout.jade
+
+block content
+    section#EventDetail
+        ol.breadcrumb
+            li
+                a(href="#/") Home
+            li
+                a(href="#/event") Events
+            li.active Detail
+
+        .container
+            h2(data-bind="text: event().Name")
+
+            .well.col-sm-8
+                div 
+                    strong Date: &nbsp;
+                    span(data-bind="text: event().date")
+                div 
+                    strong Location: &nbsp;
+                    a(data-bind="attr: { target: '_blank', href: 'http://maps.google.com/?q=' + event().Location }")
+                        span(data-bind="text: event().Location")
+                div 
+                    strong Meet: &nbsp;
+                    span(data-bind="text: event().MeetLocation") 
+                    span(data-bind="visible: event().MeetTime")
+                        | &nbsp; &#64;  
+                        span(data-bind="text: event().MeetTime")
+                hr
+                div.top-space
+                    strong Description: 
+                    div(data-bind="html: event().Description")
+
+            .col-sm-4(data-bind="with: shiftViewModel")
+                div(data-bind="foreach: shifts")
+                    //- shifts
+                    .panel.panel-default
+                        .panel-heading
+                            div(data-bind="text: Description")
+                            div
+                                span(data-bind="text: StartTime")
+                                span(data-bind="visible: EndTime, text: ' - ' + EndTime")
+                        
+                        .panel-body
+                            //- signups
+                            ul(data-bind="foreach: $parent.signups()[Id]")
+                                li
+                                    span(data-bind="text: FirstName") 
+                                    | &nbsp;
+                                    span(data-bind="text: LastName")
+                                    | &nbsp;
+                                    span(data-bind="visible: Driver != 0") 
+                                        span(data-bind="text: '(' + Driver + ')'")  
+                            //- buttons
+                            div.text-center(data-bind="with: $parent.eventActionViewModel")
+                                button.btn.btn-primary(data-bind="visible: $parent.canSignUp() && $parent.isReady(), \
+                                    attr: { 'data-shiftId': $parent.Id, 'data-eventId': $parent.Event }, \
+                                    click: add, disable: $parent.disabled") Signup
+                                button.btn.btn-warning(data-bind="visible: $parent.canWaitlist() && $parent.isReady(), \
+                                    attr: { 'data-shiftId': $parent.Id, 'data-eventId': $parent.Event }, \
+                                    click: addWaitlist, disable: $parent.disabled") Waitlist
+                                button.btn.btn-danger(data-bind="visible: $parent.isWaitlisted() && $parent.isReady(), \
+                                    attr: { 'data-shiftId': $parent.Id, 'data-eventId': $parent.Event }, \
+                                    click: removeWaitlist, disable: $parent.disabled") Remove from Waitlist
+                                button.btn.btn-danger(data-bind="visible: $parent.isSignedUp() && $parent.isReady(),  \
+                                    attr: { 'data-shiftId': $parent.Id, 'data-eventId': $parent.Event }, \
+                                    click: remove, disable: $parent.disabled") Remove
+                            //- waitlist
+                            hr(data-bind="visible: isFull")
+                            .well.well-sm(data-bind="visible: isFull")
+                                h5 Waitlist:
+                                ol(data-bind="foreach: $parent.waitlist()[Id]")
+                                    li
+                                        span(data-bind="text: FirstName") 
+                                        | &nbsp;
+                                        span(data-bind="text: LastName")

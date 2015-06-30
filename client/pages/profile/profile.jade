@@ -1,0 +1,120 @@
+extends ../_layout.jade
+
+block content
+  section#Profile
+    ol.breadcrumb
+            li
+                a(href="#/") Home
+            li.active Profile
+
+    .container
+      .col-md-12
+        
+        h3(data-bind="text: currentUser.FirstName + ' ' + currentUser.LastName")
+        hr 
+        
+        .row
+          //- Upcoming Shifts
+          .col-md-6
+            .panel.panel-info
+              .panel-heading 
+                h1.panel-title Upcoming Shifts
+              .panel-body 
+                span(data-bind="visible: !upcomingEvents().length") You have no upcoming shifts.
+                table.table(data-bind="visible: upcomingEvents().length")
+                  thead
+                    tr
+                      th Date
+                      th Name
+                      th Start 
+                      th.hidden-xs End 
+                  tbody(data-bind="foreach: upcomingEvents")
+                    tr(data-bind="css: { 'text-danger': conflict }")
+                      td
+                        span(data-bind="text: Date")
+                        i.fa.fa-exclamation-triangle.left-space(data-bind="visible: conflict")
+                      td
+                        a(data-bind="attr: { href: window.env.CLIENT_HOST + '/event/' + Event }")
+                          span(data-bind="text: Name, css: { 'text-danger': conflict }")
+                      td(data-bind="text: StartTime")
+                      td.hidden-xs(data-bind="text: EndTime")
+
+          //- Waitlisted
+          .col-md-6
+            .panel.panel-warning
+              .panel-heading 
+                h1.panel-title Waitlisted
+              .panel-body 
+                span(data-bind="visible: !waitlistedEvents().length") You have no waitlisted shifts.
+                table.table(data-bind="visible: waitlistedEvents().length")
+                  thead
+                    tr
+                      th Date
+                      th Name
+                      th Start 
+                      th.hidden-xs End 
+                  tbody(data-bind="foreach: waitlistedEvents")
+                    tr(data-bind="css: { 'text-danger': conflict }")
+                      td
+                        span(data-bind="text: Date")
+                        i.fa.fa-exclamation-triangle.left-space(data-bind="visible: conflict")
+                      td
+                        a(data-bind="attr: { href: window.env.CLIENT_HOST + '/event/' + Event }")
+                          span(data-bind="text: Name, css: { 'text-danger': conflict }")
+                      td(data-bind="text: StartTime")
+                      td.hidden-xs(data-bind="text: EndTime")
+
+        .row
+          //- Notes
+          .col-md-3
+            .alert.alert-warning 
+              strong Notes
+              hr
+              div(data-bind="html: currentUser.Notes")
+
+          //- Edit Profile
+          .col-md-9
+            form.form-horizontal(data-bind="submit: save")
+              fieldset.panel.panel-primary
+                .panel-heading 
+                  h1.panel-title Edit Profile
+                .panel-body
+                  .form-group
+                    label.col-lg-3.control-label Phone
+                    .col-lg-9
+                      input.form-control(type='tel', name='phone', data-bind="value: formViewModel.phone")
+                  .form-group
+                    label.col-lg-3.control-label Email
+                    .col-lg-9
+                      input.form-control(type='email', name='email', data-bind="value: formViewModel.email")
+                  .form-group
+                    label.col-lg-3.control-label(for='select') Shirt Size
+                    .col-lg-9
+                      select.form-control(name='shirt_size', data-bind="value: formViewModel.shirtSize")
+                        option(value='') Select a Shirt Size...
+                        option(value='YS') YS
+                        option(value='YM') YM
+                        option(value='YL') YL
+                        option(value='S') S
+                        option(value='M') M
+                        option(value='L') L
+                        option(value='XL') XL
+                  .form-group
+                    label.col-lg-3.control-label School Address
+                    .col-lg-9
+                      input.form-control(type='text', name='temp_address', data-bind="value: formViewModel.schoolAddress")
+                  .form-group
+                    label.col-lg-3.control-label Permanent Address
+                    .col-lg-9
+                      input.form-control(type='text', name='perm_address', data-bind="value: formViewModel.permAddress")
+                  .form-group
+                    label.col-lg-3.control-label New Password
+                    .col-lg-9
+                      input.form-control(type='password', name='password', data-bind="value: formViewModel.newPassword")
+                  .form-group
+                    .col-lg-12.text-center
+                      button.btn.btn-default(type='reset', data-bind="click: reset") Cancel
+                      button.btn.btn-primary(type='submit', data-bind="enable: formViewModel.isDirty")  Submit 
+
+            
+        div#ConfirmModal

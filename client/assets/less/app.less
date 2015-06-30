@@ -1,0 +1,56 @@
+/**
+ * Body
+ */
+body {
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    height: 100vh;
+
+    @media all and (max-width: @screen-xs-max) {
+        background-image: url('@{img-base}/oak-tree-bg-xs.jpg');
+    } 
+    @media all and (min-width: @screen-sm-min) {
+        background-image: url('@{img-base}/oak-tree-bg-sm.jpg');
+    } 
+    @media all and (min-width: @screen-md-min) {
+        background-image: url('@{img-base}/oak-tree-bg-md.jpg');
+    } 
+    @media all and (min-width: @screen-lg-min) {
+        background-image: url('@{img-base}/oak-tree-bg-lg.jpg');
+    } 
+}
+
+.content {
+    background-color: @body-bg;
+    display: none;
+    height: auto;
+    min-height: calc(~"100vh - 54px");
+}
+
+
+/**
+ * MainView
+ */
+#MainView {
+    padding-top: 72px;
+}
+
+
+/**
+ * Utilities
+ */
+.top-space { margin-top: 15px; }
+.bottom-space { margin-bottom: 15px; }
+.left-space { margin-left: 15px; }
+.right-space { margin-right: 15px; }
+
+.double-top-space { margin-top: 30px; }
+.double-bottom-space { margin-bottom: 30px; }
+.double-left-space { margin-left: 30px; }
+.double-right-space { margin-right: 30px; }
+
+.v-top { vertical-align: top; }
+.v-middle { vertical-align: middle; }
+.v-bottom { vertical-align: bottom; }

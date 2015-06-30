@@ -1,0 +1,25 @@
+extends ../_layout.jade
+
+block no-content
+    section#Home
+        .container-fluid
+            .jumbotron
+                .visible-xs-block
+                    div(data-bind='visible: !loggedIn')
+                        h3 You don't turn your back on family. 
+                        p - Dominic Toretto
+                        a.btn.btn-block.btn-primary.btn-lg.double-top-space(href='#/login') Login
+
+                    div(data-bind='visible: loggedIn')
+                        h3 You don't turn your back on family. 
+                        p - Dominic Toretto
+                        a.btn.btn-block.btn-info.btn-lg.double-top-space(href='#/member/roster') View Roster
+                        a.btn.btn-block.btn-success.btn-lg.top-space(href='#/event') Upcoming Events
+
+                .hidden-xs
+                    h1 
+                        span.small You don't turn your back on &nbsp;
+                        | family 
+                    h1 
+                        span.small - Dominic Toretto
+                
