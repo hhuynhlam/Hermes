@@ -3024,22 +3024,22 @@ body {
 }
 @media all and (max-width: 767px) {
   body {
-    background-image: url('assets/img/oak-tree-bg-xs.jpg');
+    background-image: url('assets/img/autumn-leaves-bg.jpg');
   }
 }
 @media all and (min-width: 768px) {
   body {
-    background-image: url('assets/img/oak-tree-bg-sm.jpg');
+    background-image: url('assets/img/autumn-leaves-bg.jpg');
   }
 }
 @media all and (min-width: 992px) {
   body {
-    background-image: url('assets/img/oak-tree-bg-md.jpg');
+    background-image: url('assets/img/autumn-leaves-bg.jpg');
   }
 }
 @media all and (min-width: 1200px) {
   body {
-    background-image: url('assets/img/oak-tree-bg-lg.jpg');
+    background-image: url('assets/img/autumn-leaves-bg.jpg');
   }
 }
 .content {
@@ -3196,7 +3196,7 @@ body {
 .jumbotron h1 span.small,
 .jumbotron h3 span.small,
 .jumbotron p span.small {
-  color: rgba(153, 153, 153, 0.5);
+  color: rgba(153, 153, 153, 0.8);
 }
 .jumbotron h1:nth-child(2),
 .jumbotron h3:nth-child(2),
