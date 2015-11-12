@@ -1,0 +1,28 @@
+[
+    {
+        "firstName": "John",
+        "lastName": "Do",
+        "streetAddress": "111 Test Ave.",
+        "country": "US",
+        "state": "CA",
+        "city": "Sunnyvale",
+        "zip": "11223",
+        "homePhone": "1112223333",
+        "mobilePhone": "2223334444",
+        "email": "test1@gmail.com",
+        "password": "password1"
+    },
+    {
+        "firstName": "Jane",
+        "lastName": "Do",
+        "streetAddress": "111 Test Ave.",
+        "country": "US",
+        "state": "CA",
+        "city": "Sunnyvale",
+        "zip": "11223",
+        "homePhone": "1112223333",
+        "mobilePhone": "2223334444",
+        "email": "test2@gmail.com",
+        "password": "password1"
+    }
+]

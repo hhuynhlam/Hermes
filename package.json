@@ -1,0 +1,55 @@
+{
+  "name": "hermes",
+  "version": "0.0.1",
+  "description": "Family Website",
+  "private": true,
+  "scripts": {
+    "start": "node ./src/server/bin/www",
+    "test": "gulp test"
+  },
+  "engines": {
+    "node": "4.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hhuynhlam/Hermes"
+  },
+  "author": "Hai Huynhlam <hhuynhlam@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/hhuynhlam/Hermes/issues"
+  },
+  "homepage": "https://github.com/hhuynhlam/Ulysses",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "1.13.2",
+    "cookie-parser": "1.3.5",
+    "debug": "2.2.0",
+    "express": "4.13.1",
+    "jade": "1.11.0",
+    "morgan": "1.6.1",
+    "passport": "0.3.2",
+    "passport-local": "1.0.0",
+    "serve-favicon": "2.3.0"
+  },
+  "devDependencies": {
+    "es6-module-loader": "0.17.8",
+    "gulp": "3.9.0",
+    "gulp-jade": "1.0.1",
+    "gulp-jshint": "1.11.0",
+    "gulp-less": "3.0.3",
+    "gulp-plumber": "1.0.1",
+    "gulp-shell": "0.4.2",
+    "gulp-sourcemaps": "1.5.2",
+    "jasmine-core": "2.3.4",
+    "jshint-stylish": "2.0.0",
+    "karma": "0.13.10",
+    "karma-chrome-launcher": "0.2.0",
+    "karma-jasmine": "0.3.6",
+    "karma-phantomjs2-launcher": "0.3.2",
+    "karma-spec-reporter": "0.0.20",
+    "karma-systemjs": "0.8.0",
+    "lodash": "3.10.1",
+    "systemjs": "0.19.3",
+    "traceur": "0.0.91"
+  }
+}
