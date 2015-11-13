@@ -12,6 +12,7 @@ System.config({
     
     // Widgets
     "base-widget.viewmodel": "widgets/core/base/base-widget.viewmodel",
+    "button.widget"        : "widgets/core/button/button",
     "dropdown.widget"      : "widgets/core/dropdown/dropdown",
     "input.widget"         : "widgets/core/input/input",
 

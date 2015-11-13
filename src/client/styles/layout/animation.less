@@ -1,0 +1,30 @@
+@keyframes spin {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
+ 
+@-webkit-keyframes spin {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
+ 
+.spinning {
+    & > span[type='label'] {
+        display: none;
+    }
+
+    & > span.spinner {
+        &:before {
+            content: '';
+            display: block;
+            margin: 0 auto;
+            border-radius: 50%;
+            border:  2px solid;
+            width: 20px;
+            height: 20px;
+
+            -webkit-animation: spin .9s linear infinite;
+            animation: spin .9s linear infinite;
+        }
+    }
+}
