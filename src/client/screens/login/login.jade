@@ -4,12 +4,13 @@ section#Login.container-fluid
         .panel.panel-default.margin-lg-top
             .panel-heading Login
             .panel-body
-                .form-group.has-feedback
-                    input.form-control(type='email', placeholder='Email')
-                    span.glyphicon.glyphicon-envelope.form-control-feedback
-                .form-group.has-feedback
-                    input.form-control(type='password', placeholder='Password')
-                    span.glyphicon.glyphicon-lock.form-control-feedback
-                .row
-                    .col-sm-5.col-xs-12.pull-right
-                        button.btn.btn-primary.btn-block(type='submit') Sign In
+                form(data-bind='submit: login')
+                    .form-group.has-feedback(data-bind='css: { "has-error": emailError }')
+                        input.form-control(placeholder='Email', data-bind='value: email')
+                        span.glyphicon.glyphicon-envelope.form-control-feedback
+                    .form-group.has-feedback(data-bind='css: { "has-error": pwError }')
+                        input.form-control(type='password', placeholder='Password', data-bind='value: password')
+                        span.glyphicon.glyphicon-lock.form-control-feedback
+                    .row
+                        .col-sm-5.col-xs-12.pull-right
+                            button.btn.btn-primary.btn-block(type='submit') Sign In
