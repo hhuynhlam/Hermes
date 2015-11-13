@@ -32,6 +32,7 @@ class LoginViewModel {
             })
             .then((user) => {
                 msg.trigger('#Navbar', 'App.CurrentUser', user);
+                window.location.replace('/#/');
             })
             .catch(() => {
                 this.formError('Unauthorized: Please check your email and password.');

@@ -8,6 +8,7 @@ System.config({
     
     // Routes
     "dev.router": "screens/_dev/dev.router",
+    "home.router": "screens/home/home.router",
     "login.router": "screens/login/login.router",
     
     // Widgets

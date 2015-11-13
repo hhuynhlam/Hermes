@@ -9,18 +9,25 @@ var router = function (app) {
 
     // root
     app.get('/#/login', function (context) {
-        System.import('screens/login/login.html!text').then(function (template) {
-            var viewModel = new LoginViewModel();
+        var _user = sandbox.cookie.get('_user');
+        
+        if (_user) { 
+            window.location.replace('/#/'); 
+        
+        } else {
+            System.import('screens/login/login.html!text').then(function (template) {
+                var viewModel = new LoginViewModel();
 
-            // render partial view
-            context.swap(sandbox.util.template(template));
-            
-            // apply ko bindings
-            ko.applyBindings(viewModel, document.getElementById('Login'));
+                // render partial view
+                context.swap(sandbox.util.template(template));
+                
+                // apply ko bindings
+                ko.applyBindings(viewModel, document.getElementById('Login'));
 
-            // initialize view model
-            viewModel.init();
-        });
+                // initialize view model
+                viewModel.init();
+            });
+        }
     });
 
 };

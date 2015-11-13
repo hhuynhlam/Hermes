@@ -18,6 +18,7 @@ var app = sammy('#MainView');
 
 // routes
 import devRouter from 'dev.router'; devRouter(app);
+import homeRouter from 'home.router'; homeRouter(app);
 import loginRouter from 'login.router'; loginRouter(app);
 
 // // 404 Error

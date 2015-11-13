@@ -21,7 +21,7 @@ nav#Navbar
       
       // Main Links
       ul.nav.navbar-nav
-        li.dropdown
+        li.dropdown(data-bind='visible: currentUser', style="display: none;")
           a.dropdown-toggle(href='#', data-toggle='dropdown')
             | About
             b.caret
@@ -31,10 +31,10 @@ nav#Navbar
       
       // Right Links
       ul.nav.navbar-nav.navbar-right
-        li.dropdown(data-bind='visible: currentUser')
-          //- a.border.dropdown-toggle(href='#', data-toggle='dropdown')
-          //-   span(data-bind='text: currentUser.FirstName')
-          //-   b.caret
+        li.dropdown(data-bind='visible: currentUser', style="display: none;")
+          a.border.dropdown-toggle(href='#', data-toggle='dropdown')
+            span(data-bind='text: (currentUser()) ? currentUser().firstName : null')
+            b.caret
           
           ul.dropdown-menu
             li
