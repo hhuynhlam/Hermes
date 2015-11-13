@@ -28,7 +28,7 @@
 
     //wrap notifySubscribers passing topic first and caching latest value
     exports.publish = function(topic, value) {
-        console.info(topic, ': ', value);
+        console.info('publish: ', topic, ': ', value);
 
         if (topic) {
             //keep the value and a serialized version for comparison
@@ -45,7 +45,7 @@
     exports.subscribe = function(topic, action, target, initializeWithLatestValue) {
         var subscription, current, existingDispose;
         
-        console.info(topic);
+        console.info('subscribed: ', topic);
 
         if (topic) {
             if (typeof target === "boolean") {

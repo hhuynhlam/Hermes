@@ -31,8 +31,7 @@ class LoginViewModel {
                 password: this.password()
             })
             .then((user) => {
-                msg.publish('App.CurrentUser', user);
-                debugger;
+                msg.trigger('#Navbar', 'App.CurrentUser', user);
             })
             .catch(() => {
                 this.formError('Unauthorized: Please check your email and password.');

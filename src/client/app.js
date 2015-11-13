@@ -8,8 +8,8 @@ import NavViewModel from 'navbar.viewmodel';
 
 var AppViewModel = function () {
     var _user = sandbox.cookie.get('_user');
-    if (_user) { sandbox.msg.publish('App.CurrentUser', JSON.parse(_user)); }
-    
+    if (_user) { sandbox.msg.trigger('#Navbar', 'App.CurrentUser', JSON.parse(_user)); }
+
     this.isReady = ko.observable(false);
 };
 

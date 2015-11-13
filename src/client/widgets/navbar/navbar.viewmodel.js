@@ -1,11 +1,12 @@
 'use strict';
 
+import $ from 'jquery';
 import ko from 'knockout';
-// import sandbox from 'sandbox';
 
 class NavbarViewModel {
     constructor(options) {
         this.options = options || {};
+        this.$selector = $('#Navbar');
         
         this.currentUser = ko.observable();
         this.init();
@@ -16,7 +17,9 @@ class NavbarViewModel {
     }
 
     setupSubscriptions() {
-        this.currentUser.subscribeTo('App.CurrentUser', true);
+        this.$selector.on('App.CurrentUser', (e, val) => {
+            this.currentUser(val);
+        });
     }
 }
 

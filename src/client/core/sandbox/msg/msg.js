@@ -1,6 +1,7 @@
 'use strict';
 
 
+import $ from 'jquery';
 import ko from 'knockout';
 import 'knockout-postbox';
 
@@ -15,7 +16,11 @@ var msg = {
         });
     },
 
-    reset: ko.postbox.reset
+    reset: ko.postbox.reset,
+    
+    trigger: function (selector, event, val) {
+        $(selector).trigger(event, val);
+    }
 };
 
 export default msg;
