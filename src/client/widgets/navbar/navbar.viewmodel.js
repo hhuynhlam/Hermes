@@ -7,7 +7,7 @@ class NavbarViewModel {
     constructor(options) {
         this.options = options || {};
         
-        this.isLoggedIn = ko.observable(false);
+        this.currentUser = ko.observable();
         this.init();
     }
 
@@ -16,7 +16,7 @@ class NavbarViewModel {
     }
 
     setupSubscriptions() {
-        this.isLoggedIn.subscribeTo('App.IsLoggedIn');
+        this.currentUser.subscribeTo('App.CurrentUser', true);
     }
 }
 

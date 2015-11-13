@@ -30,7 +30,8 @@ class LoginViewModel {
                 email: this.email(),
                 password: this.password()
             })
-            .then(() => {
+            .then((user) => {
+                msg.publish('App.CurrentUser', user);
                 debugger;
             })
             .catch(() => {
