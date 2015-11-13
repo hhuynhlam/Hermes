@@ -24,6 +24,7 @@ System.config({
     // Vendor
     "bootstrap"       : "vendor/bootstrap/dist/js/bootstrap",
     "jquery"          : "vendor/jquery/dist/jquery.min",
+    "js-cookie"       : "vendor/js-cookie/src/js.cookie",
     "knockout"        : "vendor/knockout/dist/knockout.debug.js",
     "knockout-postbox": "vendor/knockout-postbox/build/knockout-postbox",
     "lodash"          : "vendor/lodash/lodash.min",
