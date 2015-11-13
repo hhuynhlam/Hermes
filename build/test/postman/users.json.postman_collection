@@ -1,0 +1,157 @@
+{
+	"id": "17e50d16-aa07-fc9b-1b60-48bf839abc2f",
+	"name": "users",
+	"description": "",
+	"order": [
+		"e201896a-45b9-b14c-09d6-eebbb90e99b1",
+		"4890a604-81ae-7a70-5fcd-59c58b011920",
+		"08626cc3-1018-983c-d635-b2a7a8b0ccc6",
+		"eefd1808-c530-e13c-6607-fef9c10f5497",
+		"ec273216-ca6c-902f-05e2-7ac72d204587"
+	],
+	"folders": [],
+	"timestamp": 1447369304235,
+	"owner": 0,
+	"remoteLink": "",
+	"public": false,
+	"requests": [
+		{
+			"id": "08626cc3-1018-983c-d635-b2a7a8b0ccc6",
+			"headers": "Authorization: Basic am9obmRvQGdtYWlsLmNvbTpwYXNzd29yZDE=\n",
+			"url": "localhost:9000/users/1",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"collectionId": "17e50d16-aa07-fc9b-1b60-48bf839abc2f",
+			"data": [],
+			"dataMode": "params",
+			"name": "localhost:9000/users/:id",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1447369398874,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "4890a604-81ae-7a70-5fcd-59c58b011920",
+			"headers": "Authorization: Basic am9obmRvQGdtYWlsLmNvbTpwYXNzd29yZDE=\n",
+			"url": "localhost:9000/users",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "PUT",
+			"collectionId": "17e50d16-aa07-fc9b-1b60-48bf839abc2f",
+			"data": [
+				{
+					"key": "email",
+					"value": "johndo123@gmail.com",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "123",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "mobilePhone",
+					"value": "1112227777",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"name": "localhost:9000/users",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1447373080070,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "e201896a-45b9-b14c-09d6-eebbb90e99b1",
+			"headers": "Authorization: Basic am9obmRvQGdtYWlsLmNvbTpwYXNzd29yZDE=\n",
+			"url": "localhost:9000/users",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"collectionId": "17e50d16-aa07-fc9b-1b60-48bf839abc2f",
+			"data": [],
+			"dataMode": "params",
+			"name": "localhost:9000/users",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1447369357888,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "ec273216-ca6c-902f-05e2-7ac72d204587",
+			"headers": "Authorization: Basic am9obmRvQGdtYWlsLmNvbTpwYXNzd29yZDE=\n",
+			"url": "localhost:9000/users/1",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "DELETE",
+			"collectionId": "17e50d16-aa07-fc9b-1b60-48bf839abc2f",
+			"data": [],
+			"dataMode": "params",
+			"name": "localhost:9000/users/:id",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1447370678526,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "eefd1808-c530-e13c-6607-fef9c10f5497",
+			"headers": "Authorization: Basic am9obmRvQGdtYWlsLmNvbTpwYXNzd29yZDE=\n",
+			"url": "localhost:9000/users/1",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "PUT",
+			"collectionId": "17e50d16-aa07-fc9b-1b60-48bf839abc2f",
+			"data": [
+				{
+					"key": "email",
+					"value": "johndo123@gmail.com",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "123",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "mobilePhone",
+					"value": "1112227777",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"name": "localhost:9000/users/:id",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1447373039743,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		}
+	]
+}
