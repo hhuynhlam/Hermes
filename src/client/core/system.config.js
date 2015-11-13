@@ -5,8 +5,10 @@ System.config({
   transpiler: "traceur",
 
   paths: {
+    
     // Routes
     "dev.router": "screens/_dev/dev.router",
+    "login.router": "screens/login/login.router",
     
     // Widgets
     "base-widget.viewmodel": "widgets/core/base/base-widget.viewmodel",

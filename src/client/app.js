@@ -15,6 +15,7 @@ var app = sammy('#MainView');
 
 // routes
 import devRouter from 'dev.router'; devRouter(app);
+import loginRouter from 'login.router'; loginRouter(app);
 
 // // 404 Error
 app.notFound = function () {
