@@ -5,6 +5,7 @@ import sandbox from 'sandbox';
 import buttonWidget from 'button.widget';
 
 var http = sandbox.http;
+var msg = sandbox.msg;
 
 class LoginViewModel {
     constructor(options) {
@@ -23,6 +24,8 @@ class LoginViewModel {
 
     login() {
         if (this._validate() ) {
+            msg.publish('Login.SignInButton', 'spinning');
+            
             http.post('/auth/login', {
                 email: this.email(),
                 password: this.password()
@@ -33,6 +36,7 @@ class LoginViewModel {
             .catch(() => {
                 this.formError('Unauthorized: Please check your email and password.');
             })
+            .fin(() => { msg.publish('Login.SignInButton', 'enabled'); })
             .done();  
         }
     }
