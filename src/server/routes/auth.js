@@ -49,14 +49,15 @@ router.post('/login', function (req, res) {
         if(err) { return res.status(500).json(err); }
         if(!user) { return res.status(401).json(err); }
         
-        res.cookie('_user', JSON.stringify(user), 1, req.host);
+        res.cookie('_user', JSON.stringify(user), 1, req.hostname);
         return res.status(200).json(user);
     })(req, res);
 });
 
-router.post('/logout', function (req, res) {
-    req.logout();
-    res.redirect('/');
+router.get('/logout', function (req, res) {
+    req.logOut();
+    res.clearCookie('_user', { path: '/' });
+    res.redirect('/#/login');
 });
 
 module.exports = router;

@@ -1,19 +1,20 @@
 'use strict';
 
 import $ from 'jquery';
+import q from 'q';
 
 var http = {
     
     get: function (url, data) { 
-        return new Promise($.get(url, data)); 
+        return q($.get(url, data)); 
     },
 
     post: function (url, data) { 
-        return new Promise($.post(url, data)); 
+        return q($.post(url, data)); 
     },
 
     put: function (url, data) {
-        return new Promise($.ajax({
+        return q($.ajax({
             type: 'PUT',
             url: url,
             data: data
@@ -21,7 +22,7 @@ var http = {
     },
 
     'delete': function (url) {
-        return new Promise($.ajax({
+        return q($.ajax({
             type: 'DELETE',
             url: url
         }));

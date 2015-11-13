@@ -27,6 +27,7 @@ System.config({
     "knockout-postbox": "vendor/knockout-postbox/build/knockout-postbox",
     "lodash"          : "vendor/lodash/lodash.min",
     "moment"          : "vendor/moment/moment",
+    "q"               : "vendor/q/q",
     "sammy"           : "vendor/sammy/lib/sammy",
     "traceur"         : "vendor/traceur/traceur.min",
     "traceur-runtime" : "vendor/traceur-runtime/traceur-runtime.min",

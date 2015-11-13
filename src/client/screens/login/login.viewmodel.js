@@ -1,6 +1,9 @@
 'use strict';
 
 import ko from 'knockout';
+import sandbox from 'sandbox';
+
+var http = sandbox.http;
 
 class LoginViewModel {
     constructor(options) {
@@ -8,15 +11,27 @@ class LoginViewModel {
 
         this.email = ko.observable('');
         this.emailError = ko.observable(false);
-
         this.password = ko.observable('');
         this.pwError = ko.observable(false);
+        this.formError = ko.observable('');
     }   
 
     init() {}
 
     login() {
-        this._validate();
+        if (this._validate() ) {
+            http.post('/auth/login', {
+                email: this.email(),
+                password: this.password()
+            })
+            .then(() => {
+                debugger;
+            })
+            .catch((err) => {
+                this.formError('Unauthorized: Please check your email and password.');
+            })
+            .done();  
+        }
     }
 
     _validate() {
