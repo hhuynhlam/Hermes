@@ -4,6 +4,7 @@ import ko from 'knockout';
 import sammy from 'sammy';
 import sandbox from 'sandbox';
 import 'bootstrap';
+import NavViewModel from 'navbar.viewmodel';
 
 var AppViewModel = function () {
     this.isReady = ko.observable(false);
@@ -38,6 +39,7 @@ app.swap = function(content, callback) {
 
 // run app
 $(function() { 
+    ko.applyBindings(new NavViewModel(), document.getElementById('Navbar'));
     ko.applyBindings(new AppViewModel(), document.getElementById('MainView'));
     app.run(); 
 });

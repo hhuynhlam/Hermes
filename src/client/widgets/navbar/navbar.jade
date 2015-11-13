@@ -1,0 +1,51 @@
+nav#Navbar
+  // Navigation
+  .navbar.navbar-inverse
+    .navbar-header
+      // Toggle Button
+      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-responsive-collapse')
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      
+      // Site Name
+      a.navbar-brand.hidden-xs(href='#') The &nbsp;
+        span Win &nbsp;
+        | Family
+      a.navbar-brand.visible-xs-inline(href='#') 
+        span Win &nbsp;
+        | Family
+    
+    // Collapsible
+    .navbar-collapse.collapse.navbar-responsive-collapse
+      
+      // Main Links
+      ul.nav.navbar-nav
+        li.dropdown
+          a.dropdown-toggle(href='#', data-toggle='dropdown')
+            | About
+            b.caret
+          ul.dropdown-menu
+            li
+              a(href='#/contacts') Contacts
+      
+      // Right Links
+      ul.nav.navbar-nav.navbar-right
+        li.dropdown(data-bind='visible: isLoggedIn')
+          //- a.border.dropdown-toggle(href='#', data-toggle='dropdown')
+          //-   span(data-bind='text: currentUser.FirstName')
+          //-   b.caret
+          
+          ul.dropdown-menu
+            li
+              a(href='#/profile') Profile
+            //- li
+            //-   a Send Email
+            li
+              a Logout
+
+        li(data-bind='visible: !isLoggedIn')
+          a.border(href='#/login') Login
+  
+  #LogoutModal
+  #AppAlerts.col-sm-6.col-sm-offset-3.text-center(style="margin-top: -20px")

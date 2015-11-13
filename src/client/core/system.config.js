@@ -12,6 +12,8 @@ System.config({
     "base-widget.viewmodel": "widgets/core/base/base-widget.viewmodel",
     "dropdown.widget"      : "widgets/core/dropdown/dropdown",
     "input.widget"         : "widgets/core/input/input",
+
+    "navbar.viewmodel"     : "widgets/navbar/navbar.viewmodel",
     
     // Core
     "sandbox": "core/sandbox/sandbox",
