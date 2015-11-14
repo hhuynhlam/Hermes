@@ -10,6 +10,7 @@ System.config({
     "dev.router": "screens/_dev/dev.router",
     "home.router": "screens/home/home.router",
     "login.router": "screens/login/login.router",
+    "profile.router": "screens/profile/profile.router",
     
     // Widgets
     "base-widget.viewmodel": "widgets/core/base/base-widget.viewmodel",

@@ -2,6 +2,10 @@
 
 import $ from 'jquery';
 import ko from 'knockout';
+import sandbox from 'sandbox';
+
+var cookie = sandbox.cookie;
+var http = sandbox.http;
 
 class NavbarViewModel {
     constructor(options) {
@@ -14,6 +18,16 @@ class NavbarViewModel {
 
     init() {
         this.setupSubscriptions();
+    }
+
+    logout() {
+        http.get('/auth/logout')
+        .then(() => {
+            this.currentUser(null);
+            cookie.remove('_user', { path: '/' });
+            window.location.replace('/#/');
+        })
+        .done();
     }
 
     setupSubscriptions() {

@@ -42,7 +42,7 @@ nav#Navbar
             //- li
             //-   a Send Email
             li
-              a Logout
+              a(data-bind="click: logout") Logout
 
         li(data-bind='visible: !currentUser()')
           a.border(href='#/login') Login
