@@ -4,7 +4,7 @@ var express = require('express');
 var pg = require('pg');
 var router = express.Router();
 
-var connectionString = "postgres://username:password@localhost/database";
+var connectionString = "postgres://db_admin:haiwashere@localhost/family";
 
 
 //======================================
