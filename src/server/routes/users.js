@@ -17,8 +17,9 @@ router.get('/',
 function (req, res) {
     var queryString = queryBuilder(req.body);
 
-    var data = db.query('SELECT * FROM Users;', res);
-    return res.status(200).json( data.rows[0] );
+    db.query('SELECT * FROM Users;', res, function (data) {
+        return res.status(200).json( data.rows[0] );
+    });
 });
 
 

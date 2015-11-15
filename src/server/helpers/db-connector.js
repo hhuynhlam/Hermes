@@ -7,9 +7,9 @@ var db = function () {
     this.client = new pg.Client(connectionString);
 };
 
-db.prototype.query = function (queryString, res) {
+db.prototype.query = function (queryString, res, callback) {
     var client = this.client;
-    
+
     client.connect(function(err) {
         if (err) { return res.status(500).send('could not connect to postgres', err); }
 
@@ -17,7 +17,7 @@ db.prototype.query = function (queryString, res) {
             if (err) { return res.status(500).send('error running query', err); }
             
             client.end();
-            return result;
+            if (result) { callback.call(this, result); }
         });
     }); 
 
