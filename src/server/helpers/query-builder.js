@@ -6,6 +6,7 @@ var queryBuilder = function(body) {
     // Build columns of query
     if (body.select instanceof Array) {
         columns = body.select.join(',');
+        columns = '"' + columns + '"';
     }
     else {
         columns = '*';
