@@ -27,7 +27,7 @@ var db = {
             // After all data is returned, close connection and return results
             query.on('end', function() {
                 done();
-                success.call(results);
+                success.call(this, results);
             });
 
 

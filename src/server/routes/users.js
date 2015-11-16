@@ -15,7 +15,7 @@ router.post('/',
 function (req, res) {
     var queryString = queryBuilder(req.body);
     db.query(queryString, function (data) {
-        var result = (data && data.rows && data.rows.length) ? data.rows[0] : [];
+        var result = (data && data.length) ? data[0] : [];
         return res.status(200).json( result );
     }, function (err) { res.status(500).send('SQL Error: ' + err); });
 });
