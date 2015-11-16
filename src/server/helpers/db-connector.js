@@ -2,7 +2,7 @@
 
 var pg = require('pg');
 
-var connectionString = "postgres://db_admin:haiwashere99@localhost/family";
+var connectionString = process.env.FAMILY_DB;
 var client = new pg.Client(connectionString);
 
 var db = {
