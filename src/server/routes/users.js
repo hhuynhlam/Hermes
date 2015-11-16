@@ -11,7 +11,7 @@ var router = express.Router();
 
 // List all Users
 // router.get('/', passport.authenticate('local', { session: false }),
-router.get('/',
+router.post('/',
 function (req, res) {
     var queryString = queryBuilder(req.body);
     db.query(queryString, function (data) {
