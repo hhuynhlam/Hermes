@@ -3,20 +3,35 @@
 var pg = require('pg');
 
 var connectionString = process.env.FAMILY_DB;
-var client = new pg.Client(connectionString);
 
 var db = {
     query: function (queryString, success, fail) {
-        client.connect(function(err) {
-            if (err) { fail.call(this, err); }
+        pg.connect(connectionString, function(err, client, done) {
+            var results = [],
+                query;
 
-            client.query(queryString, function(err, result) {
-                if (err) { fail.call(this, err); }
+            // Handle connection errors
+            if(err) {
+                done();
+                fail.call(this, err);
+            }
 
-                client.end();
-                if (result) { success.call(this, result); }
+            // SQL Query
+            query = client.query(queryString);
+
+            // // Stream results back one row at a time
+            query.on('row', function(row) {
+                results.push(row);
             });
-        }); 
+
+            // After all data is returned, close connection and return results
+            query.on('end', function() {
+                done();
+                success.call(results);
+            });
+
+
+        });
     }
 };
 
