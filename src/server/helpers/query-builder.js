@@ -24,9 +24,11 @@ var queryBuilder = function(body) {
     
     // Build where clause
     if (body.where instanceof Array) {
+        var whereList = [];
         body.where.forEach(function(eachWhere) {
-            where = eachWhere.key + eachWhere.operator + '\'' + eachWhere.value + '\'';   
+            whereList.push(eachWhere.key + eachWhere.operator + '\'' + eachWhere.value + '\'');
         });
+        where = whereList.join(' AND ');
         query += ' WHERE ' + where;
     }
 
