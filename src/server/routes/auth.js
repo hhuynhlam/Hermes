@@ -20,7 +20,7 @@ localStrategy = new LocalStrategy({
 }, function(email, password, done) {
     var queryString = queryBuilder({ email: email, password: password, route: 'Users' });
     db.query(queryString, function (data) {
-        var _user = (data && data.rows && data.rows.length) ? data.rows[0] : [];
+        var _user = (data && data.length) ? data[0] : [];
         return (!_user) ? done(null, false) : done(null, _user);
     }, function () { return done(null, false); });
 });
