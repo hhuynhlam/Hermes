@@ -8,34 +8,34 @@ var queryBuilder = function(body) {
         columns = body.select.join(',');
     }
     else {
-        columns = "*";
+        columns = '*';
     }
-    query = "SELECT " + columns;
+    query = 'SELECT ' + columns;
 
     // determine table name 
     if (body.route) {
         table = body.route; 
     }
     else {
-        return "Route not defined";
+        return 'Route not defined';
     }
-    query += " FROM " + table;
+    query += ' FROM ' + table;
     
     // Build where clause
     if (body.where instanceof Array) {
         body.where.forEach(function(eachWhere) {
-            where = eachWhere.key + eachWhere.operator + "'" + eachWhere.value + "'";   
+            where = eachWhere.key + eachWhere.operator + '\'' + eachWhere.value + '\'';   
         });
-        query += " WHERE " + where;
+        query += ' WHERE ' + where;
     }
 
     // Build offset, limit clause
     if (body.offset) {
-        query += " OFFSET " + body.offset;
+        query += ' OFFSET ' + body.offset;
     }
 
     if (body.limit) {
-        query += " LIMIT " + body.limit;
+        query += ' LIMIT ' + body.limit;
     }
 
     return query;
