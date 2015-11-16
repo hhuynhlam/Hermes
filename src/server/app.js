@@ -7,13 +7,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var auth = require('./routes/auth');
+var app = express();
+
+var auth = (app.get('env') === 'production') ? require('./routes/auth') : require('./routes/auth_mock');
 var countries = require('./routes/countries');
 var index = require('./routes/index');
 var states = require('./routes/states');
-var users = require('./routes/users');
-
-var app = express();
+var users = (app.get('env') === 'production') ? require('./routes/users') : require('./routes/users_mock');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
