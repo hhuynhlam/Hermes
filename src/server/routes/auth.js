@@ -18,7 +18,14 @@ localStrategy = new LocalStrategy({
     passwordFIeld: 'password',
     session: true
 }, function(email, password, done) {
-    var queryString = queryBuilder({ email: email, password: password, route: 'Users' });
+    var queryString = queryBuilder({ 
+        route: 'Users',
+        where: [
+            { 'key': 'email', 'operator': '=', 'value': email }, 
+            { 'key': 'password', 'operator': '=', 'value': password }
+        ] 
+    });
+    
     db.query(queryString, function (data) {
         var _user = (data && data.length) ? data[0] : [];
         return (!_user) ? done(null, false) : done(null, _user);
