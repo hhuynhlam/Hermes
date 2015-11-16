@@ -14,10 +14,10 @@ var router = express.Router();
 router.get('/',
 function (req, res) {
     var queryString = queryBuilder(req.body);
-    db.query(queryString, res, function (data) {
+    db.query(queryString, function (data) {
         var result = (data && data.rows && data.rows.length) ? data.rows[0] : [];
         return res.status(200).json( result );
-    });
+    }, function (err) { res.status(500).send('SQL Error: ' + err); });
 });
 
 

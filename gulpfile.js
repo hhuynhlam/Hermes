@@ -19,6 +19,7 @@ gulp.task('jshint', function() {
         'gruntfile.js', 
         '**/*.js', 
         '!src/client/vendor/**/*.js', 
+        '!_archive/**/*.js',
         '!node_modules/**/*.js',
         '!**/*.spec.js'
     ])

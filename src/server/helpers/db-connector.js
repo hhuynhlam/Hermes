@@ -6,14 +6,15 @@ var connectionString = process.env.FAMILY_DB;
 var client = new pg.Client(connectionString);
 
 var db = {
-    query: function (queryString, res, callback) {
+    query: function (queryString, success, fail) {
         client.connect(function(err) {
-            if (err) { return res.status(500).send('could not connect to postgres', err); }
+            if (err) { fail.call(this, err); }
 
             client.query(queryString, function(err, result) {
-                if (err) { return res.status(500).send('error running query', err); }
+                if (err) { fail.call(this, err); }
+
                 client.end();
-                if (result) { callback.call(this, result); }
+                if (result) { success.call(this, result); }
             });
         }); 
     }

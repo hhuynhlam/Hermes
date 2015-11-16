@@ -1,25 +1,13 @@
 'use strict';
 
-var _ = require('lodash');
+var db = require('../helpers/db-connector');
 var express = require('express');
-var jsonfile = require('jsonfile');
 var passport = require('passport');
+var queryBuilder = require('../helpers/query-builder');
 var router = express.Router();
 var LocalStrategy = require('passport-local').Strategy;
 
-var localStrategy,
-    Users;
-
-
-//======================================
-// Mock
-//======================================
-
-jsonfile.readFile('src/server/_mock/Users.json', function(err, data) {
-    if (err) { console.error(err); }
-    else { Users = data; }
-});
-
+var localStrategy;
 
 //======================================
 // Local Strategy
@@ -30,11 +18,11 @@ localStrategy = new LocalStrategy({
     passwordFIeld: 'password',
     session: true
 }, function(email, password, done) {
-    var _user = _.find(Users, function (u) {
-        return u.email === email && u.password === password;
-    });
-
-    return (!_user) ? done(null, false) : done(null, _user);
+    var queryString = queryBuilder({ email: email, password: password });
+    db.query(queryString, function (data) {
+        var _user = (data && data.rows && data.rows.length) ? data.rows[0] : [];
+        return (!_user) ? done(null, false) : done(null, _user);
+    }, function () { return done(null, false); });
 });
 
 passport.use(localStrategy);
