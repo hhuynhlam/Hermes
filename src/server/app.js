@@ -8,14 +8,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var app = express();
-var devMode;
+var devMode = true;
 
 
 //======================================
 // Dev Env
 //======================================
 
-if (path.existsSync('dev.config.json')) { devMode = require('dev.config.json'); } 
+if (path.existsSync('prod.config.json')) { devMode = false; } 
 
 
 //======================================

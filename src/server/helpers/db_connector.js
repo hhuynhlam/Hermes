@@ -1,6 +1,7 @@
 'use strict';
 
-var _config = require('../prod.config.json');
+var path = require('path');
+var _config = require(path.resolve(__dirname, '../prod.config.json'));
 var pg = require('pg');
 
 var connectionString = _config.connectionString;
