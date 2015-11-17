@@ -1,5 +1,6 @@
 'use strict';
 
+var del = require('del');
 var gulp = require('gulp');
 var jade = require('gulp-jade');
 var jshint = require('gulp-jshint');
@@ -97,6 +98,31 @@ gulp.task('watch', function () {
 
 
 //======================================
+// BUILD
+//======================================
+ 
+gulp.task('clean', function() {
+    del(['_dist/**/*']);
+});
+
+gulp.task('copy', function() {
+    
+    // copy over node_modules
+    gulp.src([
+        'node_modules/**'
+    ])
+    .pipe(gulp.dest('_dist/node_modules'));
+
+    // copy over src
+    gulp.src([
+        'src/**'
+    ])
+    .pipe(gulp.dest('_dist/src'));
+    
+});
+
+
+//======================================
 // Shell
 //======================================
 
@@ -106,6 +132,7 @@ gulp.task('server', ['less', 'jade'], shell.task([ 'npm start' ]));
 //======================================
 // Primary Tasks
 //======================================
+gulp.task('build', ['clean', 'copy']);
 gulp.task('default', ['jshint', 'less', 'jade']);
 gulp.task('test', ['jshint', 'karma']);
 
