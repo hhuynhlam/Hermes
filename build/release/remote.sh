@@ -1,5 +1,6 @@
 cd ~/www/
 sudo /usr/local/bin/svc -d /service/hermes_prod 
+sudo /service/hermes_prod/stop
 
 rm -rf hermes_bak
 mv hermes_prod hermes_bak
