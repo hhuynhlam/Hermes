@@ -11,7 +11,7 @@ var States;
 // Mock
 //======================================
 
-var stateFile = 'src/server/_mock/States.json';
+var stateFile = 'src/server/_mock/data/States.json';
 jsonfile.spaces = 4;
 jsonfile.readFile(stateFile, function(err, data) {
     if (err) { console.error(err); }
@@ -23,8 +23,7 @@ jsonfile.readFile(stateFile, function(err, data) {
 // Routes
 //======================================
 
-// List all Users
-// router.get('/', passport.authenticate('local', { session: false }),
+// List all States
 router.get('/',
 function (req, res) {
     return res.status(200).json(States);

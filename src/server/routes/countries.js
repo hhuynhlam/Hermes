@@ -11,7 +11,7 @@ var Countries;
 // Mock
 //======================================
 
-var countryFile = 'src/server/_mock/Countries.json';
+var countryFile = 'src/server/_mock/data/Countries.json';
 jsonfile.spaces = 4;
 jsonfile.readFile(countryFile, function(err, data) {
     if (err) { console.error(err); }
@@ -23,8 +23,7 @@ jsonfile.readFile(countryFile, function(err, data) {
 // Routes
 //======================================
 
-// List all Users
-// router.get('/', passport.authenticate('local', { session: false }),
+// List all Countries
 router.get('/',
 function (req, res) {
     return res.status(200).json(Countries);

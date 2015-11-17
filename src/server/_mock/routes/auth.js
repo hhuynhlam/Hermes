@@ -15,7 +15,7 @@ var localStrategy,
 // Mock
 //======================================
 
-jsonfile.readFile('src/server/_mock/Users.json', function(err, data) {
+jsonfile.readFile('src/server/_mock/data/Users.json', function(err, data) {
     if (err) { console.error(err); }
     else { Users = data; }
 });

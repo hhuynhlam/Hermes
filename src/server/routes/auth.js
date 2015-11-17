@@ -1,9 +1,9 @@
 'use strict';
 
-var db = require('../helpers/db-connector');
+var db = require('../helpers/db_connector');
 var express = require('express');
 var passport = require('passport');
-var queryBuilder = require('../helpers/query-builder');
+var queryBuilder = require('../helpers/query_builder');
 var router = express.Router();
 var LocalStrategy = require('passport-local').Strategy;
 

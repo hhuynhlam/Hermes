@@ -1,8 +1,9 @@
 'use strict';
 
+var _config = require('../prod.config.json');
 var pg = require('pg');
 
-var connectionString = process.env.FAMILY_DB;
+var connectionString = _config.connectionString;
 
 var db = {
     query: function (queryString, success, fail) {

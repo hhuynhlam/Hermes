@@ -13,7 +13,7 @@ var Users;
 // Mock
 //======================================
 
-var userFile = 'src/server/_mock/Users.json';
+var userFile = 'src/server/_mock/data/Users.json';
 jsonfile.spaces = 4;
 jsonfile.readFile(userFile, function(err, data) {
     if (err) { console.error(err); }

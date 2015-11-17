@@ -1,7 +1,7 @@
 'use strict';
 
-var db = require('../helpers/db-connector');
-var queryBuilder = require('../helpers/query-builder');
+var db = require('../helpers/db_connector');
+var queryBuilder = require('../helpers/query_builder');
 var express = require('express');
 var router = express.Router();
 
