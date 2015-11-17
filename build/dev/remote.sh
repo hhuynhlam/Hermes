@@ -2,7 +2,7 @@ cd ~/www/
 sudo /usr/local/bin/svc -d /service/hermes_dev 
 
 rm -rf hermes_bak
-mv hermes_prod hermes_bak
+mv hermes_dev hermes_bak
 
 gunzip hermes.tar.gz
 tar -xf hermes.tar
