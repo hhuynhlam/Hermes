@@ -7,6 +7,6 @@ mv hermes_prod hermes_bak
 gunzip hermes.tar.gz
 tar -xvf hermes.tar
 rm hermes.tar
-mv _dist hermes_prod
+mv _dist hermes_dev
 
 sudo /usr/local/bin/svc -u /service/hermes_dev 
