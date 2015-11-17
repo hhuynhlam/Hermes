@@ -5,7 +5,7 @@ rm -rf hermes_bak
 mv hermes_prod hermes_bak
 
 gunzip hermes.tar.gz
-tar -xvf hermes.tar
+tar -xf hermes.tar
 rm hermes.tar
 mv _dist hermes_prod
 
