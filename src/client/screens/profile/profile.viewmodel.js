@@ -14,8 +14,7 @@ class ProfileViewModel {
     constructor(options) {
         this.options = options || {};
 
-        this.currentUser = sandbox.cookie.get('_user');
-        this.currentUser = (this.currentUser) ? JSON.parse(this.currentUser) : null;
+        this.currentUser = sandbox.auth.getCurrentUser();
 
         this.firstName = ko.observable('');
         this.lastName = ko.observable('');
@@ -66,13 +65,13 @@ class ProfileViewModel {
     }
     
     setupSubscriptions() {
-        msg.subscribe('Profile.Country', (country) => {
-            this.country(country);
-        });
+        // msg.subscribe('Profile.Country', (country) => {
+        //     this.country(country);
+        // });
 
-        msg.subscribe('Profile.State', (state) => {
-            this.state(state);
-        });
+        // msg.subscribe('Profile.State', (state) => {
+        //     this.state(state);
+        // });
     }
 
     _setCurrentUser() {

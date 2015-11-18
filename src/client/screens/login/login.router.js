@@ -9,12 +9,7 @@ var router = function (app) {
 
     // root
     app.get('/#/login', function (context) {
-        var _user = sandbox.cookie.get('_user');
-        
-        if (_user) { 
-            window.location.replace('/#/'); 
-        
-        } else {
+        sandbox.auth.checkIsNotAuth(() => {
             System.import('screens/login/login.html!text').then(function (template) {
                 var viewModel = new LoginViewModel();
 
@@ -27,7 +22,7 @@ var router = function (app) {
                 // initialize view model
                 viewModel.init();
             });
-        }
+        });
     });
 
 };

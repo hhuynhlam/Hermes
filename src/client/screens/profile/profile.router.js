@@ -9,12 +9,7 @@ var router = function (app) {
 
     // profile
     app.get('/#/profile', function (context) {
-        var _user = sandbox.cookie.get('_user');
-        
-        if (!_user) { 
-            window.location.replace('/#/login'); 
-        
-        } else {
+        sandbox.auth.checkIsAuth(() => {
             System.import('screens/profile/profile.html!text').then(function (template) {
                 var viewModel = new ProfileViewModel();
 
@@ -27,7 +22,7 @@ var router = function (app) {
                 // initialize view model
                 viewModel.init();
             });
-        }
+        });
     });
 
 };
