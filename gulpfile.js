@@ -107,17 +107,17 @@ gulp.task('clean', function() {
 
 gulp.task('copy', function() {
     
-    // copy over node_modules
-    gulp.src([
-        'node_modules/**'
-    ])
-    .pipe(gulp.dest('_dist/node_modules'));
-
     // copy over src
     gulp.src([
         'src/**'
     ])
     .pipe(gulp.dest('_dist/src'));
+
+    // copy over package.json
+    gulp.src([
+        'package.json'
+    ])
+    .pipe(gulp.dest('_dist'));
     
 });
 
@@ -134,6 +134,7 @@ gulp.task('server', ['less', 'jade'], shell.task([ 'npm start' ]));
 //======================================
 gulp.task('build', ['clean', 'copy']);
 gulp.task('default', ['jshint', 'less', 'jade']);
-gulp.task('test', ['jshint', 'karma']);
+// gulp.task('test', ['jshint', 'karma']);
+gulp.task('test', ['jshint']);
 
 

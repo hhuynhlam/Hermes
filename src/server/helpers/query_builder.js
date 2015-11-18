@@ -1,7 +1,7 @@
 'use strict';
 
 var queryBuilder = function(body) {
-    var query, columns, table, where, limit;
+    var query, columns, table, where;
 
     // Build columns of query
     if (body.select instanceof Array) {

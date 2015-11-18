@@ -13,4 +13,6 @@ mv _dist hermes_prod
 sudo ln -s /home/hhuynhlam1/www/_config/prod.config.json ./hermes_prod/src/server/prod.config.json 
 sudo chmod 755 ./hermes_prod/src/server/prod.config.json 
 
+cd hermes_prod && sudo npm install --production
+
 sudo /usr/local/bin/svc -u /service/hermes_prod 
