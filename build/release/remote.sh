@@ -2,8 +2,8 @@ cd ~/www/
 sudo /usr/local/bin/svc -d /service/hermes_prod 
 sudo /service/hermes_prod/stop
 
-rm -rf hermes_prod_bak
-mv hermes_prod hermes_prod_bak
+sudo rm -rf hermes_prod_bak
+sudo mv hermes_prod hermes_prod_bak
 
 gunzip hermes.tar.gz
 tar -xf hermes.tar
