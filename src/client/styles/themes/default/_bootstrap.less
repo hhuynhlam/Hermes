@@ -34,10 +34,15 @@
 
 // Common styles
 .btn {
+
   // Remove the gradient for the pressed/active state
   &:active,
   &.active {
     background-image: none;
+  }
+
+  &:focus {
+    outline: 0;
   }
 }
 

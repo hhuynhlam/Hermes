@@ -93,6 +93,10 @@ class ProfileViewModel {
     _createWidgets() {
         alertWidget.create({
             id: 'ProfileAlert',
+            position: {
+                top: 60,
+                right: 10
+            },
             subscribe: {
                 error: 'Profile.Error',
                 success: 'Profile.Success',
