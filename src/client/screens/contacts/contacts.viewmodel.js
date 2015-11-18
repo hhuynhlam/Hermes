@@ -27,7 +27,10 @@ class ContactsViewModel {
             
             dataSource: { 
                 transport: { 
-                    read: '/users'  
+                    read: {
+                        type: 'POST',
+                        url: '/users'  
+                    }
                 }
             },
             columns: [

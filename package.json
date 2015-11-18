@@ -27,6 +27,7 @@
     "express": "4.13.1",
     "jade": "1.11.0",
     "jsonfile": "2.2.3",
+    "lodash": "3.10.1",
     "morgan": "1.6.1",
     "passport": "0.3.2",
     "passport-local": "1.0.0",
@@ -51,7 +52,6 @@
     "karma-phantomjs2-launcher": "0.3.2",
     "karma-spec-reporter": "0.0.20",
     "karma-systemjs": "0.8.0",
-    "lodash": "3.10.1",
     "systemjs": "0.19.3",
     "traceur": "0.0.91"
   }

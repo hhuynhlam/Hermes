@@ -27,7 +27,7 @@ jsonfile.readFile(userFile, function(err, data) {
 
 // List all Users
 // router.get('/', passport.authenticate('local', { session: false }),
-router.get('/',
+router.post('/',
 function (req, res) {
     return res.status(200).json(Users);
 });
@@ -68,7 +68,7 @@ function (req, res) {
 });
 
 // Update a User by id
-router.put('/:id',
+router.post('/:id',
 function (req, res) {
     var userIndex = _.findIndex(Users, function (u) { 
         return u.id === req.params.id; 
