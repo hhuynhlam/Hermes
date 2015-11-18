@@ -1,14 +1,11 @@
-section#Profile.container-fluid
-    .col-sm-8.col-sm-offset-2
+section#Profile.container
+    #ProfileAlert
+    form(data-bind='submit: save')
+        .col-sm-6
         
-        .margin-sm-top
-            .alert.alert-danger(data-bind="visible: formError, text: formError")
-
-        
-        .panel.panel-default.margin-lg-top
-            .panel-heading Edit Profile
-            .panel-body
-                form(data-bind='submit: save')
+            .panel.panel-default.margin-lg-top
+                .panel-heading Change Name
+                .panel-body
                     .form-group.has-feedback
                         label First Name
                         input.form-control(placeholder='First Name', data-bind='value: firstName')
@@ -18,7 +15,10 @@ section#Profile.container-fluid
                         label Last Name
                         input.form-control(placeholder='Last Name', data-bind='value: lastName')
                         span.glyphicon.glyphicon-user.form-control-feedback
-
+                    
+            .panel.panel-default
+                .panel-heading Change Address
+                .panel-body
                     .form-group.has-feedback
                         label Street Address
                         input.form-control(placeholder='Street Address', data-bind='value: streetAddress')
@@ -40,6 +40,10 @@ section#Profile.container-fluid
                         input.form-control(placeholder='Zip', data-bind='value: zip')
                         span.glyphicon.glyphicon-home.form-control-feedback
 
+        .col-sm-6
+            .panel.panel-default.margin-lg-top
+                .panel-heading Change Phone Numbers
+                .panel-body
                     .form-group.has-feedback
                         label Home Phone
                         input.form-control(placeholder='Home Phone', data-bind='value: homePhone')
@@ -50,6 +54,9 @@ section#Profile.container-fluid
                         input.form-control(placeholder='Mobile Phone', data-bind='value: mobilePhone')
                         span.glyphicon.glyphicon-earphone.form-control-feedback
 
+            .panel.panel-default
+                .panel-heading Change Credentials
+                .panel-body
                     .form-group.has-feedback
                         label Email
                         input.form-control(placeholder='Email', data-bind='value: email')
@@ -59,6 +66,8 @@ section#Profile.container-fluid
                         label Password
                         input.form-control(type='password', placeholder='Change Password', data-bind='value: password')
                         span.glyphicon.glyphicon-lock.form-control-feedback
-                    
-                    .row
-                        #SaveButton.col-sm-4.col-xs-12.pull-right
+
+        .col-sm-12
+            .panel.panel-default
+                .panel-body
+                    #SaveButton.col-sm-4.col-xs-12.pull-right

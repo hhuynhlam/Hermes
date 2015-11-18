@@ -2,6 +2,7 @@
 
 import ko from 'knockout';
 import sandbox from 'sandbox';
+import alertWidget from 'alert.widget';
 import buttonWidget from 'button.widget';
 // import dropdownWidget from 'dropdown.widget';
 
@@ -27,12 +28,11 @@ class ProfileViewModel {
         this.mobilePhone = ko.observable('');
         this.email = ko.observable('');
         this.password = ko.observable('');
-        this.formError = ko.observable('');
     }   
 
     init() {
         this._setCurrentUser();
-        this._createButtons();
+        this._createWidgets();
         // this._createDropdowns();
         this.setupSubscriptions();
     }
@@ -56,10 +56,10 @@ class ProfileViewModel {
         .then((user) => {
             cookie.set('_user', user);
             msg.trigger('#Navbar', 'App.CurrentUser', user);
-            console.log('Saved Successful');
+            msg.publish('Profile.Success', 'Saved Successful!');
         })
         .catch(() => {
-            this.formError('Error: Save Unsuccessfully. Please try again later.');
+            msg.publish('Profile.Error', 'Error: Save Unsuccessfully. Please try again later.');
         })
         .fin(() => { msg.publish('Profile.Save', 'enabled'); })
         .done();  
@@ -90,7 +90,17 @@ class ProfileViewModel {
         }
     }
 
-    _createButtons() {
+    _createWidgets() {
+        alertWidget.create({
+            id: 'ProfileAlert',
+            subscribe: {
+                error: 'Profile.Error',
+                success: 'Profile.Success',
+                info: 'Profile.Info',
+                warning: 'Profile.Warning'
+            }
+        });
+
         buttonWidget.create({
             id: 'SaveButton',
             label: 'Save',
