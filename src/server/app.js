@@ -1,5 +1,6 @@
 'use strict';
 
+var fs = require('path');
 var express = require('express');
 var path = require('path');
 // var favicon = require('serve-favicon');
@@ -15,7 +16,7 @@ var devMode = true;
 // Dev Env
 //======================================
 
-if (path.existsSync('prod.config.json')) { devMode = false; } 
+if (fs.existsSync('prod.config.json')) { devMode = false; } 
 
 
 //======================================

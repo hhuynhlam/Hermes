@@ -10,6 +10,7 @@ tar -xf hermes.tar
 rm hermes.tar
 mv _dist hermes_dev
 
-sudo ln -s ./_config/prod.config.json ./hermes_dev/src/server/prod.config.json 
+sudo ln -s /home/hhuynhlam1/www/_config/prod.config.json ./hermes_dev/src/server/prod.config.json 
+sudo chmod 755 ./hermes_dev/src/server/prod.config.json 
 
 sudo /usr/local/bin/svc -u /service/hermes_dev 
