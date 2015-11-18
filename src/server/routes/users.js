@@ -16,8 +16,7 @@ router.post('/',
 function (req, res) {
     var queryString = queryBuilder( _.assign(req.body, { route: 'Users' }) );
     db.query(queryString, function (data) {
-        var result = (data && data.length) ? data[0] : [];
-        return res.status(200).json( result );
+        return res.status(200).json( data );
     }, function (err) { res.status(500).send('SQL Error: ' + err); });
 });
 
