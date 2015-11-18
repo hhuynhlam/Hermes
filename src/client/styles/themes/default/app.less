@@ -1,8 +1,27 @@
 body {
+    overflow-y: hidden;
+}
+
+#MainView {
+    background-color: @body-bg;
+    background: url(/public/images/pattern-grid@1x.jpg);
+    background-repeat: repeat;
+    backgroud-position: left top;
+    background-size: 18px 18px;
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+.full-page-background {
     background-image: url(/public/images/autumn-leaves-bg.jpg);
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    height: 100vh;
+    height: 100%;
+
+    #MainView {
+        background-color: transparent;
+        background-image: none;
+    }
 }

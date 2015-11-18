@@ -1,9 +1,11 @@
 'use strict';
 
+import $ from 'jquery';
 import ko from 'knockout';
 import sammy from 'sammy';
 import sandbox from 'sandbox';
 import 'bootstrap';
+
 import NavViewModel from 'navbar.viewmodel';
 
 var AppViewModel = function () {
@@ -38,6 +40,9 @@ app.swap = function(content, callback) {
 
     // replace html
     app.$element().html(content);
+
+    // clean up body classes
+    $('body').removeClass();
 
     // apply callback
     if (callback) { callback.apply(); }
