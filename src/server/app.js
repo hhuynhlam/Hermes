@@ -1,7 +1,7 @@
 'use strict';
 
-var fs = require('path');
 var express = require('express');
+var fs = require('fs');
 var path = require('path');
 // var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -16,7 +16,26 @@ var devMode = true;
 // Dev Env
 //======================================
 
-if (fs.existsSync('prod.config.json')) { devMode = false; } 
+if ( fs.existsSync( path.resolve(__dirname, './prod.config.json') ) ) { devMode = false; }
+
+
+//======================================
+// Views
+//======================================
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
+
+//======================================
+// Middleware
+//======================================
+
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 
 //======================================
@@ -40,25 +59,6 @@ app.use(function(req, res, next) {
     err.status = 404;
     next(err);
 });
-
-
-//======================================
-// Views
-//======================================
-
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-
-
-//======================================
-// Middleware
-//======================================
-
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
 
 
 //======================================
