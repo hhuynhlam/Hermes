@@ -69,8 +69,8 @@ class ButtonViewModel extends BaseWidgetViewModel {
             _.forOwn(this.options.trigger, (val, key) => {
                 this.$selector.on(key, () => { 
                     $(val.id).trigger(val.event); 
-                })
-            })
+                });
+            });
         }
     }
 
