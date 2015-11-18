@@ -1,6 +1,7 @@
 'use strict';
 
 import dropdownWidget from 'dropdown.widget';
+import gridWidget from 'grid.widget';
 import inputWidget from 'input.widget';
 
 class ExampleViewModel {
@@ -27,6 +28,25 @@ class ExampleViewModel {
             subscribe: ['DropDownTopicB']
         });
 
+        gridWidget.create({
+            id: 'SampleGrid',
+            dataSource: { 
+                transport: { 
+                    read: 'http://jsonplaceholder.typicode.com/users'  
+                }
+            },
+            filterable: true,
+            sortable: true,
+            pageable: false,
+            columns: [
+                { field: "name", title: "Name"}, 
+                { field: "username", title: "Username"},
+                { field: "phone", title: "Phone"}
+            ], 
+            publish: ['InputTopicA'],
+            subscribe: ['InputTopicB']
+        });
+        
         inputWidget.create({
             id: 'SampleInput',
             publish: ['InputTopicA'],
