@@ -1,5 +1,6 @@
 'use strict';
 
+import alertWidget from 'alert.widget';
 import dropdownWidget from 'dropdown.widget';
 import gridWidget from 'grid.widget';
 import inputWidget from 'input.widget';
@@ -8,6 +9,16 @@ class ExampleViewModel {
     constructor() {}   
 
     init() {
+
+        alertWidget.create({
+            id: 'SampleAlert',
+            subscribe: {
+                error: 'Error',
+                success: 'Success',
+                info: 'Info',
+                warning: 'Warning'
+            }
+        });
 
         dropdownWidget.create({
             id: 'SampleDropDown',
@@ -42,9 +53,7 @@ class ExampleViewModel {
                 { field: "name", title: "Name"}, 
                 { field: "username", title: "Username"},
                 { field: "phone", title: "Phone"}
-            ], 
-            publish: ['InputTopicA'],
-            subscribe: ['InputTopicB']
+            ]
         });
         
         inputWidget.create({

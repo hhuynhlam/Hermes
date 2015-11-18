@@ -13,6 +13,7 @@ System.config({
     "profile.router": "screens/profile/profile.router",
     
     // Widgets
+    "alert.widget"         : "widgets/core/alert/alert",
     "base-widget.viewmodel": "widgets/core/base/base-widget.viewmodel",
     "button.widget"        : "widgets/core/button/button",
     "dropdown.widget"      : "widgets/core/dropdown/dropdown",
