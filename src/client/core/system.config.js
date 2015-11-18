@@ -8,6 +8,7 @@ System.config({
     
     // Routes
     "dev.router": "screens/_dev/dev.router",
+    "contacts.router": "screens/contacts/contacts.router",
     "home.router": "screens/home/home.router",
     "login.router": "screens/login/login.router",
     "profile.router": "screens/profile/profile.router",
@@ -27,7 +28,7 @@ System.config({
     
     // Vendor
     "bootstrap"       : "vendor/bootstrap/dist/js/bootstrap",
-    "jquery"          : "vendor/jquery/dist/jquery.min",
+    "jquery"          : "vendor/jquery/dist/jquery",
     "js-cookie"       : "vendor/js-cookie/src/js.cookie",
     "knockout"        : "vendor/knockout/dist/knockout.debug.js",
     "knockout-postbox": "vendor/knockout-postbox/build/knockout-postbox",

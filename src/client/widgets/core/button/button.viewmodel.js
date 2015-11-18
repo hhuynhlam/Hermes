@@ -1,5 +1,6 @@
 'use strict';
 
+import $ from 'jquery';
 import ko from 'knockout';
 import sandbox from 'sandbox';
 import BaseWidgetViewModel from 'base-widget.viewmodel';
@@ -36,6 +37,7 @@ class ButtonViewModel extends BaseWidgetViewModel {
 
     init() {
         this.setOptions();
+        this.setupEvents();
         this.setupPublications();
         this.setupSubscriptions();
     }
@@ -59,6 +61,16 @@ class ButtonViewModel extends BaseWidgetViewModel {
             _styles.forEach((c) => {
                 this.$selector.find('button').addClass(c);
             });
+        }
+    }
+
+    setupEvents() {
+        if (this.options.trigger)  {
+            _.forOwn(this.options.trigger, (val, key) => {
+                this.$selector.on(key, () => { 
+                    $(val.id).trigger(val.event); 
+                })
+            })
         }
     }
 

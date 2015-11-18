@@ -1,0 +1,19 @@
+section#Contacts.container-fluid
+    
+    .col-sm-12.margin-lg-top    
+        .panel.panel-default
+            .panel-heading Send Email
+            .panel-body
+                .col-sm-12
+                    #EmailAllButton.col-md-2.col-sm-4.col-xs-12
+                    #EmailSelectedButton.col-md-2.col-sm-4.col-xs-12
+
+                .col-sm-12.hide(data-bind="visible: emails().length")
+                    .well.margin-md-top
+                        #EmailOutput
+
+    .col-sm-12    
+        .panel.panel-default
+            .panel-heading Contacts
+            .panel-body
+                #UsersList
