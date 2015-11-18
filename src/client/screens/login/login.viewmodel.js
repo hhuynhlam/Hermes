@@ -2,6 +2,7 @@
 
 import ko from 'knockout';
 import sandbox from 'sandbox';
+import alertWidget from 'alert.widget';
 import buttonWidget from 'button.widget';
 
 var http = sandbox.http;
@@ -15,11 +16,10 @@ class LoginViewModel {
         this.emailError = ko.observable(false);
         this.password = ko.observable('');
         this.pwError = ko.observable(false);
-        this.formError = ko.observable('');
     }   
 
     init() {
-        this._createButtons();
+        this._createWidgets();
     }
 
     login() {
@@ -35,14 +35,28 @@ class LoginViewModel {
                 window.location.replace('/#/');
             })
             .catch(() => {
-                this.formError('Unauthorized: Please check your email and password.');
+                msg.publish('Login.Error', 'Unauthorized - Please check your email and password.');
             })
             .fin(() => { msg.publish('Login.SignInButton', 'enabled'); })
             .done();  
         }
     }
 
-    _createButtons() {
+    _createWidgets() {
+        alertWidget.create({
+            id: 'LoginAlert',
+            position: {
+                top: 60,
+                right: 10
+            },
+            subscribe: {
+                error: 'Login.Error',
+                success: 'Login.Success',
+                info: 'Login.Info',
+                warning: 'Login.Warning'
+            }
+        });
+
         buttonWidget.create({
             id: 'SignInButton',
             label: 'Sign In',

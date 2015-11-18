@@ -41,7 +41,7 @@ class ProfileViewModel {
     save() {
         msg.publish('Profile.Save', 'spinning');
             
-        http.put('/users/' + this.currentUser.id, {
+        http.post('/users/' + this.currentUser.id, {
             firstName: this.firstName(),
             lastName: this.lastName(),
             streetAddress: this.streetAddress(),
@@ -58,7 +58,7 @@ class ProfileViewModel {
             msg.publish('Profile.Success', 'Saved Successful!');
         })
         .catch(() => {
-            msg.publish('Profile.Error', 'Error: Save Unsuccessfully. Please try again later.');
+            msg.publish('Profile.Error', 'Save Unsuccessful - Please try again later.');
         })
         .fin(() => { msg.publish('Profile.Save', 'enabled'); })
         .done();  
