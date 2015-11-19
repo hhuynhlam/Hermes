@@ -40,16 +40,15 @@ class ContactsViewModel {
                 }
             },
             columns: [
-                { field: 'firstName', title: 'First Name'}, 
-                { field: 'lastName', title: 'Last Name'}, 
-                { field: 'streetAddress', title: 'Address'}, 
-                { field: 'country', title: 'Country'}, 
-                // { field: 'state', title: 'State'}, 
-                // { field: 'city', title: 'City'}, 
-                { field: 'zip', title: 'Zip'}, 
-                { field: 'homePhone', title: 'Home Phone' }, 
-                { field: 'mobilePhone', title: 'Mobile Phone' },
-                { field: 'email', title: 'Email'}
+                {   field: 'firstName', title: 'First Name' },
+                {   field: 'lastName', title: 'Last Name' },
+                {   title: 'Address', 
+                    template: '#= streetAddress + "</br>" + \
+                    city + ", " + state + ", " + country + " " + zip #'}, 
+                {   title: 'Phone', 
+                    template: '#= "Home: " + homePhone + "</br>" + \
+                    "Mobile: " + mobilePhone #'}, 
+                {   field: 'email', title: 'Email'}
             ],
 
             change: () => {
