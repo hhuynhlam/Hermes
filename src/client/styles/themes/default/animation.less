@@ -9,4 +9,13 @@
         }
     }
 
+    & > span.spinner.full-screen-spinner {
+        &:before {
+            border-top-color: white;
+            border-left-color: @brand-primary;
+            border-bottom-color: fadeout(@brand-primary, 40%);
+            border-right-color: fadeout(@brand-primary, 80%);
+        }
+    }
+
 }

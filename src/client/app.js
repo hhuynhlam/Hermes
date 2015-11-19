@@ -9,10 +9,11 @@ import 'bootstrap';
 import NavViewModel from 'navbar.viewmodel';
 
 var AppViewModel = function () {
-    var _user = sandbox.cookie.get('_user');
+    var _user;
+    
+    // load current user
+    _user = sandbox.cookie.get('_user');
     if (_user) { sandbox.msg.trigger('#Navbar', 'App.CurrentUser', JSON.parse(_user)); }
-
-    this.isReady = ko.observable(false);
 };
 
 // define a new Sammy.Application bound to the #MainView DOM
@@ -47,6 +48,9 @@ app.swap = function(content, callback) {
 
     // apply callback
     if (callback) { callback.apply(); }
+
+    // show main view
+    $('#MainView').show();
 };
 
 // run app

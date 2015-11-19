@@ -29,7 +29,8 @@
         "document"  :true,
         "require"   : true,
         "window"    : true,
-        "System"    : true
+        "System"    : true,
+        "Image"     : true
     },        
     "indent"        : 4         // Specify indentation spacing
 }

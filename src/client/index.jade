@@ -20,8 +20,11 @@ html.no-js(lang='')
     include ./widgets/navbar/navbar.jade
 
     // Start App Content
-    section#MainView
+    section#MainView(style="display: none;")
     // End App Content
+
+    #AppStatus.spinning
+        span.spinner.full-screen-spinner
     
     script(src='vendor/system.js/dist/system.js')
     script(src='core/system.config.js')

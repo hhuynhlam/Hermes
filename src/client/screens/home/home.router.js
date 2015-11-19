@@ -9,9 +9,17 @@ var router = function (app) {
     app.get('/#/', function (context) {
         System.import('screens/home/home.html!text').then(function (template) {
 
-            // render partial view
-            context.swap(sandbox.util.template(template), function () {
-                $('body').addClass('full-page-background');
+            // pre-load bg image
+            var _bgImg = new Image();
+            _bgImg.src = '/public/images/autumn-leaves-bg.jpg';
+            
+            // set app to ready
+            $(_bgImg).load( () =>  { 
+                
+                // render partial view
+                context.swap(sandbox.util.template(template), function () {
+                    $('body').addClass('full-page-background');
+                }); 
             });
         });
     });
