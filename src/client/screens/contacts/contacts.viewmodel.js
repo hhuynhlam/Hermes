@@ -6,12 +6,13 @@ import sandbox from 'sandbox';
 import buttonWidget from 'button.widget';
 import gridWidget from 'grid.widget';
 
+var _ = sandbox.util;
 var msg = sandbox.msg;
 
 class ContactsViewModel {
     constructor(options) {
         this.options = options || {};
-        this.emails = ko.observableArray([]);
+        this.emails = ko.observable('');
     }   
 
     init() {
@@ -94,19 +95,33 @@ class ContactsViewModel {
         });
     }
 
-    _getEmails() {
+    _getEmails(onlySelected) {
+        var $grid = $('#UsersList').data('kendoGrid'),
+            _emails = [];
 
+        if (onlySelected) {
+            var selectedItems = $grid.select();
+            _.forEach(selectedItems, (s) => {
+                _emails.push($grid.dataItem(s).email);
+            });
+        } else {
+            $grid.dataItems().forEach((row) => {
+                _emails.push(row.email);
+            });
+        }
+
+        return _emails.join(', ');
     }
 
     _setupEvents() {
         var $eventElement = $(document);
 
         $eventElement.on('EmailAllButton.Click', () => {
-            debugger;
+            this.emails( this._getEmails() );
         });
 
         $eventElement.on('EmailSelectedButton.Click', () => {
-            debugger;
+            this.emails( this._getEmails(true) );
         });
     }
 }

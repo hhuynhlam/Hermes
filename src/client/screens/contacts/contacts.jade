@@ -8,9 +8,9 @@ section#Contacts.container-fluid
                     #EmailAllButton.col-md-2.col-sm-4.col-xs-12
                     #EmailSelectedButton.col-md-2.col-sm-4.col-xs-12
 
-                .col-sm-12.hide(data-bind="visible: emails().length")
+                .col-sm-12(style="display: none;" data-bind="visible: emails")
                     .well.margin-md-top
-                        #EmailOutput
+                        span(data-bind="text: emails")
 
     .col-sm-12    
         .panel.panel-default
