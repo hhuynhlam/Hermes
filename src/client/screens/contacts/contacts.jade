@@ -8,8 +8,10 @@ section#Contacts.container-fluid
                     #EmailAllButton.col-md-2.col-sm-4.col-xs-12
                     #EmailSelectedButton.col-md-2.col-sm-4.col-xs-12
 
-                .col-sm-12(style="display: none;" data-bind="visible: emails")
-                    .well.margin-md-top
+                .col-sm-12.margin-md-top(style="display: none;" data-bind="visible: emails")
+                    p
+                        small.text-info Copy to email client:
+                    .well
                         span(data-bind="text: emails")
 
     .col-sm-12    
@@ -17,5 +19,5 @@ section#Contacts.container-fluid
             .panel-heading Contacts
             .panel-body
                 p
-                    small Hold Ctrl/Cmd to select multiple contacts. 
+                    small.text-info Hold Ctrl/Cmd to select multiple contacts. 
                 #UsersList
