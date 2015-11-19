@@ -27,6 +27,7 @@ class ButtonViewModel extends BaseWidgetViewModel {
                     _classes.disabled = true;
                     break;
                 default:
+                    this.$selector.find('button').attr('disabled', false);
                     _classes.disabled = false;
                     _classes.spinning = false;
             }
@@ -65,11 +66,19 @@ class ButtonViewModel extends BaseWidgetViewModel {
     }
 
     setupEvents() {
+        var $document = $(document);
         if (this.options.trigger)  {
             _.forOwn(this.options.trigger, (val, key) => {
-                this.$selector.on(key, () => { 
-                    $(val.id).trigger(val.event); 
-                });
+                if ( val &&_.isArray(val) ) {                    
+
+                    // on event key
+                    this.$selector.find('button').on(key, () => {
+
+                        // trigger each event defined
+                        val.forEach((v) => { $document.trigger(v); });
+                    });
+
+                }
             });
         }
     }

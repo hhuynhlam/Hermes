@@ -1,8 +1,12 @@
 'use strict';
 
+import $ from 'jquery';
 import ko from 'knockout';
+import sandbox from 'sandbox';
 import buttonWidget from 'button.widget';
 import gridWidget from 'grid.widget';
+
+var msg = sandbox.msg;
 
 class ContactsViewModel {
     constructor(options) {
@@ -12,6 +16,7 @@ class ContactsViewModel {
 
     init() {
         this._createWidgets();
+        this._setupEvents();
     }
 
     _createWidgets() {
@@ -44,33 +49,64 @@ class ContactsViewModel {
                 { field: 'homePhone', title: 'Home Phone' }, 
                 { field: 'mobilePhone', title: 'Mobile Phone' },
                 { field: 'email', title: 'Email'}
-            ]
+            ],
+
+            change: () => {
+                msg.publish('Contacts.EmailSelectedButton', 'enabled');
+            },
+            dataBound: () => {
+                msg.publish('Contacts.EmailAllButton', 'enabled');
+            }
         });
 
         buttonWidget.create({
             id: 'EmailAllButton',
             label: 'Email All',
+            attributes: [{
+                disabled: true
+            }],
             styles: [
                 'btn-primary',
-                'btn-block'
+                'btn-block',
+                'disabled'
             ],
             subscribe: ['Contacts.EmailAllButton'],
             trigger: {
-                click: { id: '#Contact', event: 'EmailAllButton.Click' }
+                click: ['EmailAllButton.Click']
             }
         });
 
         buttonWidget.create({
             id: 'EmailSelectedButton',
             label: 'Email Selected',
+            attributes: [{
+                disabled: true
+            }],
             styles: [
                 'btn-default',
-                'btn-block'
+                'btn-block',
+                'disabled'
             ],
             subscribe: ['Contacts.EmailSelectedButton'],
             trigger: {
-                click: { id: '#Contact', event: 'EmailSelectedButton.Click' }
+                click: ['EmailSelectedButton.Click']
             }
+        });
+    }
+
+    _getEmails() {
+
+    }
+
+    _setupEvents() {
+        var $eventElement = $(document);
+
+        $eventElement.on('EmailAllButton.Click', () => {
+            debugger;
+        });
+
+        $eventElement.on('EmailSelectedButton.Click', () => {
+            debugger;
         });
     }
 }
