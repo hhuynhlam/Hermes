@@ -58,7 +58,7 @@ function (req, res) {
 });
 
 // Get a User by id
-router.get('/:id',
+router.post('/:id',
 function (req, res) {
     var user = _.find(Users, function (u) {
         return u.id === req.params.id;
