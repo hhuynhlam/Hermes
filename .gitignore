@@ -1,9 +1,11 @@
+*.config.json
 *.log
 *.pid
 *.seed
-*.config.json
+
 .grunt
 .lock-wscript
+
 _dist
 coverage
 lib-cov

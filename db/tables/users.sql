@@ -1,6 +1,6 @@
 CREATE TABLE Users 
 (
-    id              int NOT NULL,
+    pid              int NOT NULL,
     firstName       varchar(255),
     lastName        varchar(255),
     streetAddress   varchar(255),
@@ -12,5 +12,5 @@ CREATE TABLE Users
     mobilePhone     varchar(10),
     email           varchar(255) NOT NULL,
     password        varchar(255) NOT NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (pid)
 )
