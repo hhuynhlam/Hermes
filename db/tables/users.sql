@@ -1,16 +1,17 @@
-CREATE TABLE Users 
-(
-    pid              int NOT NULL,
-    firstName       varchar(255),
-    lastName        varchar(255),
-    streetAddress   varchar(255),
-    country         varchar(2),
-    state           varchar(2),
-    city            varchar(255),
-    zip             varchar(5),
-    homePhone       varchar(10),
-    mobilePhone     varchar(10),
-    email           varchar(255) NOT NULL,
-    password        varchar(255) NOT NULL,
-    PRIMARY KEY (pid)
-)
+DROP TABLE IF EXISTS `Users`;
+
+CREATE TABLE `Users` (
+  `uid` int(11) NOT NULL AUTO_INCREMENT,
+  `firstName` varchar(255) DEFAULT NULL,
+  `lastName` varchar(255) DEFAULT NULL,
+  `streetAddress` varchar(255) DEFAULT NULL,
+  `country` varchar(2) DEFAULT NULL,
+  `state` varchar(2) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `zip` int(5) DEFAULT NULL,
+  `homePhone` int(10) DEFAULT NULL,
+  `mobilePhone` int(10) DEFAULT NULL,
+  `email` text NOT NULL,
+  `password` text NOT NULL,
+  PRIMARY KEY (`uid`)
+);

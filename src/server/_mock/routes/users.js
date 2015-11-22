@@ -68,7 +68,7 @@ function (req, res) {
 });
 
 // Update a User by id
-router.post('/:id',
+router.put('/:id',
 function (req, res) {
     var userIndex = _.findIndex(Users, function (u) { 
         return u.id === req.params.id; 
