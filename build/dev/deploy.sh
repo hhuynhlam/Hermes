@@ -2,7 +2,7 @@
 pushd ../../
 
 tar -czf hermes.tar.gz _dist/
-scp -r ./hermes.tar.gz hhuynhlam1@ps486964.dreamhostps.com:~/www/
+scp -r ./hermes.tar.gz webservice@45.33.40.30:~/
 
 popd
-ssh hhuynhlam1@ps486964.dreamhostps.com 'bash -s' < ./remote.sh
+ssh webservice@45.33.40.30 'bash -s' < ./remote.sh

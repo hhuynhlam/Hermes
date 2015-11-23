@@ -109,7 +109,10 @@ gulp.task('copy', function() {
     
     // copy over src
     gulp.src([
-        'src/**'
+        'src/**',
+        '!src/server/prod.config.json',
+        '!src/util',
+        '!src/util/**'
     ])
     .pipe(gulp.dest('_dist/src'));
 
