@@ -7,11 +7,9 @@ var connection = mysql.createConnection(_config.db);
 
 var db = {
     query: function (queryString, success, fail) {
-        connection.connect();
         connection.query(queryString, function(err, rows) {
             if (err) { fail.call(this, err); }
             else { success.call(this, rows); }
-            connection.end();
         });
     }
 };
