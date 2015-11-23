@@ -7,3 +7,5 @@
 
 # DJB DaemonTools
 # http://blog.tonycode.com/tech-stuff/setting-up-djbdns-on-linux
+
+# Copy run, stop from local:/build/dev/templates to remote:/service/hermes

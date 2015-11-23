@@ -1,0 +1,3 @@
+#!/bin/bash
+
+lsof -t -i tcp:9191 | xargs kill
