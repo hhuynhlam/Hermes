@@ -4,3 +4,6 @@
 # Create new user, add to sudoers, create /home/<user> directory
 # Install NVM [https://github.com/creationix/nvm]
 # Install Node via NVM
+
+# DJB DaemonTools
+# http://blog.tonycode.com/tech-stuff/setting-up-djbdns-on-linux
