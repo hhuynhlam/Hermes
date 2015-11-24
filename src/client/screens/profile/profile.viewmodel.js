@@ -41,7 +41,7 @@ class ProfileViewModel {
     save() {
         msg.publish('Profile.Save', 'spinning');
             
-        http.post('/users/' + this.currentUser.id, {
+        http.post('/users/' + this.currentUser.uid, {
             firstName: this.firstName(),
             lastName: this.lastName(),
             streetAddress: this.streetAddress(),
