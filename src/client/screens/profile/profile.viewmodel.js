@@ -52,8 +52,8 @@ class ProfileViewModel {
             email: (this.email()) ? this.email() : undefined,
             password: (this.password()) ? this.password() : undefined
         })
-        .then((user) => {
-            cookie.set('_user', user);
+        .then((data) => {
+            cookie.set('_user', data[0]);
             msg.trigger('#Navbar', 'App.CurrentUser', user);
             msg.publish('Profile.Success', 'Saved Successful!');
         })
