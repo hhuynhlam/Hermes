@@ -18,15 +18,15 @@ CREATE PROCEDURE `pUpdateUser` (
 BEGIN
     
     UPDATE Users
-    SET `firstName` = COALESCE(_firstName, `firstName`),
-        `lastName` = COALESCE(_lastName, `lastName`),
-        `streetAddress` = COALESCE(_streetAddress, `streetAddress`),
-        `country` = COALESCE(_country, `country`),
-        `state` = COALESCE(_state, `state`),
-        `city` = COALESCE(_city, `city`),
-        `zip` = COALESCE(_zip, `zip`),
-        `homePhone` = COALESCE(_homePhone, `homePhone`),
-        `mobilePhone` = COALESCE(_mobilePhone, `mobilePhone`),
+    SET `firstName` = _firstName,
+        `lastName` = _lastName,
+        `streetAddress` = _streetAddress,
+        `country` = _country,
+        `state` = _state,
+        `city` = _city,
+        `zip` = _zip,
+        `homePhone` = _homePhone,
+        `mobilePhone` = _mobilePhone,
         `email` = COALESCE(_email, `email`),
         `password` = COALESCE(_password, `password`)
     WHERE `uid` = _uid;
