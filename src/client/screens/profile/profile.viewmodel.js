@@ -54,7 +54,7 @@ class ProfileViewModel {
         })
         .then((data) => {
             cookie.set('_user', data[0]);
-            msg.trigger('#Navbar', 'App.CurrentUser', user);
+            msg.trigger('#Navbar', 'App.CurrentUser', data[0]);
             msg.publish('Profile.Success', 'Saved Successful!');
         })
         .catch(() => {
