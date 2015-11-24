@@ -53,8 +53,8 @@ class ProfileViewModel {
             password: (this.password()) ? this.password() : undefined
         })
         .then((data) => {
-            cookie.set('_user', data[0]);
-            msg.trigger('#Navbar', 'App.CurrentUser', data[0]);
+            cookie.set('_user', data[0][0]);
+            msg.trigger('#Navbar', 'App.CurrentUser', data[0][0]);
             msg.publish('Profile.Success', 'Saved Successful!');
         })
         .catch(() => {
