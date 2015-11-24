@@ -32,7 +32,8 @@ BEGIN
     WHERE `uid` = _uid;
 
     -- return updated user info
-    SELECT  `firstName`, 
+    SELECT  `uid`, 
+            `firstName`, 
             `lastName`, 
             `streetAddress`, 
             `country`, 
