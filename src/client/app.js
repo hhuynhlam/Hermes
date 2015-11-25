@@ -24,6 +24,7 @@ import devRouter from 'dev.router'; devRouter(app);
 import contactsRouter from 'contacts.router'; contactsRouter(app);
 import homeRouter from 'home.router'; homeRouter(app);
 import loginRouter from 'login.router'; loginRouter(app);
+import photosRouter from 'photos.router'; photosRouter(app);
 import profileRouter from 'profile.router'; profileRouter(app);
 
 // // 404 Error

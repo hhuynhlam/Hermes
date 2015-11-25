@@ -28,6 +28,8 @@ nav#Navbar
           ul.dropdown-menu
             li
               a(href='#/contacts') Contacts
+        li.dropdown(data-bind='visible: currentUser', style="display: none;")
+          a(href='#/photos') Photos
       
       // Right Links
       ul.nav.navbar-nav.navbar-right

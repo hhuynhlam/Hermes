@@ -11,6 +11,7 @@ System.config({
     "contacts.router": "screens/contacts/contacts.router",
     "home.router": "screens/home/home.router",
     "login.router": "screens/login/login.router",
+    "photos.router": "screens/photos/photos.router",
     "profile.router": "screens/profile/profile.router",
     
     // Widgets

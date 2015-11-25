@@ -21,6 +21,7 @@
     "knockout": "3.3.0",
     "knockout-postbox": "0.5.2",
     "lodash": "3.10.1",
+    "masonry": "3.3.2",
     "moment": "2.10.6",
     "plugin-css": "https://github.com/systemjs/plugin-css.git#0.1.18",
     "plugin-json": "https://github.com/systemjs/plugin-json.git#0.1.0",
