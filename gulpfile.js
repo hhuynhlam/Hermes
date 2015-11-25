@@ -20,7 +20,6 @@ gulp.task('jshint', function() {
         'gruntfile.js', 
         '**/*.js', 
         '!src/client/vendor/**/*.js', 
-        '!_archive/**/*.js',
         '!node_modules/**/*.js',
         '!**/*.spec.js'
     ])
@@ -111,6 +110,7 @@ gulp.task('copy', function() {
     gulp.src([
         'src/**',
         '!src/server/prod.config.json',
+        '!src/server/public/uploaded/images', 
         '!src/util',
         '!src/util/**'
     ])
