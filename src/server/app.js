@@ -44,6 +44,7 @@ app.use(cookieParser());
 
 // dynamic routes
 app.use('/auth',    (devMode) ? require('./_mock/routes/auth') : require('./routes/auth') );
+app.use('/photos',  (devMode) ? require('./_mock/routes/photos') : require('./routes/photos'));
 app.use('/users',   (devMode) ? require('./_mock/routes/users') : require('./routes/users'));
 
 // static routes
