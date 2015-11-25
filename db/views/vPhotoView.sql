@@ -3,7 +3,7 @@ AS
     SELECT 
         p.`pid`,
         p.`photoName`,
-        CONCAT(pg.`pgid`, '/', p.`pid`, '.', p.`photoExt`) as filePath,
+        CONCAT( 'uploaded/images/', substring(p.`pid`,-2,2), '/', p.`pid`, '.', p.`photoExt` ) as filePath,
         pg.`pgid`,
         pg.`groupName`,
         p.`uid` 

@@ -25,7 +25,8 @@ class PhotosViewModel {
         http.post('/photos')
         .then((data) => {
             data.forEach((photo) => {
-                this.$photoGrid.append('<div class="masonry-item"><img src="/photos/thumb?filePath=uploaded/images/' + photo.filePath + '&width=300" /></div>');
+                this.$photoGrid.append('<div class="masonry-item"> \
+                    <img src="/photos/thumb?filePath=' + photo.filePath + '&width=300" /></div>');
             });
 
             imagesLoaded('#PhotoMasonry', () => {
