@@ -15,7 +15,8 @@ var router = express.Router();
 // router.get('/', passport.authenticate('local', { session: false }),
 router.post('/',
 function (req, res) {
-    var queryString = queryBuilder.select({ route: 'vPhoto' });
+    var queryString = queryBuilder.select({ route: 'vPhoto', where: [{'key':'pgid', 'operator':'=', 'value':'62' }] });
+    debugger;
     db.query(queryString, function (data) {
         return res.status(200).json( data );
     }, function (err) { res.status(500).send('SQL Error: ' + err); });

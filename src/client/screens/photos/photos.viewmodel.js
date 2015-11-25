@@ -22,22 +22,24 @@ class PhotosViewModel {
     init() {
         this.$photoGrid = $('#PhotoMasonry');
 
-        this.$photoGrid.append('<div class="masonry-item"><img src="' + '/photos/thumb?filePath=uploaded/images/Brian/67.gif&width=200' + '"" /></div>');
-        this.$photoGrid.append('<div class="masonry-item"><img src="' + '/photos/thumb?filePath=uploaded/images/Brian/fatty.gif&width=200' + '"" /></div>');
-        this.$photoGrid.append('<div class="masonry-item"><img src="' + '/photos/thumb?filePath=uploaded/images/Brian/67.gif&width=200' + '"" /></div>');
-        this.$photoGrid.append('<div class="masonry-item"><img src="' + '/photos/thumb?filePath=uploaded/images/Brian/fatty.gif&width=200' + '"" /></div>');
-        this.$photoGrid.append('<div class="masonry-item"><img src="' + '/photos/thumb?filePath=uploaded/images/Brian/67.gif&width=200' + '"" /></div>');
-        this.$photoGrid.append('<div class="masonry-item"><img src="' + '/photos/thumb?filePath=uploaded/images/Brian/fatty.gif&width=200' + '"" /></div>');
-        this.$photoGrid.append('<div class="masonry-item"><img src="' + '/photos/thumb?filePath=uploaded/images/Brian/67.gif&width=200' + '"" /></div>');
-        this.$photoGrid.append('<div class="masonry-item"><img src="' + '/photos/thumb?filePath=uploaded/images/Brian/fatty.gif&width=200' + '"" /></div>');
-        this.$photoGrid.append('<div class="masonry-item"><img src="' + '/photos/thumb?filePath=uploaded/images/Brian/67.gif&width=200' + '"" /></div>');
-
-        imagesLoaded('#PhotoMasonry', () => {
-            this.$photoMasonry = new Masonry('#PhotoMasonry', {
-                itemSelector: '.masonry-item',
-                columnWidth: 200
+        http.post('/photos')
+        .then((data) => {
+            data.forEach((photo) => {
+                this.$photoGrid.append('<div class="masonry-item"><img src="/photos/thumb?filePath=uploaded/images/' + photo.filePath + '&width=300" /></div>');
             });
-        });
+
+            imagesLoaded('#PhotoMasonry', () => {
+                this.$photoMasonry = new Masonry('#PhotoMasonry', {
+                    itemSelector: '.masonry-item',
+                    columnWidth: 300,
+                    isFitWidth: true
+                });
+            });
+        })
+        .catch(() => {
+            console.error('Image Retrieval Error - Please try again later.');
+        })
+        .done();  
 
         this._createWidgets();
         this._setupEvents();
