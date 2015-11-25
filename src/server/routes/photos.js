@@ -23,14 +23,14 @@ function (req, res) {
 
 // Get Photo thumbnail
 // router.get('/', passport.authenticate('local', { session: false }),
-router.post('/thumb',
+router.get('/thumb',
 function (req, res) {
     var _public = path.join(__dirname, '../public'),
-        filePath = _public + '/' + req.body.filePath,
-        width = req.body.width;
-    
+        filePath = _public + '/' + req.param('filePath'),
+        width = req.param('width');
+
     // set image content-type
-    res.set('Content-Type', 'image/png');
+    res.set('Content-Type', 'image/gif');
 
     gm(filePath)
     .resize(width)

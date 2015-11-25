@@ -2,11 +2,15 @@
 
 import $ from 'jquery';
 import ko from 'knockout';
+import imagesLoaded from 'imagesloaded';
 import sandbox from 'sandbox';
+import Masonry from 'masonry';
+
 import buttonWidget from 'button.widget';
 import gridWidget from 'grid.widget';
 
 var _ = sandbox.util;
+var http = sandbox.http;
 var msg = sandbox.msg;
 
 class PhotosViewModel {
@@ -16,6 +20,25 @@ class PhotosViewModel {
     }   
 
     init() {
+        this.$photoGrid = $('#PhotoMasonry');
+
+        this.$photoGrid.append('<div class="masonry-item"><img src="' + '/photos/thumb?filePath=uploaded/images/Brian/67.gif&width=200' + '"" /></div>');
+        this.$photoGrid.append('<div class="masonry-item"><img src="' + '/photos/thumb?filePath=uploaded/images/Brian/fatty.gif&width=200' + '"" /></div>');
+        this.$photoGrid.append('<div class="masonry-item"><img src="' + '/photos/thumb?filePath=uploaded/images/Brian/67.gif&width=200' + '"" /></div>');
+        this.$photoGrid.append('<div class="masonry-item"><img src="' + '/photos/thumb?filePath=uploaded/images/Brian/fatty.gif&width=200' + '"" /></div>');
+        this.$photoGrid.append('<div class="masonry-item"><img src="' + '/photos/thumb?filePath=uploaded/images/Brian/67.gif&width=200' + '"" /></div>');
+        this.$photoGrid.append('<div class="masonry-item"><img src="' + '/photos/thumb?filePath=uploaded/images/Brian/fatty.gif&width=200' + '"" /></div>');
+        this.$photoGrid.append('<div class="masonry-item"><img src="' + '/photos/thumb?filePath=uploaded/images/Brian/67.gif&width=200' + '"" /></div>');
+        this.$photoGrid.append('<div class="masonry-item"><img src="' + '/photos/thumb?filePath=uploaded/images/Brian/fatty.gif&width=200' + '"" /></div>');
+        this.$photoGrid.append('<div class="masonry-item"><img src="' + '/photos/thumb?filePath=uploaded/images/Brian/67.gif&width=200' + '"" /></div>');
+
+        imagesLoaded('#PhotoMasonry', () => {
+            this.$photoMasonry = new Masonry('#PhotoMasonry', {
+                itemSelector: '.masonry-item',
+                columnWidth: 200
+            });
+        });
+
         this._createWidgets();
         this._setupEvents();
     }

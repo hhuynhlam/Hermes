@@ -29,11 +29,13 @@ System.config({
     
     // Vendor
     "bootstrap"       : "vendor/bootstrap/dist/js/bootstrap",
+    "imagesloaded"    : "vendor/imagesloaded/imagesloaded.pkgd",
     "jquery"          : "vendor/jquery/dist/jquery",
     "js-cookie"       : "vendor/js-cookie/src/js.cookie",
-    "knockout"        : "vendor/knockout/dist/knockout.debug.js",
+    "knockout"        : "vendor/knockout/dist/knockout.debug",
     "knockout-postbox": "vendor/knockout-postbox/build/knockout-postbox",
     "lodash"          : "vendor/lodash/lodash.min",
+    "masonry"         : "vendor/masonry/dist/masonry.pkgd",
     "moment"          : "vendor/moment/moment",
     "q"               : "vendor/q/q",
     "sammy"           : "vendor/sammy/lib/sammy",
@@ -48,6 +50,7 @@ System.config({
 
   meta: {
     "bootstrap": { "deps": ["jquery"] },
+    "masonry": { "deps": ["jquery"] },
     "sammy": { "deps": ["jquery"] }
   },
 
