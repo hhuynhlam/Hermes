@@ -4,6 +4,7 @@ import alertWidget from 'alert.widget';
 import dropdownWidget from 'dropdown.widget';
 import gridWidget from 'grid.widget';
 import inputWidget from 'input.widget';
+import windowWidget from 'window.widget';
 
 class ExampleViewModel {
     constructor() {}   
@@ -60,6 +61,19 @@ class ExampleViewModel {
             id: 'SampleInput',
             publish: ['InputTopicA'],
             subscribe: ['InputTopicB']
+        });
+
+        windowWidget.create({
+            id: 'SampleModal',
+            title: false,
+            modal: true,
+            visible: false,
+            subscribe: {
+                html: 'modal.html',
+                open: 'modal.open',
+                close: 'modal.close',
+                center: 'modal.center'
+            }
         });
 
     }
