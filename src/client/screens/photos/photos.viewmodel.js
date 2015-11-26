@@ -6,12 +6,12 @@ import imagesLoaded from 'imagesloaded';
 import sandbox from 'sandbox';
 import Masonry from 'masonry';
 
-import buttonWidget from 'button.widget';
-import gridWidget from 'grid.widget';
+// import buttonWidget from 'button.widget';
+// import gridWidget from 'grid.widget';
 
-var _ = sandbox.util;
+// var _ = sandbox.util;
 var http = sandbox.http;
-var msg = sandbox.msg;
+// var msg = sandbox.msg;
 
 class PhotosViewModel {
     constructor(options) {
@@ -121,7 +121,7 @@ class PhotosViewModel {
     }
 
     _setupEvents() {
-        var $eventElement = $(document);
+        // var $eventElement = $(document);
     }
 }
 
