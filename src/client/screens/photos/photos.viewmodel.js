@@ -47,7 +47,6 @@ class PhotosViewModel {
 
         windowWidget.create({
             id: 'PhotoViewer',
-            title: false,
             modal: true,
             visible: false,
             subscribe: {
