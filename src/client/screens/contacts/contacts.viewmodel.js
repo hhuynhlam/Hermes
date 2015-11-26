@@ -13,12 +13,22 @@ class ContactsViewModel {
     constructor(options) {
         this.options = options || {};
         this.emails = ko.observable('');
+        this.selectedContacts = ko.observableArray([]);
     }   
 
     init() {
         this._createWidgets();
         this._setupEvents();
-    }
+
+        // subscribe to observable value
+        this.selectedContacts.subscribe(() => {
+            if (this.selectedContacts().length) {
+                msg.publish('Contacts.EmailSelectedButton', 'enabled');
+            } else {
+                msg.publish('Contacts.EmailSelectedButton', 'disabled');
+            }
+        });
+    }   
 
     _createWidgets() {
         gridWidget.create({
@@ -28,7 +38,7 @@ class ContactsViewModel {
             pageable: false,
             reorderable: true,
             resizable: true,
-            selectable: 'multiple, row',
+            selectable: false,
             sortable: true,
             
             dataSource: { 
@@ -55,6 +65,16 @@ class ContactsViewModel {
                 msg.publish('Contacts.EmailSelectedButton', 'enabled');
             },
             dataBound: () => {
+                
+                // on row click
+                $('#UsersList').find('tbody > tr').on('click', (e) => {
+                    var $target =  $(e.currentTarget);
+                    this.$grid = this.$grid || $('#UsersList').data('kendoGrid');
+
+                    $target.toggleClass('k-state-selected'); 
+                    this.selectedContacts( $('.k-state-selected') );
+                });
+                
                 msg.publish('Contacts.EmailAllButton', 'enabled');
             }
         });
@@ -95,16 +115,15 @@ class ContactsViewModel {
     }
 
     _getEmails(onlySelected) {
-        var $grid = $('#UsersList').data('kendoGrid'),
-            _emails = [];
+        var _emails = [];
+        this.$grid = this.$grid || $('#UsersList').data('kendoGrid');
 
         if (onlySelected) {
-            var selectedItems = $grid.select();
-            _.forEach(selectedItems, (s) => {
-                _emails.push($grid.dataItem(s).email);
+            _.forEach(this.selectedContacts(), (s) => {
+                _emails.push(this.$grid.dataItem(s).email);
             });
         } else {
-            $grid.dataItems().forEach((row) => {
+            this.$grid.dataItems().forEach((row) => {
                 _emails.push(row.email);
             });
         }
