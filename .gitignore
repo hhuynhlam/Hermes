@@ -13,3 +13,4 @@ lib-cov
 logs
 node_modules
 pids
+src/server/public/uploaded/images

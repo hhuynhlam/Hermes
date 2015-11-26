@@ -1,16 +1,15 @@
 'use strict';
 
-import $ from 'jquery';
+// import $ from 'jquery';
 import ko from 'knockout';
-import imagesLoaded from 'imagesloaded';
-import sandbox from 'sandbox';
-import Masonry from 'masonry';
+// import sandbox from 'sandbox';
 
 // import buttonWidget from 'button.widget';
 // import gridWidget from 'grid.widget';
+import masonryWidget from 'masonry.widget';
 
 // var _ = sandbox.util;
-var http = sandbox.http;
+// var http = sandbox.http;
 // var msg = sandbox.msg;
 
 class PhotosViewModel {
@@ -20,27 +19,17 @@ class PhotosViewModel {
     }   
 
     init() {
-        this.$photoGrid = $('#PhotoMasonry');
-
-        http.post('/photos')
-        .then((data) => {
-            data.forEach((photo) => {
-                this.$photoGrid.append('<div class="masonry-item"> \
-                    <img src="/photos/thumb?filePath=' + photo.filePath + '&width=300" /></div>');
-            });
-
-            imagesLoaded('#PhotoMasonry', () => {
-                this.$photoMasonry = new Masonry('#PhotoMasonry', {
-                    itemSelector: '.masonry-item',
-                    columnWidth: 300,
-                    isFitWidth: true
-                });
-            });
-        })
-        .catch(() => {
-            console.error('Image Retrieval Error - Please try again later.');
-        })
-        .done();  
+        this.$photoMasonry = masonryWidget.create({
+            id: 'PhotoMasonry',
+            itemClass: 'masonry-item',
+            itemSelector: '.masonry-item',
+            data: {
+                transport: '/photos'
+            },
+            columnWidth: 200,
+            gutter: 5,
+            isFitWidth: true
+        });
 
         this._createWidgets();
         this._setupEvents();

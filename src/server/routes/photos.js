@@ -15,7 +15,7 @@ var router = express.Router();
 // router.get('/', passport.authenticate('local', { session: false }),
 router.post('/',
 function (req, res) {
-    var queryString = queryBuilder.select({ route: 'vPhoto', where: [{'key':'pgid', 'operator':'=', 'value':'62' }] });
+    var queryString = queryBuilder.select({ route: 'vPhoto', limit: 25 });
     db.query(queryString, function (data) {
         return res.status(200).json( data );
     }, function (err) { res.status(500).send('SQL Error: ' + err); });
@@ -26,11 +26,11 @@ function (req, res) {
 router.get('/thumb',
 function (req, res) {
     var _public = path.join(__dirname, '../public'),
-        filePath = _public + '/' + req.param('filePath'),
-        width = req.param('width');
+        filePath = _public + '/' + req.query.filePath,
+        width = req.query.width;
 
     // set image content-type
-    res.set('Content-Type', 'image/gif');
+    res.set('Content-Type', 'image/jpg');
 
     gm(filePath)
     .resize(width)
