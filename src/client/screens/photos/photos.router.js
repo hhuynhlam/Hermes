@@ -26,6 +26,18 @@ var router = function (app) {
             
     });
 
+    // -- DEBUG
+    app.get('/#/photos/test', function (context) {
+        sandbox.auth.checkIsAuth(() => {
+            System.import('screens/photos/test.html!text').then(function (template) {
+                
+                // render partial view
+                context.swap(sandbox.util.template(template));
+            });
+        });
+    });
+    // -- END DEBUG
+
 };
 
 export default router;

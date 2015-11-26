@@ -2,13 +2,15 @@
 
 // import $ from 'jquery';
 import ko from 'knockout';
-// import sandbox from 'sandbox';
-
+import sandbox from 'sandbox';
 import masonryWidget from 'masonry.widget';
+import windowWidget from 'window.widget';
+
+import imagesLoaded from 'imagesloaded';
 
 // var _ = sandbox.util;
 // var http = sandbox.http;
-// var msg = sandbox.msg;
+var msg = sandbox.msg;
 
 class PhotosViewModel {
     constructor(options) {
@@ -19,10 +21,19 @@ class PhotosViewModel {
     init() {
         this._createWidgets();
         this._setupEvents();
+
+        System.import('screens/photos/test.html!text').then((template) => {
+            msg.publish('PhotoViewer.Html', template);
+
+            imagesLoaded('#PhotoViewer', () => {
+                msg.publish('PhotoViewer.Center');
+                msg.publish('PhotoViewer.Open');
+            });
+        });
     }
 
     _createWidgets() {
-        this.$photoMasonry = masonryWidget.create({
+        masonryWidget.create({
             id: 'PhotoMasonry',
             itemClass: 'masonry-item',
             itemSelector: '.masonry-item',
@@ -32,6 +43,19 @@ class PhotosViewModel {
             columnWidth: 200,
             gutter: 5,
             isFitWidth: true
+        });
+
+        windowWidget.create({
+            id: 'PhotoViewer',
+            title: false,
+            modal: true,
+            visible: false,
+            subscribe: {
+                html: 'PhotoViewer.Html',
+                open: 'PhotoViewer.Open',
+                close: 'PhotoViewer.Close',
+                center: 'PhotoViewer.Center'
+            }
         });
     }
 
