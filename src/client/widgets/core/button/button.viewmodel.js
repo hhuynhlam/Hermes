@@ -20,6 +20,7 @@ class ButtonViewModel extends BaseWidgetViewModel {
             
             switch (this.status()) {
                 case 'disabled':
+                    this.$selector.find('button').attr('disabled', true);
                     _classes.disabled = true;
                     break;
                 case 'spinning':
