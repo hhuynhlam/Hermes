@@ -11,15 +11,13 @@ var router = function (app) {
 
             // pre-load bg image
             var _bgImg = new Image();
-            _bgImg.src = '/public/images/autumn-leaves-bg.jpg';
+            _bgImg.src = '/public/images/main-bg.jpg';
             
             // set app to ready
             $(_bgImg).load( () =>  { 
                 
                 // render partial view
-                context.swap(sandbox.util.template(template), function () {
-                    $('body').addClass('full-page-background');
-                }); 
+                context.swap(sandbox.util.template(template)); 
             });
         });
     });

@@ -44,14 +44,12 @@ app.swap = function(content, callback) {
     // replace html
     app.$element().html(content);
 
-    // clean up body classes
-    $('body').removeClass();
-
     // apply callback
     if (callback) { callback.apply(); }
 
     // show main view
     $('#MainView').show();
+    $('#AppStatus').hide();
 };
 
 // run app
