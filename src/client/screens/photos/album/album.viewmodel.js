@@ -3,13 +3,13 @@
 import $ from 'jquery';
 import ko from 'knockout';
 import sandbox from 'sandbox';
-import masonryWidget from 'masonry.widget';
+// import masonryWidget from 'masonry.widget';
 // import windowWidget from 'window.widget';
 
-import imagesLoaded from 'imagesloaded';
+// import imagesLoaded from 'imagesloaded';
 
 var http = sandbox.http;
-var msg = sandbox.msg;
+// var msg = sandbox.msg;
 
 class AlbumViewModel {
     constructor(options) {
