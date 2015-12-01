@@ -27,6 +27,7 @@ class ProfileViewModel {
         this.mobilePhone = ko.observable('');
         this.email = ko.observable('');
         this.password = ko.observable('');
+        this.confirmPassword = ko.observable('');
     }   
 
     init() {
@@ -36,7 +37,21 @@ class ProfileViewModel {
         this.setupSubscriptions();
     }
 
-    confirm() {}
+    validate() {
+        if ( this.password() ) {
+            if ( !this.confirmPassword() ) {
+                msg.publish('Profile.Warning', 'Please confirm your new password.');
+            } else if ( this.password() !== this.confirmPassword() ) {
+                msg.publish('Profile.Warning', 'Passwords do not match.');
+                this.password('');
+                this.confirmPassword('');
+            } else {
+                this.save();
+            }
+        } else {
+            this.save();
+        }
+    }
 
     save() {
         msg.publish('Profile.Save', 'spinning');

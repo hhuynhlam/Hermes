@@ -1,6 +1,6 @@
 section#Profile.container
     #ProfileAlert
-    form(data-bind='submit: save')
+    form(data-bind='submit: validate')
         .col-sm-6
         
             .panel.panel-default.margin-lg-top
@@ -65,6 +65,11 @@ section#Profile.container
                     .form-group.has-feedback
                         label Password
                         input.form-control(type='password', placeholder='Change Password', data-bind='value: password')
+                        span.glyphicon.glyphicon-lock.form-control-feedback
+
+                    .form-group.has-feedback
+                        label Password
+                        input.form-control(type='password', placeholder='Confirm Password', data-bind='value: confirmPassword')
                         span.glyphicon.glyphicon-lock.form-control-feedback
 
         .col-sm-12
