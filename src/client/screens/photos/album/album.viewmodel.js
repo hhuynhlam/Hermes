@@ -11,7 +11,7 @@ import imagesLoaded from 'imagesloaded';
 var http = sandbox.http;
 var msg = sandbox.msg;
 
-class PhotosViewModel {
+class AlbumViewModel {
     constructor(options) {
         this.options = options || {};
         this.emails = ko.observable('');
@@ -82,4 +82,4 @@ class PhotosViewModel {
     }
 }
 
-export default PhotosViewModel;
+export default AlbumViewModel;

@@ -21,6 +21,21 @@ function (req, res) {
     }, function (err) { res.status(500).send('SQL Error: ' + err); });
 });
 
+// Get a Photo by id
+// router.get('/', passport.authenticate('local', { session: false }),
+router.post('/:id',
+function (req, res) {
+    var queryString = queryBuilder.select({ 
+        route: 'vPhoto', 
+        where: [
+            { 'key': 'pid', 'operator': '=', 'value': req.params.id }
+        ]
+    });
+    db.query(queryString, function (data) {
+        return res.status(200).json( data );
+    }, function (err) { res.status(500).send('SQL Error: ' + err); });
+});
+
 // Get Photo thumbnail
 // router.get('/', passport.authenticate('local', { session: false }),
 router.get('/',
