@@ -44,12 +44,12 @@ app.use(cookieParser());
 
 // dynamic routes
 app.use('/auth',    (devMode) ? require('./_mock/routes/auth') : require('./routes/auth') );
-app.use('/photos',  (devMode) ? require('./_mock/routes/photos') : require('./routes/photos'));
 app.use('/users',   (devMode) ? require('./_mock/routes/users') : require('./routes/users'));
 
 // static routes
 app.use('/',          require('./routes/index'));
 app.use('/countries', require('./routes/countries'));
+app.use('/photos',    require('./routes/photos'));
 app.use('/states',    require('./routes/states'));
 
 app.use( '/public', express.static(path.join(__dirname, 'public')) );
