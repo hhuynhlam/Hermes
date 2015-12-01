@@ -4,7 +4,7 @@
 import ko from 'knockout';
 import sandbox from 'sandbox';
 import masonryWidget from 'masonry.widget';
-import windowWidget from 'window.widget';
+// import windowWidget from 'window.widget';
 
 import imagesLoaded from 'imagesloaded';
 
@@ -22,14 +22,14 @@ class PhotosViewModel {
         this._createWidgets();
         this._setupEvents();
 
-        System.import('screens/photos/test.html!text').then((template) => {
-            msg.publish('PhotoViewer.Html', template);
+        // System.import('screens/photos/test.html!text').then((template) => {
+        //     msg.publish('PhotoViewer.Html', template);
 
-            imagesLoaded('#PhotoViewer', () => {
-                msg.publish('PhotoViewer.Center');
-                msg.publish('PhotoViewer.Open');
-            });
-        });
+        //     imagesLoaded('#PhotoViewer', () => {
+        //         msg.publish('PhotoViewer.Center');
+        //         msg.publish('PhotoViewer.Open');
+        //     });
+        // });
     }
 
     _createWidgets() {
@@ -40,22 +40,25 @@ class PhotosViewModel {
             data: {
                 transport: '/photos'
             },
-            columnWidth: 200,
+            columnWidth: 300,
             gutter: 5,
-            isFitWidth: true
-        });
-
-        windowWidget.create({
-            id: 'PhotoViewer',
-            modal: true,
-            visible: false,
-            subscribe: {
-                html: 'PhotoViewer.Html',
-                open: 'PhotoViewer.Open',
-                close: 'PhotoViewer.Close',
-                center: 'PhotoViewer.Center'
+            isFitWidth: true,
+            publish: {
+                rendered: 'PhotoMasonry.Rendered'
             }
         });
+
+        // windowWidget.create({
+        //     id: 'PhotoViewer',
+        //     modal: true,
+        //     visible: false,
+        //     subscribe: {
+        //         html: 'PhotoViewer.Html',
+        //         open: 'PhotoViewer.Open',
+        //         close: 'PhotoViewer.Close',
+        //         center: 'PhotoViewer.Center'
+        //     }
+        // });
     }
 
     _setupEvents() {
