@@ -4,7 +4,7 @@ import ko from 'knockout';
 import sandbox from 'sandbox';
 import alertWidget from 'alert.widget';
 import buttonWidget from 'button.widget';
-// import dropdownWidget from 'dropdown.widget';
+import dropdownWidget from 'dropdown.widget';
 
 var cookie = sandbox.cookie;
 var http = sandbox.http;
@@ -20,8 +20,8 @@ class ProfileViewModel {
         this.lastName = ko.observable('');
         this.streetAddress = ko.observable('');
         this.city = ko.observable('');
-        // this.state = ko.observable('');
-        // this.country = ko.observable('');
+        this.state = ko.observable('CA');
+        this.country = ko.observable('US');
         this.zip = ko.observable('');
         this.homePhone = ko.observable('');
         this.mobilePhone = ko.observable('');
@@ -33,7 +33,6 @@ class ProfileViewModel {
     init() {
         this._setCurrentUser();
         this._createWidgets();
-        // this._createDropdowns();
         this.setupSubscriptions();
     }
 
@@ -61,6 +60,8 @@ class ProfileViewModel {
             lastName: this.lastName(),
             streetAddress: this.streetAddress(),
             city: this.city(),
+            country: this.country(),
+            state: this.state(),
             zip: this.zip(),
             homePhone: this.homePhone(),
             mobilePhone: this.mobilePhone(),
@@ -80,13 +81,13 @@ class ProfileViewModel {
     }
     
     setupSubscriptions() {
-        // msg.subscribe('Profile.Country', (country) => {
-        //     this.country(country);
-        // });
+        msg.subscribe('Profile.Country', (country) => {
+            this.country(country);
+        });
 
-        // msg.subscribe('Profile.State', (state) => {
-        //     this.state(state);
-        // });
+        msg.subscribe('Profile.State', (state) => {
+            this.state(state);
+        });
     }
 
     _setCurrentUser() {
@@ -95,8 +96,8 @@ class ProfileViewModel {
             this.lastName(this.currentUser.lastName);
             this.streetAddress(this.currentUser.streetAddress);
             this.city(this.currentUser.city);
-            // this.state(this.currentUser.state);
-            // this.country(this.currentUser.country);
+            this.state(this.currentUser.state || 'CA');
+            this.country(this.currentUser.country || 'US');
             this.zip(this.currentUser.zip);
             this.homePhone(this.currentUser.homePhone);
             this.mobilePhone(this.currentUser.mobilePhone);
@@ -131,35 +132,34 @@ class ProfileViewModel {
             ],
             subscribe: ['Profile.Save']
         });
+
+        dropdownWidget.create({
+            id: 'CountryDropdown',
+            change: ['Profile.Country'],
+            dataTextField: 'name',
+            dataValueField: 'code',
+            dataSource: { 
+                transport: { 
+                    read: '/countries' 
+                }
+            },
+            value: this.country()
+        });
+
+        dropdownWidget.create({
+            id: 'StateDropdown',
+            cascadeFrom: 'CountryDropdown',
+            change: ['Profile.State'],
+            dataTextField: 'name',
+            dataValueField: 'short',
+            dataSource: { 
+                transport: { 
+                    read: '/states' 
+                }
+            }, 
+            value: this.state()
+        });
     }
-
-    // _createDropdowns() {
-    //     dropdownWidget.create({
-    //         id: 'CountryDropdown',
-    //         change: ['Profile.Country'],
-    //         dataTextField: 'name',
-    //         dataValueField: 'code',
-    //         dataSource: { 
-    //             transport: { 
-    //                 read: '/countries' 
-    //             }
-    //         },
-    //         value: this.country()
-    //     });
-
-    //     dropdownWidget.create({
-    //         id: 'StateDropdown',
-    //         change: ['Profile.State'],
-    //         dataTextField: 'name',
-    //         dataValueField: 'abbreviation',
-    //         dataSource: { 
-    //             transport: { 
-    //                 read: '/states' 
-    //             }
-    //         }, 
-    //         value: this.state()
-    //     });
-    // }
 }
 
 export default ProfileViewModel;
