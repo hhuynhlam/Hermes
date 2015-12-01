@@ -5,6 +5,7 @@ import imagesLoaded from 'imagesloaded';
 import Masonry from 'masonry';
 
 var http = sandbox.http;
+var msg = sandbox.msg;
 
 class MasonryViewModel {
     constructor(options) {
@@ -21,7 +22,7 @@ class MasonryViewModel {
                 
                 // append image to masonry
                 this.$selector.append('<div class="' + this.options.itemClass + '"> \
-                    <img src="/photos/thumb?filePath=' + photo.filePath + '&width=' + this.options.columnWidth + '" /></div>');
+                    <img src="/photos?filePath=' + photo.filePath + '&width=' + this.options.columnWidth + '" /></div>');
             });
 
             // after all images loaded
@@ -29,6 +30,10 @@ class MasonryViewModel {
                 
                 // rerender layout
                 this.$photoMasonry = new Masonry('#' + this.options.id, this.options);
+
+                if (this.options.publish && this.options.publish.rendered) {
+                    msg.publish(this.options.publish.rendered, true);
+                }
             });
         })
         .catch(() => {

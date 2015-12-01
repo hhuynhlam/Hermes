@@ -23,7 +23,7 @@ function (req, res) {
 
 // Get Photo thumbnail
 // router.get('/', passport.authenticate('local', { session: false }),
-router.get('/thumb',
+router.get('/',
 function (req, res) {
     var _public = path.join(__dirname, '../public'),
         filePath = _public + '/' + req.query.filePath,
