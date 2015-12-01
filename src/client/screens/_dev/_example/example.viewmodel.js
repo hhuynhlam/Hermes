@@ -1,9 +1,11 @@
 'use strict';
 
 import alertWidget from 'alert.widget';
+import buttonWidget from 'button.widget';
 import dropdownWidget from 'dropdown.widget';
 import gridWidget from 'grid.widget';
 import inputWidget from 'input.widget';
+import masonryWidget from 'masonry.widget';
 import windowWidget from 'window.widget';
 
 class ExampleViewModel {
@@ -19,6 +21,19 @@ class ExampleViewModel {
                 info: 'Info',
                 warning: 'Warning'
             }
+        });
+
+        buttonWidget.create({
+            id: 'SampleButton',
+            label: 'Sample',
+            attributes: [{
+                type: 'submit'
+            }],
+            styles: [
+                'btn-primary',
+                'btn-block'
+            ],
+            subscribe: ['SampleButton.Sample']
         });
 
         dropdownWidget.create({
@@ -63,8 +78,23 @@ class ExampleViewModel {
             subscribe: ['InputTopicB']
         });
 
+        masonryWidget.create({
+            id: 'SampleMasonry',
+            itemClass: 'masonry-item',
+            itemSelector: '.masonry-item',
+            data: {
+                transport: '/photos'
+            },
+            columnWidth: 300,
+            gutter: 5,
+            isFitWidth: true,
+            publish: {
+                rendered: 'SampleMasonry.Rendered'
+            }
+        });
+
         windowWidget.create({
-            id: 'SampleModal',
+            id: 'SampleWindow',
             title: false,
             modal: true,
             visible: false,
