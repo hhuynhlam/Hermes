@@ -1,6 +1,6 @@
 'use strict';
 
-// import $ from 'jquery';
+import $ from 'jquery';
 import ko from 'knockout';
 import sandbox from 'sandbox';
 import masonryWidget from 'masonry.widget';
@@ -8,8 +8,7 @@ import masonryWidget from 'masonry.widget';
 
 import imagesLoaded from 'imagesloaded';
 
-// var _ = sandbox.util;
-// var http = sandbox.http;
+var http = sandbox.http;
 var msg = sandbox.msg;
 
 class PhotosViewModel {
@@ -33,20 +32,37 @@ class PhotosViewModel {
     }
 
     _createWidgets() {
-        masonryWidget.create({
-            id: 'PhotoMasonry',
-            itemClass: 'masonry-item',
-            itemSelector: '.masonry-item',
-            data: {
-                transport: '/photos'
-            },
-            columnWidth: 300,
-            gutter: 5,
-            isFitWidth: true,
-            publish: {
-                rendered: 'PhotoMasonry.Rendered'
-            }
-        });
+
+
+        http.post( '/photos')
+        .then((data) => {
+            data.forEach((photo) => {
+                
+                // append image to grid
+                $('#PhotoGrid').append('<div class="photo-item"> \
+                    <img src="/photos?filePath=' + photo.filePath + '&height=200" /></div>');
+            });
+        })
+        .catch(() => {
+            console.error('Image Retrieval Error - Please try again later.');
+        })
+        .done();  
+
+
+        // masonryWidget.create({
+        //     id: 'PhotoMasonry',
+        //     itemClass: 'masonry-item',
+        //     itemSelector: '.masonry-item',
+        //     data: {
+        //         transport: '/photos'
+        //     },
+        //     columnWidth: 300,
+        //     gutter: 5,
+        //     isFitWidth: true,
+        //     publish: {
+        //         rendered: 'PhotoMasonry.Rendered'
+        //     }
+        // });
 
         // windowWidget.create({
         //     id: 'PhotoViewer',

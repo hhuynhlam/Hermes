@@ -27,13 +27,14 @@ router.get('/',
 function (req, res) {
     var _public = path.join(__dirname, '../public'),
         filePath = _public + '/' + req.query.filePath,
+        height = req.query.height,
         width = req.query.width;
 
     // set image content-type
     res.set('Content-Type', 'image/jpg');
 
     gm(filePath)
-    .resize(width)
+    .resize(width, height)
     .stream(function (err, stdout) {
         if (err) { res.status(500).send('Image Error: ' + err); }
         else { stdout.pipe(res); }
