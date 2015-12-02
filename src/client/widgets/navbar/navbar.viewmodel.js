@@ -13,6 +13,7 @@ class NavbarViewModel {
         this.$selector = $('#Navbar');
         
         this.currentUser = ko.observable();
+        this.hidden = ko.observable(true);
         this.init();
     }
 
@@ -33,6 +34,9 @@ class NavbarViewModel {
     setupSubscriptions() {
         this.$selector.on('App.CurrentUser', (e, val) => {
             this.currentUser(val);
+        });
+        this.$selector.on('App.Headless', (e, val) => {
+            this.hidden(val);
         });
     }
 }

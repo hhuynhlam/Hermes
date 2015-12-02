@@ -27,7 +27,7 @@ import loginRouter from 'login.router'; loginRouter(app);
 import photosRouter from 'photos.router'; photosRouter(app);
 import profileRouter from 'profile.router'; profileRouter(app);
 
-// // 404 Error
+// 404 Error
 app.notFound = function () {
     window.location.replace('/#/');
 };
