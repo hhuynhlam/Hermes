@@ -9,4 +9,8 @@ router.get('/', function(req, res) {
     res.sendFile(path.resolve(__dirname, '../../client', './index.html'));
 });
 
+router.get('/v', function(req, res) {
+    res.sendFile(path.resolve(__dirname, '../../client', './vIndex.html'));
+});
+
 module.exports = router;

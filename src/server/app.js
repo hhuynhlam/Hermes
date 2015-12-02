@@ -55,6 +55,10 @@ app.use('/states',    require('./routes/states'));
 app.use( '/public', express.static(path.join(__dirname, 'public')) );
 app.use( express.static(path.resolve(__dirname, '../client')) );
 
+// headless support
+app.use( '/v/public', express.static(path.join(__dirname, 'public')) );
+app.use( '/v', express.static(path.resolve(__dirname, '../client')) );
+
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
