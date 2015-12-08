@@ -1,6 +1,19 @@
+body {
+    height: 100%;
+    overflow-y: hidden;
+}
+
 #AppStatus {
-    height: ~"calc(100vh - 50px)";
+    // height: ~"calc(100vh - 50px)";
+    height: 100vh;
     .flex-display(flex);
     .justify-content(center);
     .align-content(center);
+}
+
+#MainView {
+    height: 100vh;
+    overflow-y: scroll;
+    padding-top: 75px;
+    z-index: -100;
 }
