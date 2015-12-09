@@ -31,10 +31,12 @@ var router = function (app) {
     // before all non /v/ routes, check headless and reset
     app.before({ except: { path: /\/#\/v/ } }, function () {
         if (app.headless) { 
-            sandbox.msg.trigger('#Navbar', 'App.Headless', true); 
+            sandbox.msg.trigger('#Navbar', 'App.Headless', true);
+            $('body').addClass('headless'); 
             app.headless = false;
         } else {
             sandbox.msg.trigger('#Navbar', 'App.Headless', false); 
+            $('body').removeClass('headless'); 
         }
     });
 };

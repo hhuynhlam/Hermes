@@ -1,4 +1,22 @@
 #Viewer {
-    height: calc(100vh - 75px);
-    margin-top: -75px;
+    height: 100vh;
+}
+
+.k-widget.k-window {
+    border: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0; 
+    border-bottom-left-radius: 0; 
+    border-bottom-right-radius: 0; 
+
+    .k-window-titlebar {
+        border: 0;
+    }
+}
+
+.uly-core-window.k-window-content {
+    overflow: hidden;
+    padding: 0;
+
+    iframe { border: 0; }
 }

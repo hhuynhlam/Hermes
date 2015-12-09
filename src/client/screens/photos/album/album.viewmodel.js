@@ -1,84 +1,63 @@
 'use strict';
 
 import $ from 'jquery';
-import ko from 'knockout';
+// import ko from 'knockout';
 import sandbox from 'sandbox';
-// import masonryWidget from 'masonry.widget';
-// import windowWidget from 'window.widget';
+import buttonWidget from 'button.widget';
+import windowWidget from 'window.widget';
 
-// import imagesLoaded from 'imagesloaded';
-
-var http = sandbox.http;
-// var msg = sandbox.msg;
+// var http = sandbox.http;
+var msg = sandbox.msg;
 
 class AlbumViewModel {
     constructor(options) {
         this.options = options || {};
-        this.emails = ko.observable('');
     }   
 
-    init() {
+    init(albumId) {
+        this.albumId = albumId;
         this._createWidgets();
         this._setupEvents();
-
-        // System.import('screens/photos/test.html!text').then((template) => {
-        //     msg.publish('PhotoViewer.Html', template);
-
-        //     imagesLoaded('#PhotoViewer', () => {
-        //         msg.publish('PhotoViewer.Center');
-        //         msg.publish('PhotoViewer.Open');
-        //     });
-        // });
     }
 
     _createWidgets() {
 
+        buttonWidget.create({
+            id: 'TestButton',
+            label: 'Open',
+            styles: [
+                'btn-primary',
+                'btn-block'
+            ],
+            trigger: {
+                click: ['TestButton.Click']
+            }
+        });
 
-        http.post( '/photos')
-        .then((data) => {
-            data.forEach((photo) => {
-                
-                // append image to grid
-                $('#PhotoGrid').append('<div class="photo-item"> \
-                    <img src="/photos?filePath=' + photo.filePath + '&height=200" /></div>');
-            });
-        })
-        .catch(() => {
-            console.error('Image Retrieval Error - Please try again later.');
-        })
-        .done();  
-
-
-        // masonryWidget.create({
-        //     id: 'PhotoMasonry',
-        //     itemClass: 'masonry-item',
-        //     itemSelector: '.masonry-item',
-        //     data: {
-        //         transport: '/photos'
-        //     },
-        //     columnWidth: 300,
-        //     gutter: 5,
-        //     isFitWidth: true,
-        //     publish: {
-        //         rendered: 'PhotoMasonry.Rendered'
-        //     }
-        // });
-
-        // windowWidget.create({
-        //     id: 'PhotoViewer',
-        //     modal: true,
-        //     visible: false,
-        //     subscribe: {
-        //         html: 'PhotoViewer.Html',
-        //         open: 'PhotoViewer.Open',
-        //         close: 'PhotoViewer.Close',
-        //         center: 'PhotoViewer.Center'
-        //     }
-        // });
+        var windowWidth = window.innerWidth;
+        var windowHeight = window.innerHeight;
+        windowWidget.create({
+            id: 'PhotoViewer',
+            content: '/#/v/photos/viewer/606',
+            iframe: true,
+            height: windowHeight - 100,
+            width: windowWidth - 200,
+            modal: true,
+            visible: false,
+            subscribe: {
+                open: 'PhotoViewer.Open',
+                close: 'PhotoViewer.Close',
+                center: 'PhotoViewer.Center'
+            }
+        });
     }
 
     _setupEvents() {
-        // var $eventElement = $(document);
+        var $eventElement = $(document);
+        $eventElement.on('TestButton.Click', () => {
+            msg.publish('PhotoViewer.Center');
+            msg.publish('PhotoViewer.Open');
+        });
     }
 }
 

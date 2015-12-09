@@ -15,7 +15,6 @@ class ViewerViewModel {
 
     init(photoId) {
         this.photoId = photoId;
-
         this._createWidgets();
         this._setupEvents();
     }

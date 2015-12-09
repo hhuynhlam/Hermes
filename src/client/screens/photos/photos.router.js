@@ -41,7 +41,7 @@ var router = function (app) {
                 ko.applyBindings(viewModel, document.getElementById('Album'));
 
                 // initialize view model
-                viewModel.init();
+                viewModel.init(context.params.id);
             });
         });
             
