@@ -30,7 +30,7 @@ class AlbumViewModel {
         // responsive photo grid
         if (window.innerWidth >= 1200) { _height = 218; }
         else if (window.innerWidth >= 992) { _height = 178; }
-        else if (window.innerWidth >= 768) { _height = 223; }
+        else if (window.innerWidth >= 768) { _height = 230; }
         else { _height = window.innerWidth - 40; }
 
         // @TODO: Maybe this should be a DataSource
