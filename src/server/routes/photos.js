@@ -1,6 +1,7 @@
 'use strict';
 
 var db = require('../helpers/db_connector');
+var fs = require('fs');
 var gm = require('gm').subClass({ imageMagick: true });
 var queryBuilder = require('../helpers/query_builder');
 var express = require('express');
@@ -13,9 +14,14 @@ var router = express.Router();
 
 // List all Photos
 // router.get('/', passport.authenticate('local', { session: false }),
-router.post('/',
+router.post('/:albumId',
 function (req, res) {
-    var queryString = queryBuilder.select({ route: 'vPhoto', limit: 25 });
+    var queryString = queryBuilder.select({ 
+        route: 'vPhoto', 
+        where: [
+            { 'key': 'pgid', 'operator': '=', 'value': req.params.albumId }
+        ]
+    });
     db.query(queryString, function (data) {
         return res.status(200).json( data );
     }, function (err) { res.status(500).send('SQL Error: ' + err); });
@@ -42,75 +48,34 @@ router.get('/',
 function (req, res) {
     var _public = path.join(__dirname, '../public'),
         filePath = _public + '/' + req.query.filePath,
+        noFilePath = _public + '/images/404.png',
         height = req.query.height,
         width = req.query.width;
 
     // set image content-type
     res.set('Content-Type', 'image/jpg');
 
-    gm(filePath)
-    .resize(width, height)
-    .stream(function (err, stdout) {
-        if (err) { res.status(500).send('Image Error: ' + err); }
-        else { stdout.pipe(res); }
-    });
+    if ( fs.existsSync(filePath) ) { 
+        gm(filePath)
+        .resize(width, height)
+        .gravity('Center')
+        .extent(height)
+        .stream(function (err, stdout) {
+            if (err) { res.status(500).send('Image Error: ' + err); }
+            else { stdout.pipe(res); }
+        }); 
+
+    // error handling for 404 images
+    } else {
+        gm(noFilePath)
+        .resize(width, height)
+        .gravity('Center')
+        .extent(height)
+        .stream(function (err, stdout) {
+            if (err) { res.status(500).send('Image Error: ' + err); }
+            else { stdout.pipe(res); }
+        }); 
+    }
 });
-
-// // Create a User
-// // router.get('/', passport.authenticate('local', { session: false }),
-// router.put('/',
-// function (req, res) {
-//     var queryParams = queryBuilder.params([
-//             'firstName', 
-//             'lastName',
-//             'streetAddress',
-//             'country',
-//             'state',
-//             'city',
-//             'zip',
-//             'homePhone',
-//             'mobilePhone',
-//             'email',
-//             'password'
-//         ], req.body ),
-//         queryString = 'CALL pCreateUser(' + queryParams + ');';
-    
-//     db.query(queryString, function (data) {
-//         return res.status(200).json( data );
-//     }, function (err) { res.status(500).send('SQL Error: ' + err); });
-// });
-
-// // Update a User by id
-// router.put('/:id',
-// function (req, res) {
-//     var queryParams = queryBuilder.params([
-//             'firstName', 
-//             'lastName',
-//             'streetAddress',
-//             'country',
-//             'state',
-//             'city',
-//             'zip',
-//             'homePhone',
-//             'mobilePhone',
-//             'email',
-//             'password'
-//         ], req.body ),
-//         queryString = 'CALL pUpdateUser(\'' + req.params.id + '\', ' + queryParams + ');';
-    
-//     db.query(queryString, function (data) {
-//         return res.status(200).json( data );
-//     }, function (err) { res.status(500).send('SQL Error: ' + err); });
-// });
-
-// // Delete a User by id
-// router.delete('/:id',
-// function (req, res) {
-//     var queryString = 'CALL pDeleteUser(\'' + req.params.id + '\'' + ');';
-//     db.query(queryString, function (data) {
-//         return res.status(200).json( data );
-//     }, function (err) { res.status(500).send('SQL Error: ' + err); });
-// });
-
 
 module.exports = router;
