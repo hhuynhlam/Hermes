@@ -24,6 +24,7 @@ System.config({
     "window.widget"        : "widgets/core/window/window",
     
     "masonry.widget"       : "widgets/masonry/masonry",
+    "photogrid.widget"     : "widgets/photoGrid/photoGrid",
     "navbar.viewmodel"     : "widgets/navbar/navbar.viewmodel",
     
     // Core

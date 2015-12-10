@@ -37,7 +37,7 @@ function (req, res) {
     }, function (err) { res.status(500).send('SQL Error: ' + err); });
 });
 
-// List all in album
+// List all photos in album
 // router.get('/', passport.authenticate('local', { session: false }),
 router.post('/albums/:albumId',
 function (req, res) {

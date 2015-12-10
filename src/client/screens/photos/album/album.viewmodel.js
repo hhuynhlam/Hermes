@@ -3,6 +3,7 @@
 import $ from 'jquery';
 // import ko from 'knockout';
 import sandbox from 'sandbox';
+import photoGridWidget from 'photogrid.widget';
 import windowWidget from 'window.widget';
 
 var http = sandbox.http;
@@ -14,42 +15,34 @@ class AlbumViewModel {
     }   
 
     init(albumId) {
-        this.albumId = albumId;
-        this.$photoGrid = $('#PhotoGrid');
-        
+        this.albumId = albumId;        
         this._createWidgets();
         this._setupEvents();
-        
-        this._getPhotos();
-    }
-
-    _getPhotos() {
-        var _height;
-
-        // responsive photo grid
-        if (window.innerWidth >= 1200) { _height = 218; }
-        else if (window.innerWidth >= 992) { _height = 178; }
-        else if (window.innerWidth >= 768) { _height = 230; }
-        else { _height = window.innerWidth - 40; }
-
-        // @TODO: Maybe this should be a DataSource
-        http.post('/photos/albums/' + this.albumId)
-        .then((data) => {
-            data.forEach((photo) => {
-                
-                // append image to grid
-                this.$photoGrid.append('<div class="library-item" onclick="$(document).trigger(\'PhotoViewer.Init\', \'' + photo.pid + '\')"> \
-                    <img src="/photos?filePath=' + photo.filePath + '&height=' + _height + '" /></div>');
-            });
-        })
-        .catch(() => {
-            console.error('Image Retrieval Error - Please try again later.');
-        })
-        .done();  
-
     }
 
     _createWidgets() {
+        photoGridWidget.create({
+            id: 'PhotoGrid',
+            dataSource: { 
+                transport: { 
+                    read: {
+                        type: 'POST',
+                        url: '/photos/albums/' + this.albumId  
+                    }
+                }
+            },
+            dataBound: function ($photoGrid, data) {
+                data.forEach((album) => {
+
+                    // append image to grid
+                    data.forEach((photo) => {
+                        $photoGrid.append('<div class="library-item" \
+                            onclick="$(document).trigger(\'PhotoViewer.Init\', \'' + photo.pid + '\')"> \
+                            <img src="/photos?filePath=' + photo.filePath + '&height=' + this.getResponsiveHeight() + '" /></div>');
+                    });
+                });
+            }           
+        });
 
         windowWidget.create({
             id: 'PhotoViewer',
