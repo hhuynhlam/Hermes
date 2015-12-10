@@ -31,7 +31,6 @@ function (req, res) {
 // router.get('/', passport.authenticate('local', { session: false }),
 router.get('/albums',
 function (req, res) {
-    debugger;
     var queryString = queryBuilder.select({ route: 'vPhotoGroup' });
     db.query(queryString, function (data) {
         return res.status(200).json( data );
