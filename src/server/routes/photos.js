@@ -12,21 +12,6 @@ var router = express.Router();
 // Routes
 //======================================
 
-// List all Photos
-// router.get('/', passport.authenticate('local', { session: false }),
-router.post('/:albumId',
-function (req, res) {
-    var queryString = queryBuilder.select({ 
-        route: 'vPhoto', 
-        where: [
-            { 'key': 'pgid', 'operator': '=', 'value': req.params.albumId }
-        ]
-    });
-    db.query(queryString, function (data) {
-        return res.status(200).json( data );
-    }, function (err) { res.status(500).send('SQL Error: ' + err); });
-});
-
 // Get a Photo by id
 // router.get('/', passport.authenticate('local', { session: false }),
 router.post('/:id',
@@ -42,40 +27,46 @@ function (req, res) {
     }, function (err) { res.status(500).send('SQL Error: ' + err); });
 });
 
+// List all in album
+// router.get('/', passport.authenticate('local', { session: false }),
+router.post('/album/:albumId',
+function (req, res) {
+    var queryString = queryBuilder.select({ 
+        route: 'vPhoto', 
+        where: [
+            { 'key': 'pgid', 'operator': '=', 'value': req.params.albumId }
+        ]
+    });
+    db.query(queryString, function (data) {
+        return res.status(200).json( data );
+    }, function (err) { res.status(500).send('SQL Error: ' + err); });
+});
+
 // Get Photo thumbnail
 // router.get('/', passport.authenticate('local', { session: false }),
 router.get('/',
 function (req, res) {
     var _public = path.join(__dirname, '../public'),
+
         filePath = _public + '/' + req.query.filePath,
         noFilePath = _public + '/images/404.png',
+        _filePath = (fs.existsSync(filePath)) ? filePath : noFilePath,
+    
         height = req.query.height,
-        width = req.query.width;
+        width = req.query.width,
+        _img;
 
     // set image content-type
     res.set('Content-Type', 'image/jpg');
 
-    if ( fs.existsSync(filePath) ) { 
-        gm(filePath)
-        .resize(width, height)
-        .gravity('Center')
-        .extent(height)
-        .stream(function (err, stdout) {
-            if (err) { res.status(500).send('Image Error: ' + err); }
-            else { stdout.pipe(res); }
-        }); 
+    _img = gm(_filePath).resize(width, height).gravity('Center');
+    
+    if (height) { _img = _img.extent(height); }
 
-    // error handling for 404 images
-    } else {
-        gm(noFilePath)
-        .resize(width, height)
-        .gravity('Center')
-        .extent(height)
-        .stream(function (err, stdout) {
-            if (err) { res.status(500).send('Image Error: ' + err); }
-            else { stdout.pipe(res); }
-        }); 
-    }
+    _img.stream(function (err, stdout) {
+        if (err) { res.status(500).send('Image Error: ' + err); }
+        else { stdout.pipe(res); }
+    }); 
 });
 
 module.exports = router;

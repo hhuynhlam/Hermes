@@ -42,6 +42,15 @@ class WindowViewModel extends BaseWidgetViewModel {
                 this.subscriptions.push(_subscription);
             }
 
+            // iframe subscription
+            if (this.options.subscribe.iframe) {
+                _subscription = msg.subscribe(this.options.subscribe.iframe, (iframe) => {
+                    this.$selector.html('<iframe src="' + iframe + '" height="' + this.options.height + '" width="' + this.options.width + '"></iframe>');
+                }, this, true);
+
+                this.subscriptions.push(_subscription);
+            }
+
             // open subscription
             if (this.options.subscribe.open) {
                 _subscription = msg.subscribe(this.options.subscribe.open, () => {

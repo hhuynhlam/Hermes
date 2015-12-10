@@ -1,12 +1,9 @@
 'use strict';
 
 import $ from 'jquery';
-// import ko from 'knockout';
 import sandbox from 'sandbox';
-// import imagesLoaded from 'imagesloaded';
 
 var http = sandbox.http;
-// var msg = sandbox.msg;
 
 class ViewerViewModel {
     constructor(options) {
@@ -23,7 +20,7 @@ class ViewerViewModel {
         http.post( '/photos/' + this.photoId )
         .then((data) => {
             if (data && data.length) {
-                $('#MainImage').attr('src', '/photos?filePath=' + data[0].filePath );
+                $('#MainImage').attr('src', '/photos?filePath=' + data[0].filePath + '&height=' + (window.innerWidth));
             } else {
                 console.error('Image Retrieval Error - Photo Not Found.');
             }
