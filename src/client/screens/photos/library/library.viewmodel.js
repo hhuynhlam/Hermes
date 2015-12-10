@@ -11,30 +11,48 @@ class LibraryViewModel {
     }   
 
     init() {
+        this.$albumGrid = $('#LibraryGrid');
+        
         this._createWidgets();
         this._setupEvents();
+        
+        this._getPhotos();
     }
 
-    _createWidgets() {
+    _getPhotos() {
+        var _height;
 
+        // responsive photo grid
+        if (window.innerWidth >= 1200) { _height = 218; }
+        else if (window.innerWidth >= 992) { _height = 178; }
+        else if (window.innerWidth >= 768) { _height = 230; }
+        else { _height = window.innerWidth - 40; }
 
-        http.post( '/photos')
+        // @TODO: Maybe this should be a DataSource
+        http.get('/photos/albums')
         .then((data) => {
-            data.forEach((photo) => {
-                
-                // append album to grid
-                $('#LibraryGrid').append('<div class="library-item"> \
-                    <img src="/photos?filePath=' + photo.filePath + '&height=200" /></div>');
+            data.forEach((album) => {
+                // append image to grid
+                this.$albumGrid.append('<div class="library-item"> \
+                    <a href="/#/photos/album/' + album.pgid + '"> \
+                    <img src="/photos?filePath=' + album.filePath + '&height=' + _height + '" /> \
+                    <p class="text-center">' + album.groupName + '</p> \
+                    </a></div>');
             });
         })
         .catch(() => {
             console.error('Image Retrieval Error - Please try again later.');
         })
         .done();  
+
+    }
+
+    _createWidgets() {
+
     }
 
     _setupEvents() {
-        // var $eventElement = $(document);
+
     }
 }
 

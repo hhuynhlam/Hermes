@@ -33,7 +33,7 @@ class AlbumViewModel {
         else { _height = window.innerWidth - 40; }
 
         // @TODO: Maybe this should be a DataSource
-        http.post('/photos/album/' + this.albumId)
+        http.post('/photos/albums/' + this.albumId)
         .then((data) => {
             data.forEach((photo) => {
                 

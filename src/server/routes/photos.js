@@ -27,9 +27,20 @@ function (req, res) {
     }, function (err) { res.status(500).send('SQL Error: ' + err); });
 });
 
+// List all albums
+// router.get('/', passport.authenticate('local', { session: false }),
+router.get('/albums',
+function (req, res) {
+    debugger;
+    var queryString = queryBuilder.select({ route: 'vPhotoGroup' });
+    db.query(queryString, function (data) {
+        return res.status(200).json( data );
+    }, function (err) { res.status(500).send('SQL Error: ' + err); });
+});
+
 // List all in album
 // router.get('/', passport.authenticate('local', { session: false }),
-router.post('/album/:albumId',
+router.post('/albums/:albumId',
 function (req, res) {
     var queryString = queryBuilder.select({ 
         route: 'vPhoto', 
