@@ -20,6 +20,11 @@ class NavbarViewModel {
 
     init() {
         this.setupSubscriptions();
+
+        // readjust MainView, if Sidebar is out
+        $('#SidebarHamburger').on('click', () => {
+            $('#MainView').toggleClass('main-aside');
+        });
     }
 
     logout() {

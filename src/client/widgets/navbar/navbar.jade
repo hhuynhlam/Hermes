@@ -1,13 +1,15 @@
 nav#Navbar(data-bind="visible: !hidden();", style="display: none;")
+  
   // Navigation
   .navbar.navbar-inverse
     .navbar-header
-      // Toggle Button
-      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-responsive-collapse')
-        span.icon-bar
-        span.icon-bar
-        span.icon-bar
       
+      // Sidebar Hamburger
+      ul.nav.navbar-nav
+        li
+          a#SidebarHamburger(data-toggle="collapse", data-target="#Sidebar")
+            span.glyphicon.glyphicon-menu-hamburger
+
       // Site Name
       a.navbar-brand.hidden-xs(href='#') The &nbsp;
         span Win &nbsp;
@@ -15,24 +17,30 @@ nav#Navbar(data-bind="visible: !hidden();", style="display: none;")
       a.navbar-brand.visible-xs-inline(href='#') 
         span Win &nbsp;
         | Family
-    
+      
+      // Toggle Button
+      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-responsive-collapse')
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      
     // Collapsible
     .navbar-collapse.collapse.navbar-responsive-collapse
       
       // Main Links
-      ul.nav.navbar-nav
-        li
-          a(data-toggle="collapse", href="#Sidebar")
-            span.glyphicon.glyphicon-menu-hamburger
-        //- li.dropdown(data-bind='visible: currentUser', style="display: none;")
-        //-   a.dropdown-toggle(href='#', data-toggle='dropdown')
-        //-     | About
-        //-     b.caret
-        //-   ul.dropdown-menu
-        //-     li
-        //-       a(href='#/contacts') Contacts
-        //- li.dropdown(data-bind='visible: currentUser', style="display: none;")
-        //-   a(href='#/photos') Photos
+      //- ul.nav.navbar-nav
+      //-   li
+      //-     a#SidebarHamburger(data-toggle="collapse", data-target="#Sidebar")
+      //-       span.glyphicon.glyphicon-menu-hamburger
+      //-   //- li.dropdown(data-bind='visible: currentUser', style="display: none;")
+      //-   //-   a.dropdown-toggle(href='#', data-toggle='dropdown')
+      //-   //-     | About
+      //-   //-     b.caret
+      //-   //-   ul.dropdown-menu
+      //-   //-     li
+      //-   //-       a(href='#/contacts') Contacts
+      //-   //- li.dropdown(data-bind='visible: currentUser', style="display: none;")
+      //-   //-   a(href='#/photos') Photos
       
       ul.nav.navbar-nav
         li.navbar-title
@@ -56,23 +64,32 @@ nav#Navbar(data-bind="visible: !hidden();", style="display: none;")
 
         li(data-bind='visible: !currentUser()')
           a.border(href='#/login') Login
-  
-  #LogoutModal
-  #AppAlerts.col-sm-6.col-sm-offset-3.text-center(style="margin-top: -20px")
 
 aside#Sidebar.navbar-inverse.width.collapse(style="width: 0px;")
     ul.sidebar-menu.navbar-nav
       
-      li(data-toggle="collapse", href="#SideBarAbout") 
+      // About
+      li(data-toggle="collapse", href="#SideBarAbout", data-bind='visible: currentUser', style="display: none;") 
         a
           | About
           b.caret
       li#SideBarAbout.dropdown.collapse
         ul
           li
-            a(href='#/contacts') Contacts
+            a(href='#/contacts') 
+              span.pull-right.glyphicon.glyphicon-earphone
+              | Contacts
 
-      li
-        a(href='#/photos') Photos
+      // Photos
+      li(data-toggle="collapse", href="#SideBarPhoto", data-bind='visible: currentUser', style="display: none;") 
+        a
+          | Photos
+          b.caret
+      li#SideBarPhoto.dropdown.collapse
+        ul
+          li
+            a(href='#/photos') 
+              span.pull-right.glyphicon.glyphicon-th-large
+              | Albums
 
 
