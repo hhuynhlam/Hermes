@@ -21,15 +21,18 @@ nav#Navbar(data-bind="visible: !hidden();", style="display: none;")
       
       // Main Links
       ul.nav.navbar-nav
-        li.dropdown(data-bind='visible: currentUser', style="display: none;")
-          a.dropdown-toggle(href='#', data-toggle='dropdown')
-            | About
-            b.caret
-          ul.dropdown-menu
-            li
-              a(href='#/contacts') Contacts
-        li.dropdown(data-bind='visible: currentUser', style="display: none;")
-          a(href='#/photos') Photos
+        li
+          a(data-toggle="collapse", href="#Sidebar")
+            span.glyphicon.glyphicon-menu-hamburger
+        //- li.dropdown(data-bind='visible: currentUser', style="display: none;")
+        //-   a.dropdown-toggle(href='#', data-toggle='dropdown')
+        //-     | About
+        //-     b.caret
+        //-   ul.dropdown-menu
+        //-     li
+        //-       a(href='#/contacts') Contacts
+        //- li.dropdown(data-bind='visible: currentUser', style="display: none;")
+        //-   a(href='#/photos') Photos
       
       // Right Links
       ul.nav.navbar-nav.navbar-right
@@ -51,3 +54,20 @@ nav#Navbar(data-bind="visible: !hidden();", style="display: none;")
   
   #LogoutModal
   #AppAlerts.col-sm-6.col-sm-offset-3.text-center(style="margin-top: -20px")
+
+aside#Sidebar.navbar-inverse.width.collapse(style="width: 0px;")
+    ul.sidebar-menu.navbar-nav
+      
+      li
+        a(data-toggle="collapse", href="#SideBarAbout") 
+          | About
+          b.caret
+      li#SideBarAbout.dropdown.collapse
+        ul
+          li
+            a(href='#/contacts') Contacts
+
+      li
+        a(href='#/photos') Photos
+
+
