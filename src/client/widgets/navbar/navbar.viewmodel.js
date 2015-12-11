@@ -23,7 +23,7 @@ class NavbarViewModel {
 
         // readjust MainView, if Sidebar is out
         $('#SidebarHamburger').on('click', () => {
-            $('#MainView').toggleClass('main-aside');
+            $('#MainView, #AppStatus').toggleClass('main-aside');
         });
     }
 
