@@ -19,6 +19,9 @@ var router = function (app) {
                 // render partial view
                 context.swap(sandbox.util.template(template)); 
             });
+
+            // set screen title
+            sandbox.msg.trigger('#Navbar', 'App.Screen', 'Home');
         });
     });
 
