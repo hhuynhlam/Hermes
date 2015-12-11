@@ -7,6 +7,9 @@ import AlbumViewModel from './album/album.viewmodel';
 import LibraryViewModel from './library/library.viewmodel';
 import ViewerViewModel from './viewer/viewer.viewmodel';
 
+import CreateAlbumViewModel from './upload/add_album.viewmodel';
+import EditAlbumViewModel from './upload/edit_album.viewmodel';
+
 var router = function (app) {
 
     // library
@@ -32,6 +35,48 @@ var router = function (app) {
     });
 
     // album
+    app.get('/#/photos/album/create', function (context) {
+        sandbox.auth.checkIsAuth(() => {
+            System.import('screens/photos/upload/add_album.html!text').then(function (template) {
+                var viewModel = new CreateAlbumViewModel();
+
+                // render partial view
+                context.swap(sandbox.util.template(template));
+                
+                // apply ko bindings
+                ko.applyBindings(viewModel, document.getElementById('AddAlbum'));
+
+                // initialize view model
+                viewModel.init();
+
+                // set screen title
+                sandbox.msg.trigger('#Navbar', 'App.Screen', 'Create Album');
+            });
+        });
+            
+    });
+
+    app.get('/#/photos/album/edit/:id', function (context) {
+        sandbox.auth.checkIsAuth(() => {
+            System.import('screens/photos/upload/edit_album.html!text').then(function (template) {
+                var viewModel = new EditAlbumViewModel();
+
+                // render partial view
+                context.swap(sandbox.util.template(template));
+                
+                // apply ko bindings
+                ko.applyBindings(viewModel, document.getElementById('EditAlbum'));
+
+                // initialize view model
+                viewModel.init(context.params.id);
+
+                // set screen title
+                sandbox.msg.trigger('#Navbar', 'App.Screen', 'Edit Album');
+            });
+        });
+            
+    });
+
     app.get('/#/photos/album/:id', function (context) {
         sandbox.auth.checkIsAuth(() => {
             System.import('screens/photos/album/album.html!text').then(function (template) {
