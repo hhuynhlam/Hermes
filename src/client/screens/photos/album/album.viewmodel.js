@@ -6,7 +6,6 @@ import sandbox from 'sandbox';
 import photoGridWidget from 'photogrid.widget';
 import windowWidget from 'window.widget';
 
-var http = sandbox.http;
 var msg = sandbox.msg;
 
 class AlbumViewModel {
@@ -32,14 +31,12 @@ class AlbumViewModel {
                 }
             },
             dataBound: function ($photoGrid, data) {
-                data.forEach((album) => {
 
-                    // append image to grid
-                    data.forEach((photo) => {
-                        $photoGrid.append('<div class="library-item" \
-                            onclick="$(document).trigger(\'PhotoViewer.Init\', \'' + photo.pid + '\')"> \
-                            <img src="/photos?filePath=' + photo.filePath + '&height=' + this.getResponsiveHeight() + '" /></div>');
-                    });
+                // append image to grid
+                data.forEach((photo) => {
+                    $photoGrid.append('<div class="library-item" \
+                        onclick="$(document).trigger(\'PhotoViewer.Init\', \'' + photo.pid + '\')"> \
+                        <img src="/photos?filePath=' + photo.filePath + '&height=' + this.getResponsiveHeight() + '" /></div>');
                 });
             }           
         });
