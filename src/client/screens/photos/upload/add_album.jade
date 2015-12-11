@@ -1,1 +1,43 @@
 section#AddAlbum.container
+    #AddAlbumAlert
+    form()
+
+        //- Album Name
+        .col-sm-6.col-sm-offset-3(data-bind="visible: step() === 1")
+        
+            .panel.panel-default
+                .panel-body
+                    .form-group.has-feedback
+                        .progress
+                            .progress-bar.progress-bar-success(style="width: 33%") Album Name
+                        input.form-control(placeholder='New Album Name')
+
+        //- Upload Photos
+        .col-sm-6.col-sm-offset-3(data-bind="visible: step() === 2")
+        
+            .panel.panel-default
+                .panel-body
+                    .form-group.has-feedback
+                        .progress
+                            .progress-bar.progress-bar-success(style="width: 66%") Upload Photos
+                        #AddAlbumUpload
+
+        //- Caption Photos
+        .col-sm-12(data-bind="visible: step() === 3")
+        
+            .panel.panel-default
+                .panel-body
+                    .form-group.has-feedback
+                        .col-sm-6.col-sm-offset-3
+                            .progress
+                                .progress-bar.progress-bar-success(style="width: 100%") Add Captions
+                        #AddAlbumPhotoGrid
+
+        //- Buttons
+        .col-sm-6.col-sm-offset-3
+            .col-sm-6.pull-right(data-bind="visible: step() !== 3")
+                #AddAlbumNext
+            .col-sm-6.pull-right(data-bind="visible: step() === 3")
+                #AddAlbumDone
+            .col-sm-6.pull-right(data-bind="visible: step() !== 1")
+                #AddAlbumPrev
