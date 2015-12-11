@@ -9,7 +9,7 @@ var path = require('path');
 var router = express.Router();
 
 //======================================
-// Routes
+// Photos
 //======================================
 
 // Get a Photo by id
@@ -20,31 +20,6 @@ function (req, res) {
         route: 'vPhoto', 
         where: [
             { 'key': 'pid', 'operator': '=', 'value': req.params.id }
-        ]
-    });
-    db.query(queryString, function (data) {
-        return res.status(200).json( data );
-    }, function (err) { res.status(500).send('SQL Error: ' + err); });
-});
-
-// List all albums
-// router.get('/', passport.authenticate('local', { session: false }),
-router.get('/albums',
-function (req, res) {
-    var queryString = queryBuilder.select({ route: 'vPhotoGroup' });
-    db.query(queryString, function (data) {
-        return res.status(200).json( data );
-    }, function (err) { res.status(500).send('SQL Error: ' + err); });
-});
-
-// List all photos in album
-// router.get('/', passport.authenticate('local', { session: false }),
-router.post('/albums/:albumId',
-function (req, res) {
-    var queryString = queryBuilder.select({ 
-        route: 'vPhoto', 
-        where: [
-            { 'key': 'pgid', 'operator': '=', 'value': req.params.albumId }
         ]
     });
     db.query(queryString, function (data) {
@@ -77,6 +52,72 @@ function (req, res) {
         if (err) { res.status(500).send('Image Error: ' + err); }
         else { stdout.pipe(res); }
     }); 
+});
+
+//======================================
+// Albums
+//======================================
+
+// List all albums
+// router.get('/', passport.authenticate('local', { session: false }),
+router.get('/albums',
+function (req, res) {
+    var queryString = queryBuilder.select({ route: 'vPhotoGroup' });
+    db.query(queryString, function (data) {
+        return res.status(200).json( data );
+    }, function (err) { res.status(500).send('SQL Error: ' + err); });
+});
+
+// List all photos in album
+// router.get('/', passport.authenticate('local', { session: false }),
+router.post('/albums/:albumId',
+function (req, res) {
+    var queryString = queryBuilder.select({ 
+        route: 'vPhoto', 
+        where: [
+            { 'key': 'pgid', 'operator': '=', 'value': req.params.albumId }
+        ]
+    });
+    db.query(queryString, function (data) {
+        return res.status(200).json( data );
+    }, function (err) { res.status(500).send('SQL Error: ' + err); });
+});
+
+// Create a new album
+// router.get('/', passport.authenticate('local', { session: false }),
+router.put('/albums',
+function (req, res) {
+    var queryParams = queryBuilder.params([
+            'groupName'
+        ], req.body ),
+        queryString = 'CALL pCreatePhotoGroup(' + queryParams + ');';
+    
+    db.query(queryString, function (data) {
+        return res.status(200).json( data );
+    }, function (err) { res.status(500).send('SQL Error: ' + err); });
+});
+
+// Update an album
+// router.get('/', passport.authenticate('local', { session: false }),
+router.put('/albums/:id',
+function (req, res) {
+    var queryParams = queryBuilder.params([
+            'groupName'
+        ], req.body ),
+        queryString = 'CALL pUpdatePhotoGroup(\'' + req.params.id + '\', ' + queryParams + ');';
+    
+    db.query(queryString, function (data) {
+        return res.status(200).json( data );
+    }, function (err) { res.status(500).send('SQL Error: ' + err); });
+});
+
+// Delete a User by id
+router.delete('/albums/:id',
+function (req, res) {
+    var queryString = 'CALL pDeletePhotoGroup(\'' + req.params.id + '\'' + ');';
+    db.query(queryString, function (data) {
+        return res.status(200).json( data );
+    }, function (err) { res.status(500).send('SQL Error: ' + err); });
 });
 
 module.exports = router;
