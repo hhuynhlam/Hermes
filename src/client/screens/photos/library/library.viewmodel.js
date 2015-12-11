@@ -26,15 +26,18 @@ class LibraryViewModel {
                 }
             },
             dataBound: function ($photoGrid, data) {
+                var _gallery = '';
+                
                 data.forEach((album) => {
-
-                    // append image to grid
-                    $photoGrid.append('<div class="library-item"> \
+                    _gallery += '<div class="library-item"> \
                         <a href="/#/photos/album/' + album.pgid + '"> \
                         <img src="/photos?filePath=' + album.filePath + '&height=' + this.getResponsiveHeight() + '" /> \
                         <p class="text-center">' + album.groupName + '</p> \
-                        </a></div>');
+                        </a></div>';
                 });
+
+                // append image to grid
+                $photoGrid.append(_gallery);
             }           
         });
     }

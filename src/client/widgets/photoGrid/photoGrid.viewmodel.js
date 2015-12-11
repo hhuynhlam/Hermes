@@ -2,6 +2,7 @@
 
 import $ from 'jquery';
 import sandbox from 'sandbox';
+import imagesLoaded from 'imagesloaded';
 
 var http = sandbox.http;
 
@@ -11,6 +12,8 @@ class PhotoGridViewModel {
     }   
 
     init() {
+        sandbox.app.isLoading(true);
+
         this.$grid = $('#' + this.options.id);
         this._setupEvents();
         this._getPhotos();
@@ -32,6 +35,10 @@ class PhotoGridViewModel {
         http[_method](_url)
         .then((data) => {
             _vm.options.dataBound.call(_vm, _vm.$grid, data);
+
+            imagesLoaded('#' + _vm.options.id + '>div:nth-child(-n+15)', () => {
+                sandbox.app.isLoading(false);
+            });
         })
         .catch((err) => {
             console.error('Image Retrieval Error - Please try again later (', err, ')');

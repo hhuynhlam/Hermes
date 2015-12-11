@@ -31,13 +31,16 @@ class AlbumViewModel {
                 }
             },
             dataBound: function ($photoGrid, data) {
+                var _album = '';
+
+                data.forEach((photo) => {
+                    _album += '<div class="library-item" \
+                        onclick="$(document).trigger(\'PhotoViewer.Init\', \'' + photo.pid + '\')"> \
+                        <img src="/photos?filePath=' + photo.filePath + '&height=' + this.getResponsiveHeight() + '" /></div>';
+                });
 
                 // append image to grid
-                data.forEach((photo) => {
-                    $photoGrid.append('<div class="library-item" \
-                        onclick="$(document).trigger(\'PhotoViewer.Init\', \'' + photo.pid + '\')"> \
-                        <img src="/photos?filePath=' + photo.filePath + '&height=' + this.getResponsiveHeight() + '" /></div>');
-                });
+                $photoGrid.append(_album);
             }           
         });
 

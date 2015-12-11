@@ -48,8 +48,7 @@ app.swap = function(content, callback) {
     if (callback) { callback.apply(); }
 
     // show main view
-    $('#MainView').show();
-    $('#AppStatus').hide();
+    sandbox.app.isLoading(false);
 };
 
 // run app
