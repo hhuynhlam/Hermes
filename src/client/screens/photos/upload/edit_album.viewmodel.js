@@ -1,10 +1,10 @@
 'use strict';
 
-import $ from 'jquery';
+// import $ from 'jquery';
 // import ko from 'knockout';
-import sandbox from 'sandbox';
+// import sandbox from 'sandbox';
 
-var msg = sandbox.msg;
+// var msg = sandbox.msg;
 
 class EditAlbumViewModel {
     constructor(options) {

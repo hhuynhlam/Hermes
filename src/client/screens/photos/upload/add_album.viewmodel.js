@@ -2,10 +2,8 @@
 
 import $ from 'jquery';
 import ko from 'knockout';
-import sandbox from 'sandbox';
+// import sandbox from 'sandbox';
 import buttonWidget from 'button.widget';
-
-var msg = sandbox.msg;
 
 class AddAlbumViewModel {
     constructor(options) {
