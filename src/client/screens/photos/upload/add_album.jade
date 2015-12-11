@@ -20,7 +20,7 @@ section#AddAlbum.container
                     .form-group.has-feedback
                         .progress
                             .progress-bar.progress-bar-success(style="width: 66%") Upload Photos
-                        #AddAlbumUpload
+                    input#AddAlbumUpload(name="photo", type="file", accept="image/*")
 
         //- Caption Photos
         .col-sm-12(data-bind="visible: step() === 3")

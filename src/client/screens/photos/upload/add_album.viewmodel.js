@@ -5,6 +5,9 @@ import ko from 'knockout';
 // import sandbox from 'sandbox';
 import buttonWidget from 'button.widget';
 
+// Test
+import 'k/kendo.upload.min';
+
 class AddAlbumViewModel {
     constructor(options) {
         this.options = options || {};
@@ -18,8 +21,8 @@ class AddAlbumViewModel {
 
     _createWidgets() {
 
-        // ----------------------------------------
-        // Buttons
+    // ----------------------------------------
+    // Buttons
         
         buttonWidget.create({
             id: 'AddAlbumPrev',
@@ -57,7 +60,20 @@ class AddAlbumViewModel {
             }
         });
 
-        // ----------------------------------------
+    // ----------------------------------------
+    
+    // ----------------------------------------
+    // Upload
+    
+        $('#AddAlbumUpload').kendoUpload({
+            async: {
+                saveUrl: '/photos/upload',
+                autoUpload: false
+            }
+        });
+
+    // ---------------------------------------- 
+    
     }
 
     _setupEvents() {
