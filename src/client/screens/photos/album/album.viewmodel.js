@@ -33,6 +33,9 @@ class AlbumViewModel {
             dataBound: function ($photoGrid, data) {
                 var _album = '';
 
+                // set screen title
+                sandbox.msg.trigger('#Navbar', 'App.Screen', data[0].groupName);
+                
                 data.forEach((photo) => {
                     _album += '<div class="library-item" \
                         onclick="$(document).trigger(\'PhotoViewer.Init\', \'' + photo.pid + '\')"> \

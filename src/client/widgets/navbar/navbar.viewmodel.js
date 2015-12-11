@@ -14,6 +14,7 @@ class NavbarViewModel {
         
         this.currentUser = ko.observable();
         this.hidden = ko.observable(true);
+        this.title = ko.observable('');
         this.init();
     }
 
@@ -35,8 +36,13 @@ class NavbarViewModel {
         this.$selector.on('App.CurrentUser', (e, val) => {
             this.currentUser(val);
         });
+        
         this.$selector.on('App.Headless', (e, val) => {
             this.hidden(val);
+        });
+
+        this.$selector.on('App.Screen', (e, val) => {
+            this.title(val);
         });
     }
 }

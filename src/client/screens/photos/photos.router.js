@@ -23,6 +23,9 @@ var router = function (app) {
 
                 // initialize view model
                 viewModel.init();
+
+                // set screen title
+                sandbox.msg.trigger('#Navbar', 'App.Screen', 'Album Library');
             });
         });
             

@@ -34,6 +34,11 @@ nav#Navbar(data-bind="visible: !hidden();", style="display: none;")
         //- li.dropdown(data-bind='visible: currentUser', style="display: none;")
         //-   a(href='#/photos') Photos
       
+      ul.nav.navbar-nav
+        li.navbar-title
+          a
+            span(data-bind="text: title")
+      
       // Right Links
       ul.nav.navbar-nav.navbar-right
         li.dropdown(data-bind='visible: currentUser', style="display: none;")
