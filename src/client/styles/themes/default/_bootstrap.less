@@ -194,6 +194,7 @@
   background-color: @navbar-inverse-bg;
   .reset-filter(); // Remove gradient in IE<10 to fix bug where dropdowns don't get triggered; see https://github.com/twbs/bootstrap/issues/10257
   border-radius: @navbar-border-radius;
+  .navbar-header { background-color: lighten(@navbar-inverse-bg, 5%); }
   .navbar-nav > .open > a,
   .navbar-nav > .active > a {
     background-color: @navbar-inverse-link-active-bg;

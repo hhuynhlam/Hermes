@@ -58,8 +58,8 @@ nav#Navbar(data-bind="visible: !hidden();", style="display: none;")
 aside#Sidebar.navbar-inverse.width.collapse(style="width: 0px;")
     ul.sidebar-menu.navbar-nav
       
-      li
-        a(data-toggle="collapse", href="#SideBarAbout") 
+      li(data-toggle="collapse", href="#SideBarAbout") 
+        a
           | About
           b.caret
       li#SideBarAbout.dropdown.collapse
