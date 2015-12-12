@@ -35,6 +35,7 @@ class ContactsViewModel {
             id: 'UsersList',
             
             filterable: false,
+            height: '55vh',
             pageable: false,
             reorderable: true,
             resizable: true,
