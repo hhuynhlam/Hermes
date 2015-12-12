@@ -12,7 +12,8 @@ BEGIN
     );
 
     -- return updated photo group
-    SELECT  _groupName;
+    SELECT  LAST_INSERT_ID() as pgid,  
+            _groupName as groupName;
 
 END //
 DELIMITER ;

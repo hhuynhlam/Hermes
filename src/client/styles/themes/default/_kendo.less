@@ -86,3 +86,28 @@
     border-color: @btn-primary-border;
     border-radius: 0;
 }
+
+
+
+//
+// Uploader
+// --------------------------------------------------
+
+div.k-dropzone {
+    border: 3px dotted @gray-lighter; /* For Default; Different for each theme */
+    text-align: center;
+
+    .k-button.k-upload-button {
+        display: block;
+        margin: 70px auto 0 auto;
+        max-width: 300px;
+    }
+    
+    em { 
+        color: @gray-light;
+        display: block;
+        position: relative;
+        top: -75px;
+        visibility: visible; 
+    }
+}
