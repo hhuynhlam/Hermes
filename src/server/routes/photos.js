@@ -147,7 +147,7 @@ var uploader = multer({ dest: path.join(__dirname, '../public/uploaded') });
         }, function (err) { res.status(500).send('SQL Error: ' + err); });
     });
 
-    // List all photos in album
+    // List all photos in album, if no photos get album name
     // router.get('/', passport.authenticate('local', { session: false }),
     router.post('/albums/:albumId',
     function (req, res) {
@@ -158,7 +158,19 @@ var uploader = multer({ dest: path.join(__dirname, '../public/uploaded') });
             ]
         });
         db.query(queryString, function (data) {
-            return res.status(200).json( data );
+            var _data = data;
+
+            if (!_data.length) {
+                db.query('SELECT groupName FROM vPhotoGroup \
+                          WHERE pgid = ' + req.params.albumId, 
+                function (data) {
+                    _data = data;
+                    return res.status(200).json( _data ); 
+                });
+                
+            } else {
+               return res.status(200).json( _data ); 
+            }
         }, function (err) { res.status(500).send('SQL Error: ' + err); });
     });
 

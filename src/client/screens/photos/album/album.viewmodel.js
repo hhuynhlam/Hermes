@@ -36,6 +36,8 @@ class AlbumViewModel {
                 // set screen title
                 sandbox.msg.trigger('#Navbar', 'App.Screen', data[0].groupName);
                 
+                if (!data[0].pid) { return; }
+
                 data.forEach((photo) => {
                     _album += '<div class="library-item" \
                         onclick="$(document).trigger(\'PhotoViewer.Init\', \'' + photo.pid + '\')"> \
