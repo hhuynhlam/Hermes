@@ -24,7 +24,7 @@ class ViewerViewModel {
                 // set screen title
                 sandbox.msg.trigger('#Navbar', 'App.Screen', data[0].photoName);
 
-                $('#MainImage').attr('src', '/photos?filePath=' + data[0].filePath + '&height=' + (window.innerWidth));
+                $('#MainImage').attr('src', '/photos?filePath=' + data[0].filePath + '&extent=true&height=' + (window.innerWidth));
             } else {
                 console.error('Image Retrieval Error - Photo Not Found.');
             }

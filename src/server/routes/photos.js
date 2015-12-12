@@ -112,22 +112,53 @@ var uploader = multer({ dest: path.join(__dirname, '../public/uploaded') });
             filePath = _public + '/' + req.query.filePath,
             noFilePath = _public + '/images/404.png',
             _filePath = (fs.existsSync(filePath)) ? filePath : noFilePath,
-        
-            height = req.query.height,
-            width = req.query.width,
-            _img;
+            
+            extent = req.query.extent,
+            reqHeight = req.query.height,
+            reqWidth = req.query.width,
+            thumb = req.query.thumb,
+            _img, _width, _height;
 
         // set image content-type
         res.set('Content-Type', 'image/jpg');
 
-        _img = gm(_filePath).resize(width, height).gravity('Center');
-        
-        if (height) { _img = _img.extent(height); }
+        // read image
+        _img = gm(_filePath);
 
-        _img.stream(function (err, stdout) {
-            if (err) { res.status(500).send('Image Error: ' + err); }
-            else { stdout.pipe(res); }
-        }); 
+        // get size of image
+        _img.size(function(err, value){
+            _width = value.width;
+            _height = value.height;
+            
+            // resize and crop accordingly
+            if (thumb) {
+                if (_width > _height) {
+                    _img = _img
+                        .resize(null, reqWidth||reqHeight)
+                        .gravity('Center')
+                        .crop(reqWidth||reqHeight, reqWidth||reqHeight, 0, 0);
+                } else {
+                    _img = _img
+                        .resize(reqWidth||reqHeight, null)
+                        .gravity('Center')
+                        .crop(reqWidth||reqHeight, reqWidth||reqHeight, 0, 0);
+                }
+            } else {
+                _img.resize(reqWidth, reqHeight).gravity('Center');
+            }
+
+            // extent
+            if (extent) { 
+                _img = _img
+                    .background('#CCC')
+                    .extent( reqWidth||reqHeight ); 
+            }
+
+            _img.stream(function (err, stdout) {
+                if (err) { res.status(500).send('Image Error: ' + err); }
+                else { stdout.pipe(res); }
+            }); 
+        });
     });
 
 //======================================

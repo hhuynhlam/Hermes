@@ -41,7 +41,7 @@ class AlbumViewModel {
                 data.forEach((photo) => {
                     _album += '<div class="library-item" \
                         onclick="$(document).trigger(\'PhotoViewer.Init\', \'' + photo.pid + '\')"> \
-                        <img src="/photos?filePath=' + photo.filePath + '&height=' + this.getResponsiveHeight() + '" /></div>';
+                        <img src="/photos?filePath=' + photo.filePath + '&thumb=true&width=' + this.getResponsiveHeight() + '" /></div>';
                 });
 
                 // append image to grid
