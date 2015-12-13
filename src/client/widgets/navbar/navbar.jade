@@ -49,6 +49,20 @@ nav#Navbar(data-bind="visible: !hidden();", style="display: none;")
       
       // Right Links
       ul.nav.navbar-nav.navbar-right
+        
+        // Notifications
+        li
+          a.border.dropdown-toggle(href='#', data-toggle='dropdown')
+            span.glyphicon.glyphicon-flag
+            span.badge.badge-danger 1
+
+          ul.dropdown-menu
+            li
+              a Example Notification 1
+            li
+              a Example Notification 2
+
+        // Profile
         li.dropdown(data-bind='visible: currentUser', style="display: none;")
           a.border.dropdown-toggle(href='#', data-toggle='dropdown')
             span(data-bind='text: (currentUser()) ? currentUser().firstName : null')
