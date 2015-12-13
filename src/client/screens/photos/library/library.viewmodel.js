@@ -32,7 +32,7 @@ class LibraryViewModel {
                     _gallery += '<div class="library-item"> \
                         <a href="/#/photos/album/' + album.pgid + '"> \
                         <img src="/photos?filePath=' + album.filePath + '&thumb=true&width=' + this.getResponsiveHeight() + '" /> \
-                        <p class="text-center">' + album.groupName + '</p> \
+                        <p class="album-title">' + album.groupName + '</p> \
                         </a></div>';
                 });
 
