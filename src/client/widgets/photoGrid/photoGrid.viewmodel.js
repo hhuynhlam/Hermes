@@ -21,7 +21,7 @@ class PhotoGridViewModel {
         this._getPhotos();
     }
 
-    getResponsiveHeight() {
+    getResponsiveWidth() {
         if (window.innerWidth >= 1200) { return 218; }
         else if (window.innerWidth >= 992) { return 178; }
         else if (window.innerWidth >= 768) { return 230; }

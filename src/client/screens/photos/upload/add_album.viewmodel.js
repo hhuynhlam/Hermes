@@ -21,6 +21,7 @@ class AddAlbumViewModel {
 
         this.albumId = ko.observable();
         this.albumName = ko.observable('');
+        this.albumNameError = ko.observable(false);
 
         this.uploadedPhotos = ko.observableArray([]);
     }   
@@ -92,7 +93,7 @@ class AddAlbumViewModel {
                 
                 data.forEach((photo) => {
                     _album += '<div class="library-item"> \
-                        <img src="/photos?filePath=' + photo.path + '&height=' + this.getResponsiveHeight() + '" /> \
+                        <img src="/photos?filePath=' + photo.path + '&thumb=true&width=' + this.getResponsiveWidth() + '" /> \
                         <input data-id="' + photo.pid + '" type="text" placeholder="Caption" class="form-control add-album-caption" style="margin-top: 5px;">\
                         </div>';
                 });
@@ -135,23 +136,12 @@ class AddAlbumViewModel {
         var $eventElement = $(document);
 
         $eventElement.on('AddAlbumCreate.Click', () => {
-
-            // @TODO: Add validation, so we don't get a blank album name
-            // 
-            
             msg.publish('AddAlbumCreate.Button', 'spinning');
-
-            // create new album
-            http.put('/photos/albums', { groupName: this.albumName() })
-            .then((data) => {
+            this._createAlbum((data) => {
                 msg.publish('AddAlbumCreate.Button', 'enable');
                 this.albumId(data[0][0].pgid);
                 this.step( this.step() + 1  );
-            })
-            .catch((err) => {
-                console.error('Error: Could not create new album ( ', err, ')');
-            })
-            .done();
+            });
         });
 
         $eventElement.on('AddAlbumNext.Click', () => {
@@ -175,6 +165,22 @@ class AddAlbumViewModel {
                 msg.publish('AddAlbumDone.Button', 'enable');
             });
         });
+    }
+
+    _createAlbum(callback) {
+
+        // validate
+        if (!this.albumName()) {
+            this.albumNameError(true);
+            msg.publish('AddAlbumCreate.Button', 'enable');
+            return;
+        }
+
+        // create new album
+        http.put('/photos/albums', { groupName: this.albumName() })
+        .then((data) => { callback.call(this, data); })
+        .catch((err) => { console.error('Error: Could not create new album ( ', err, ')'); })
+        .done();
     }
 }
 

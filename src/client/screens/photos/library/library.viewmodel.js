@@ -31,7 +31,7 @@ class LibraryViewModel {
                 data.forEach((album) => {
                     _gallery += '<div class="library-item"> \
                         <a href="/#/photos/album/' + album.pgid + '"> \
-                        <img src="/photos?filePath=' + album.filePath + '&thumb=true&width=' + this.getResponsiveHeight() + '" /> \
+                        <img src="/photos?filePath=' + album.filePath + '&thumb=true&width=' + this.getResponsiveWidth() + '" /> \
                         <p class="album-title">' + album.groupName + '</p> \
                         </a></div>';
                 });

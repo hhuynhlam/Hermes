@@ -110,7 +110,7 @@ class ExampleViewModel {
                     // append image to grid
                     $photoGrid.append('<div class="library-item"> \
                         <a href="/#/photos/album/' + album.pgid + '"> \
-                        <img src="/photos?filePath=' + album.filePath + '&height=' + this.getResponsiveHeight() + '" /> \
+                        <img src="/photos?filePath=' + album.filePath + '&height=' + this.getResponsiveWidth() + '" /> \
                         <p class="text-center">' + album.groupName + '</p> \
                         </a></div>');
                 });
