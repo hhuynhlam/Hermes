@@ -1,6 +1,7 @@
 'use strict';
 
 import $ from 'jquery';
+import ko from 'knockout';
 import sandbox from 'sandbox';
 
 var http = sandbox.http;
@@ -8,6 +9,7 @@ var http = sandbox.http;
 class ViewerViewModel {
     constructor(options) {
         this.options = options || {};
+        this.meta = ko.observable({});
     }   
 
     init(photoId) {
@@ -17,10 +19,15 @@ class ViewerViewModel {
     }
 
     _createWidgets() {
+        var _vm = this;
+
         http.post( '/photos/' + this.photoId )
         .then((data) => {
             if (data && data.length) {
                 
+                // hydrate photo meta
+                _vm.meta(data[0]);
+
                 // set screen title
                 sandbox.msg.trigger('#Navbar', 'App.Screen', data[0].photoName);
 
