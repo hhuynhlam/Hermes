@@ -21,6 +21,7 @@ System.config({
     "dropdown.widget"      : "widgets/core/dropdown/dropdown",
     "grid.widget"          : "widgets/core/grid/grid",
     "input.widget"         : "widgets/core/input/input",
+    "upload.widget"        : "widgets/core/upload/upload",
     "window.widget"        : "widgets/core/window/window",
     
     "masonry.widget"       : "widgets/masonry/masonry",

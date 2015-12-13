@@ -14,19 +14,19 @@ section#Viewer.container-fluid
         #ImageSidePanel.col-sm-6.panel.panel-default(style="height: 100vh")
             .panel-body
                 #ImageMeta
-                    strong Hai Huynhlam 
+                    strong(data-bind="text: meta().username") Hai Huynhlam 
                     br
-                    small 12/15/2015
+                    //- small 12/15/2015
                     blockquote
-                        small This is an example description.
+                        small(data-bind="text: meta().photoName")
 
                 
                 hr
 
-                #ImageComments
-                    pre
-                        span Comment 1
-                    pre
-                        span Comment 2
-                    pre
-                        span Comment 3
+                //- #ImageComments
+                //-     pre
+                //-         span Comment 1
+                //-     pre
+                //-         span Comment 2
+                //-     pre
+                //-         span Comment 3

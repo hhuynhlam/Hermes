@@ -5,14 +5,12 @@ import ko from 'knockout';
 import sandbox from 'sandbox';
 import buttonWidget from 'button.widget';
 import photoGridWidget from 'photogrid.widget';
+import uploadWidget from 'upload.widget';
 
 var _ = sandbox.util;
 var http = sandbox.http;
 var msg = sandbox.msg;
 var promise = sandbox.promise;
-
-// Test
-import 'k/kendo.upload.min';
 
 class AddAlbumViewModel {
     constructor(options) {
@@ -108,13 +106,10 @@ class AddAlbumViewModel {
     // ----------------------------------------
     // Upload
         
-        $('#AddAlbumUpload').kendoUpload({
-            async: {
-                saveUrl: '/photos/upload'
-            },
-            localization: {
-                dropFilesHere: "Drag & Drop Files Here to Upload"
-            },
+        uploadWidget.create({
+            id: 'AddAlbumUpload',
+            async: { saveUrl: '/photos/upload' },
+            localization: { dropFilesHere: "Drag & Drop Files Here to Upload" },
             success: (e) => {
                 msg.publish('AddAlbumNext.Button', 'enable');
                 _vm.uploadedPhotos.push( {
@@ -123,9 +118,7 @@ class AddAlbumViewModel {
                     caption: ''
                 });
             },
-            upload: (e) => {
-                e.data = { pgid: _vm.albumId() };
-            }
+            upload: (e) => { e.data = { pgid: _vm.albumId() }; }
         });
 
     // ---------------------------------------- 
@@ -149,20 +142,10 @@ class AddAlbumViewModel {
         });
 
         $eventElement.on('AddAlbumDone.Click', () => {
-            var _captions = $('.add-album-caption'),
-                _promises = [];
-
             msg.publish('AddAlbumDone.Button', 'spinning');
-
-            _.forEach(_captions, (c) => {
-                _promises.push( http.put('/photos/update/' + c.dataset.id, {
-                    photoName: c.value
-                }));
-            });
-
-            promise.all(_promises)
-            .fin(() => {
+            this._updateCaptions(() => {
                 msg.publish('AddAlbumDone.Button', 'enable');
+                window.location.replace('/#/photos/album/' + this.albumId());
             });
         });
     }
@@ -181,6 +164,20 @@ class AddAlbumViewModel {
         .then((data) => { callback.call(this, data); })
         .catch((err) => { console.error('Error: Could not create new album ( ', err, ')'); })
         .done();
+    }
+
+    _updateCaptions(callback) {
+        var _captions = $('.add-album-caption'),
+            _promises = [];
+
+        _.forEach(_captions, (c) => {
+            _promises.push( http.put('/photos/update/' + c.dataset.id, {
+                photoName: c.value
+            }));
+        });
+
+        promise.all(_promises)
+        .fin(() => { callback.call(this); });
     }
 }
 
