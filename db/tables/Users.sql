@@ -13,5 +13,6 @@ CREATE TABLE `Users` (
   `mobilePhone` int(10) DEFAULT NULL,
   `email` text NOT NULL,
   `password` text NOT NULL,
+  `pid` int(11) DEFAULT NULL,
   PRIMARY KEY (`uid`)
 );
