@@ -10,4 +10,4 @@ AS
         CONCAT(u.`firstName`, ' ', u.`lastName`) as username 
     FROM Photos p
     JOIN PhotosGroup pg ON pg.`pgid` = p.`pgid`
-    JOIN Users u ON u.`uid` = p.`uid`;
+    LEFT JOIN Users u ON u.`uid` = p.`uid`;
