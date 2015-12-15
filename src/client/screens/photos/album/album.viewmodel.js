@@ -3,6 +3,7 @@
 import $ from 'jquery';
 // import ko from 'knockout';
 import sandbox from 'sandbox';
+import buttonWidget from 'button.widget';
 import photoGridWidget from 'photogrid.widget';
 import windowWidget from 'window.widget';
 
@@ -20,6 +21,30 @@ class AlbumViewModel {
     }
 
     _createWidgets() {
+        buttonWidget.create({
+            id: 'EditAlbumButton',
+            label: '<span class="glyphicon glyphicon-pencil"></span>',
+            styles: [
+                'btn-default'
+            ],
+            subscribe: ['EditAlbumButton.Button'],
+            trigger: {
+                click: ['EditAlbumButton.Click']
+            }
+        });
+        
+        buttonWidget.create({
+            id: 'DeleteAlbumButton',
+            label: '<span class="glyphicon glyphicon-ban-circle"></span>',
+            styles: [
+                'btn-danger'
+            ],
+            subscribe: ['DeleteAlbumButton.Button'],
+            trigger: {
+                click: ['DeleteAlbumButton.Click']
+            }
+        });
+
         photoGridWidget.create({
             id: 'PhotoGrid',
             dataSource: { 
