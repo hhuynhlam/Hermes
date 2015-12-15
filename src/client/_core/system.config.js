@@ -24,6 +24,7 @@ System.config({
     "upload.widget"        : "widgets/_core/upload/upload",
     "window.widget"        : "widgets/_core/window/window",
     
+    "confirmWindow.widget" : "widgets/confirmWindow/confirmWindow",
     "masonry.widget"       : "widgets/masonry/masonry",
     "photogrid.widget"     : "widgets/photoGrid/photoGrid",
     "navbar.viewmodel"     : "widgets/navbar/navbar.viewmodel",

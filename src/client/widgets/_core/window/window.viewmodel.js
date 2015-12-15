@@ -22,8 +22,10 @@ class WindowViewModel extends BaseWidgetViewModel {
   
     setOptions() {
         var _supportedEvents = ['activate', 'close', 'deactivate', 'dragend', 'dragstart', 'error', 'open', 'refresh', 'resize'];
+        this.$selector.html(this.options.html);
+        
         this.setupPublications(_supportedEvents);
-        this.setupSubscriptions();
+        this.setupSubscriptions(); 
     }
 
     setupSubscriptions() {

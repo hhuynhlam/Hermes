@@ -4,6 +4,7 @@ import $ from 'jquery';
 import ko from 'knockout';
 import sandbox from 'sandbox';
 import buttonWidget from 'button.widget';
+import confirmWidget from 'confirmWindow.widget';
 import photoGridWidget from 'photogrid.widget';
 import windowWidget from 'window.widget';
 
@@ -31,7 +32,6 @@ class AlbumViewModel {
             styles: [
                 'btn-default'
             ],
-            subscribe: ['EditAlbumButton.Button'],
             trigger: {
                 click: ['EditAlbumButton.Click']
             }
@@ -43,9 +43,26 @@ class AlbumViewModel {
             styles: [
                 'btn-danger'
             ],
-            subscribe: ['DeleteAlbumButton.Button'],
             trigger: {
                 click: ['DeleteAlbumButton.Click']
+            }
+        });
+
+        confirmWidget.create({
+            id: 'ConfirmDelete',
+            height: 100,
+            width: 300,
+            modal: true,
+            title: false,
+            visible: false,
+            html: 'Are you sure you want to delete?',
+            confirmLabel: 'Delete',
+            cancelLabel: 'Cancel',
+            confirm: function () { console.log('confirmed!'); }, 
+            cancel: function () { console.log('cancelled!'); }, 
+            subscribe: {
+                open: 'ConfirmModal.Open',
+                close: 'ConfirmModal.Close'
             }
         });
 
@@ -103,6 +120,16 @@ class AlbumViewModel {
             msg.publish('PhotoViewer.Iframe', '/#/v/photos/viewer/' + photoId);
             msg.publish('PhotoViewer.Center');
             msg.publish('PhotoViewer.Open');
+        });
+
+        $eventElement.on('EditAlbumButton.Click', (event, photoId) => {
+            msg.publish('PhotoViewer.Iframe', '/#/v/photos/viewer/' + photoId);
+            msg.publish('PhotoViewer.Center');
+            msg.publish('PhotoViewer.Open');
+        });
+
+        $eventElement.on('DeleteAlbumButton.Click', (event, photoId) => {
+            msg.publish('ConfirmModal.Open');
         });
     }
 }
