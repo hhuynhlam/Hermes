@@ -15,21 +15,21 @@ System.config({
     "profile.router": "screens/profile/profile.router",
     
     // Widgets
-    "alert.widget"         : "widgets/core/alert/alert",
-    "base-widget.viewmodel": "widgets/core/base/base-widget.viewmodel",
-    "button.widget"        : "widgets/core/button/button",
-    "dropdown.widget"      : "widgets/core/dropdown/dropdown",
-    "grid.widget"          : "widgets/core/grid/grid",
-    "input.widget"         : "widgets/core/input/input",
-    "upload.widget"        : "widgets/core/upload/upload",
-    "window.widget"        : "widgets/core/window/window",
+    "alert.widget"         : "widgets/_core/alert/alert",
+    "base-widget.viewmodel": "widgets/_core/base/base-widget.viewmodel",
+    "button.widget"        : "widgets/_core/button/button",
+    "dropdown.widget"      : "widgets/_core/dropdown/dropdown",
+    "grid.widget"          : "widgets/_core/grid/grid",
+    "input.widget"         : "widgets/_core/input/input",
+    "upload.widget"        : "widgets/_core/upload/upload",
+    "window.widget"        : "widgets/_core/window/window",
     
     "masonry.widget"       : "widgets/masonry/masonry",
     "photogrid.widget"     : "widgets/photoGrid/photoGrid",
     "navbar.viewmodel"     : "widgets/navbar/navbar.viewmodel",
     
     // Core
-    "sandbox": "core/sandbox/sandbox",
+    "sandbox": "_core/sandbox/sandbox",
     
     // Vendor
     "bootstrap"       : "vendor/bootstrap/dist/js/bootstrap",

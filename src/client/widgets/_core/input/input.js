@@ -5,7 +5,7 @@ import ko from 'knockout';
 import sandbox from 'sandbox';
 
 import InputViewModel from './input.viewmodel';
-import InputTemplate from 'widgets/core/input/input.html!text';
+import InputTemplate from 'widgets/_core/input/input.html!text';
 
 var inputViewModel = {
     

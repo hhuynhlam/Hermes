@@ -5,7 +5,7 @@ import ko from 'knockout';
 import sandbox from 'sandbox';
 
 import ButtonViewModel from './button.viewmodel';
-import ButtonTemplate from 'widgets/core/button/button.html!text';
+import ButtonTemplate from 'widgets/_core/button/button.html!text';
 
 var buttonViewModel = {
     
