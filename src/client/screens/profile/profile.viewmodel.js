@@ -23,8 +23,8 @@ class ProfileViewModel {
         this.state = ko.observable('CA');
         this.country = ko.observable('US');
         this.zip = ko.observable('');
-        this.homePhone = ko.observable('');
-        this.mobilePhone = ko.observable('');
+        this.primaryNumber = ko.observable('');
+        this.secondaryNumber = ko.observable('');
         this.email = ko.observable('');
         this.password = ko.observable('');
         this.confirmPassword = ko.observable('');
@@ -63,8 +63,8 @@ class ProfileViewModel {
             country: this.country(),
             state: this.state(),
             zip: this.zip(),
-            homePhone: this.homePhone(),
-            mobilePhone: this.mobilePhone(),
+            primaryNumber: this.primaryNumber(),
+            secondaryNumber: this.secondaryNumber(),
             email: (this.email()) ? this.email() : undefined,
             password: (this.password()) ? this.password() : undefined
         })
@@ -99,8 +99,8 @@ class ProfileViewModel {
             this.state(this.currentUser.state || 'CA');
             this.country(this.currentUser.country || 'US');
             this.zip(this.currentUser.zip);
-            this.homePhone(this.currentUser.homePhone);
-            this.mobilePhone(this.currentUser.mobilePhone);
+            this.primaryNumber(this.currentUser.primaryNumber);
+            this.secondaryNumber(this.currentUser.secondaryNumber);
             this.email(this.currentUser.email);
         }
     }

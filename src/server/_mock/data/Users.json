@@ -8,8 +8,8 @@
         "state": "CA",
         "city": "Sunnyvale",
         "zip": "11223",
-        "homePhone": "1112223333",
-        "mobilePhone": "2223334444",
+        "primaryNumber": "1112223333",
+        "secondaryNumber": "2223334444",
         "email": "johndo@gmail.com",
         "password": "password1"
     },
@@ -22,8 +22,8 @@
         "state": "CA",
         "city": "Sunnyvale",
         "zip": "11223",
-        "homePhone": "1112223333",
-        "mobilePhone": "2223334444",
+        "primaryNumber": "1112223333",
+        "secondaryNumber": "2223334444",
         "email": "janedo@gmail.com",
         "password": "password1"
     }

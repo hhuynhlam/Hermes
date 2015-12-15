@@ -45,8 +45,8 @@ function (req, res) {
             'state',
             'city',
             'zip',
-            'homePhone',
-            'mobilePhone',
+            'primaryNumber',
+            'secondaryNumber',
             'email',
             'password'
         ], req.body ),
@@ -68,8 +68,8 @@ function (req, res) {
             'state',
             'city',
             'zip',
-            'homePhone',
-            'mobilePhone',
+            'primaryNumber',
+            'secondaryNumber',
             'email',
             'password'
         ], req.body ),

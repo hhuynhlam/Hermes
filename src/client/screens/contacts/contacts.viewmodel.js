@@ -53,12 +53,21 @@ class ContactsViewModel {
             columns: [
                 {   field: 'firstName', title: 'First Name' },
                 {   field: 'lastName', title: 'Last Name' },
+                
                 {   title: 'Address', 
-                    template: '#= streetAddress + "</br>" + \
-                    city + ", " + state + ", " + country + " " + zip #'}, 
+                    template: '#if (streetAddress) {# #=streetAddress# #} #  \
+                               #if (city) {#</br># # #=city# #} # \
+                               #if (city && state) {#, #} # \
+                               #if (state) {# #=state.toUpperCase()# #} # \
+                               #if (state && country) {#, #} # \
+                               #=country# #=zip#'
+                }, 
+                
                 {   title: 'Phone', 
-                    template: '#= "Home: " + homePhone + "</br>" + \
-                    "Mobile: " + mobilePhone #'}, 
+                    template: '#if (primaryNumber) {# Primary: #=primaryNumber# #} #  \
+                               #if (secondaryNumber) {#</br># # Secondary: #=secondaryNumber# #} #'
+                }, 
+                
                 {   field: 'email', title: 'Email'}
             ],
 
