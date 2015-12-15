@@ -192,7 +192,7 @@ var uploader = multer({ dest: path.join(__dirname, '../public/uploaded') });
             var _data = data;
 
             if (!_data.length) {
-                db.query('SELECT groupName FROM vPhotoGroup \
+                db.query('SELECT uid, groupName FROM vPhotoGroup \
                           WHERE pgid = ' + req.params.albumId, 
                 function (data) {
                     _data = data;
@@ -210,6 +210,7 @@ var uploader = multer({ dest: path.join(__dirname, '../public/uploaded') });
     router.put('/albums',
     function (req, res) {
         var queryParams = queryBuilder.params([
+                'uid',
                 'groupName'
             ], req.body ),
             queryString = 'CALL pCreatePhotoGroup(' + queryParams + ');';

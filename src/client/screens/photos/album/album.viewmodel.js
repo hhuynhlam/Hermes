@@ -1,17 +1,19 @@
 'use strict';
 
 import $ from 'jquery';
-// import ko from 'knockout';
+import ko from 'knockout';
 import sandbox from 'sandbox';
 import buttonWidget from 'button.widget';
 import photoGridWidget from 'photogrid.widget';
 import windowWidget from 'window.widget';
 
+var auth = sandbox.auth;
 var msg = sandbox.msg;
 
 class AlbumViewModel {
     constructor(options) {
         this.options = options || {};
+        this.isCurrentUsersAlbum = ko.observable(false);
     }   
 
     init(albumId) {
@@ -21,6 +23,8 @@ class AlbumViewModel {
     }
 
     _createWidgets() {
+        var _vm = this;
+
         buttonWidget.create({
             id: 'EditAlbumButton',
             label: '<span class="glyphicon glyphicon-pencil"></span>',
@@ -61,6 +65,10 @@ class AlbumViewModel {
                 // set screen title
                 sandbox.msg.trigger('#Navbar', 'App.Screen', data[0].groupName);
                 
+                // check if album is editable and deleteable
+                _vm.isCurrentUsersAlbum( (data[0].uid === auth.getCurrentUser().uid) ? true : false );
+
+                // no further action if no photos
                 if (!data[0].pid) { return; }
 
                 data.forEach((photo) => {

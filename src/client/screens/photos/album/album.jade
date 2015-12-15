@@ -1,6 +1,6 @@
 section#Album.container
     .row
-        .col-sm-12.text-right.margin-sm-bottom
+        .col-sm-12.text-right.margin-sm-bottom(data-bind="visible: isCurrentUsersAlbum")
             #EditAlbumButton.margin-sm-right(style="display: inline-block;")
             #DeleteAlbumButton.margin-sm-right(style="display: inline-block;")
     .row

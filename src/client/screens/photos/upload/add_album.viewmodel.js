@@ -8,6 +8,7 @@ import photoGridWidget from 'photogrid.widget';
 import uploadWidget from 'upload.widget';
 
 var _ = sandbox.util;
+var auth = sandbox.auth;
 var http = sandbox.http;
 var msg = sandbox.msg;
 var promise = sandbox.promise;
@@ -160,7 +161,10 @@ class AddAlbumViewModel {
         }
 
         // create new album
-        http.put('/photos/albums', { groupName: this.albumName() })
+        http.put('/photos/albums', { 
+            uid: auth.getCurrentUser().uid,
+            groupName: this.albumName() 
+        })
         .then((data) => { callback.call(this, data); })
         .catch((err) => { console.error('Error: Could not create new album ( ', err, ')'); })
         .done();
