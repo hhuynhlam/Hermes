@@ -29,8 +29,8 @@
     "plugin-text": "https://github.com/systemjs/plugin-text.git#0.0.2",
     "q": "1.0.1",
     "sammy": "0.7.6",
-    "system.js": "0.19.3",
-    "traceur": "0.0.91",
-    "traceur-runtime": "0.0.91"
+    "system.js": "0.19.9",
+    "traceur": "0.0.93",
+    "traceur-runtime": "0.0.93"
   }
 }

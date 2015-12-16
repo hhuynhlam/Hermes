@@ -1,5 +1,5 @@
 /*
- * SystemJS v0.19.3
+ * SystemJS v0.19.9
  */
 (function(__global) {
 
@@ -461,13 +461,14 @@ function logloads(loads) {
         if (loader.loads[i].name == name) {
           existingLoad = loader.loads[i];
 
-          if(step == 'translate' && !existingLoad.source) {
+          if (step == 'translate' && !existingLoad.source) {
             existingLoad.address = stepState.moduleAddress;
             proceedToTranslate(loader, existingLoad, Promise.resolve(stepState.moduleSource));
           }
 
-          // a primary load -> use that existing linkset
-          if (existingLoad.linkSets.length)
+          // a primary load -> use that existing linkset if it is for the direct load here
+          // otherwise create a new linkset unit
+          if (existingLoad.linkSets.length && existingLoad.linkSets[0].loads[0].name == existingLoad.name)
             return existingLoad.linkSets[0].done.then(function() {
               resolve(existingLoad);
             });
@@ -835,19 +836,14 @@ function logloads(loads) {
       if (typeof obj != 'object')
         throw new TypeError('Expected object');
 
-      // we do this to be able to tell if a module is a module privately in ES5
-      // by doing m instanceof Module
       var m = new Module();
 
-      var pNames;
-      if (Object.getOwnPropertyNames && obj != null) {
+      var pNames = [];
+      if (Object.getOwnPropertyNames && obj != null)
         pNames = Object.getOwnPropertyNames(obj);
-      }
-      else {
-        pNames = [];
+      else
         for (var key in obj)
           pNames.push(key);
-      }
 
       for (var i = 0; i < pNames.length; i++) (function(key) {
         defineProperty(m, key, {
@@ -858,9 +854,6 @@ function logloads(loads) {
           }
         });
       })(pNames[i]);
-
-      if (Object.preventExtensions)
-        Object.preventExtensions(m);
 
       return m;
     },
@@ -1143,7 +1136,7 @@ function extendMeta(a, b, prepend) {
       a[p] = val;
     else if (val instanceof Array && a[p] instanceof Array)
       a[p] = [].concat(prepend ? val : a[p]).concat(prepend ? a[p] : val);
-    else if (typeof val == 'object' && typeof a[p] == 'object')
+    else if (typeof val == 'object' && val !== null && typeof a[p] == 'object')
       a[p] = extend(extend({}, a[p]), val, prepend);
     else if (!prepend)
       a[p] = val;
@@ -1310,7 +1303,7 @@ function warn(msg) {
 
           // if nothing registered, then something went wrong
           if (!load.metadata.entry && !load.metadata.bundle)
-            reject(new Error(load.name + ' did not call System.register or AMD define'));
+            reject(new Error(load.name + ' did not call System.register or AMD define. If loading a global module configure the global name via the meta exports property for script injection support.'));
 
           resolve('');
         }
@@ -1327,7 +1320,7 @@ function warn(msg) {
             s.detachEvent('onreadystatechange', complete);
             for (var i = 0; i < interactiveLoadingScripts.length; i++)
               if (interactiveLoadingScripts[i].script == s) {
-                if (interactiveScript.script == s)
+                if (interactiveScript && interactiveScript.script == s)
                   interactiveScript = null;
                 interactiveLoadingScripts.splice(i, 1);
               }
@@ -1492,8 +1485,12 @@ function createEntry() {
       if (!entry.name || load && entry.name == load.name) {
         if (!curMeta)
           throw new TypeError('Unexpected anonymous System.register call.');
-        if (curMeta.entry)
-          throw new Error('Multiple anonymous System.register calls in module ' + load.name + '. If loading a bundle, ensure all the System.register calls are named.');
+        if (curMeta.entry) {
+          if (curMeta.format == 'register')
+            throw new Error('Multiple anonymous System.register calls in module ' + load.name + '. If loading a bundle, ensure all the System.register calls are named.');
+          else
+            throw new Error('Module ' + load.name + ' interpreted as ' + curMeta.format + ' module format, but called System.register.');
+        }
         if (!curMeta.format)
           curMeta.format = 'register';
         curMeta.entry = entry;
@@ -1624,7 +1621,7 @@ function createEntry() {
 
       module.locked = false;
       return value;
-    });
+    }, entry.name);
     
     module.setters = declaration.setters;
     module.execute = declaration.execute;
@@ -1747,7 +1744,7 @@ function createEntry() {
     if (exports && exports.__esModule)
       entry.esModule = exports;
     // set module as 'default' export, then fake named exports by iterating properties
-    else if (entry.esmExports)
+    else if (entry.esmExports && exports !== __global)
       entry.esModule = getESModule(exports);
     // just use the 'default' export
     else
@@ -1813,7 +1810,7 @@ function createEntry() {
         return '';
       }
       
-      if (load.metadata.format == 'register' && !load.metadata.authorization)
+      if (load.metadata.format == 'register' && !load.metadata.authorization && load.metadata.scriptLoad !== false)
         load.metadata.scriptLoad = true;
 
       load.metadata.deps = load.metadata.deps || [];
@@ -1866,6 +1863,10 @@ function createEntry() {
           throw new Error(load.name + ' detected as ' + load.metadata.format + ' but didn\'t execute.');
 
         entry = load.metadata.entry;
+
+        // support metadata deps for System.register
+        if (entry && load.metadata.deps)
+          entry.deps = entry.deps.concat(load.metadata.deps);
       }
 
       // named bundles are just an empty module
@@ -1916,6 +1917,75 @@ function createEntry() {
   });
 })();
 /*
+  System bundles
+
+  Allows a bundle module to be specified which will be dynamically 
+  loaded before trying to load a given module.
+
+  For example:
+  System.bundles['mybundle'] = ['jquery', 'bootstrap/js/bootstrap']
+
+  Will result in a load to "mybundle" whenever a load to "jquery"
+  or "bootstrap/js/bootstrap" is made.
+
+  In this way, the bundle becomes the request that provides the module
+*/
+function getBundleFor(loader, name) {
+  // check if it is in an already-loaded bundle
+  for (var b in loader.loadedBundles_)
+    if (indexOf.call(loader.bundles[b], name) != -1)
+      return Promise.resolve(b);
+
+  // check if it is a new bundle
+  for (var b in loader.bundles)
+    if (indexOf.call(loader.bundles[b], name) != -1)
+      return loader.normalize(b)
+      .then(function(normalized) {
+        loader.bundles[normalized] = loader.bundles[b];
+        loader.loadedBundles_[normalized] = true;
+        return normalized;
+      });
+
+  return Promise.resolve();
+}
+
+(function() {
+  // bundles support (just like RequireJS)
+  // bundle name is module name of bundle itself
+  // bundle is array of modules defined by the bundle
+  // when a module in the bundle is requested, the bundle is loaded instead
+  // of the form System.bundles['mybundle'] = ['jquery', 'bootstrap/js/bootstrap']
+  hookConstructor(function(constructor) {
+    return function() {
+      constructor.call(this);
+      this.bundles = {};
+      this.loadedBundles_ = {};
+    };
+  });
+
+  // assign bundle metadata for bundle loads
+  hook('locate', function(locate) {
+    return function(load) {
+      var loader = this;
+      if (load.name in loader.loadedBundles_ || load.name in loader.bundles)
+        load.metadata.bundle = true;
+
+      // if not already defined, check if we need to load a bundle
+      if (!(load.name in loader.defined))
+        return getBundleFor(loader, load.name)
+        .then(function(bundleName) {
+          if (bundleName)
+            return loader.load(bundleName);
+        })
+        .then(function() {
+          return locate.call(loader, load);
+        });
+
+      return locate.call(this, load);
+    };
+  });
+})();
+/*
  * Script-only addition used for production loader
  *
  */
@@ -1935,7 +2005,7 @@ hook('fetch', function(fetch) {
     return fetch.call(this, load);
   };
 });System = new SystemJSLoader();
-System.version = '0.19.3 Register Only';
+System.version = '0.19.9 Register Only';
   // -- exporting --
 
   if (typeof exports === 'object')
