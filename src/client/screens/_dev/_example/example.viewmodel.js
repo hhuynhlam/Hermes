@@ -2,6 +2,7 @@
 
 import alertWidget from 'alert.widget';
 import buttonWidget from 'button.widget';
+import confirmWidget from 'confirmWindow.widget';
 import dropdownWidget from 'dropdown.widget';
 import gridWidget from 'grid.widget';
 import inputWidget from 'input.widget';
@@ -35,6 +36,27 @@ class ExampleViewModel {
                 'btn-block'
             ],
             subscribe: ['SampleButton.Sample']
+        });
+
+        confirmWidget.create({
+            id: 'SampleConfirm',
+            modal: true,
+            title: false,
+            visible: false,
+            html: 'Are you sure you want to delete?',
+            confirm: {
+                label: 'Delete',
+                styles: ['btn', 'btn-danger'],
+                callback: function () { console.log('confirmed!'); }
+            },
+            cancel: {
+                label: 'Cancel',
+                styles: ['btn', 'btn-default']
+            },
+            subscribe: {
+                open: 'ConfirmModal.Open',
+                close: 'ConfirmModal.Close'
+            }
         });
 
         dropdownWidget.create({

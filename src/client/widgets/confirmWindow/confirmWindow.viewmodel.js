@@ -4,10 +4,9 @@
 // import ko from 'knockout';
 import sandbox from 'sandbox';
 import BaseWidgetViewModel from 'base-widget.viewmodel';
+import ConfirmWindowTemplate from 'widgets/confirmWindow/confirmWindow.html!text';
 
 import windowWidget from 'window.widget';
-
-import ConfirmWindowTemplate from 'widgets/confirmWindow/confirmWindow.html!text';
 
 var _ = sandbox.util;
 var msg = sandbox.msg;
@@ -19,13 +18,19 @@ class ConfirmWindowViewModel extends BaseWidgetViewModel {
         this.options = options || {};
     }   
 
+    // @TODO: Use button widgets instead of creating custom ones 
     init() {
         var _template = _.template(ConfirmWindowTemplate);
         
+        // hydrate template
         this.html = _template({ 
             html: this.options.html,
-            confirmLabel: this.options.confirmLabel || 'Yes',
-            cancelLabel: this.options.cancelLabel || 'No'
+
+            confirmLabel: _.get(this.options, 'confirm.label') || 'Yes',
+            confirmStyles: _.get(this.options, 'confirm.styles'),
+
+            cancelLabel: _.get(this.options, 'cancel.label') || 'No',
+            cancelStyles: _.get(this.options, 'cancel.styles')
         });
         
         this._createWidgets();
@@ -65,16 +70,17 @@ class ConfirmWindowViewModel extends BaseWidgetViewModel {
     }
 
     _setupEvents() {
-        var _actions = ['cancel', 'confirm'];
+        var _vm = this,
+            _actions = ['cancel', 'confirm'];
 
         _actions.forEach((action) => {
-            if (this.options[action])  {
-                this.$selector.find('button.' + action).on('click', (e) => {
-                    this.options[action].call(this, e);
+            if (_vm.options[action] && _vm.options[action].callback)  {
+                _vm.$selector.find('button.' + action).on('click', function (e) {
+                    _vm.options[action].callback.call(this, e);
                 });
             } else {
-                this.$selector.find('button.' +  action).on('click', function () {
-                    msg.publish(this.options.id + '.Modal.Close');
+                _vm.$selector.find('button.' +  action).on('click', function () {
+                    msg.publish(_vm.options.id + '.Modal.Close');
                 });
             }
         });

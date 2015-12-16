@@ -10,6 +10,7 @@ import windowWidget from 'window.widget';
 
 var auth = sandbox.auth;
 var msg = sandbox.msg;
+var http = sandbox.http;
 
 class AlbumViewModel {
     constructor(options) {
@@ -50,19 +51,22 @@ class AlbumViewModel {
 
         confirmWidget.create({
             id: 'ConfirmDelete',
-            height: 100,
-            width: 300,
             modal: true,
             title: false,
             visible: false,
-            html: 'Are you sure you want to delete?',
-            confirmLabel: 'Delete',
-            cancelLabel: 'Cancel',
-            confirm: function () { console.log('confirmed!'); }, 
-            cancel: function () { console.log('cancelled!'); }, 
+            html: 'Are you sure you want to delete this album?',
+            confirm: {
+                label: 'Delete',
+                styles: ['btn', 'btn-danger'],
+                callback: _vm._deleteAlbum.bind(this)
+            },
+            cancel: {
+                label: 'Cancel',
+                styles: ['btn', 'btn-default']
+            },
             subscribe: {
-                open: 'ConfirmModal.Open',
-                close: 'ConfirmModal.Close'
+                open: 'ConfirmDelete.Open',
+                close: 'ConfirmDelete.Close'
             }
         });
 
@@ -116,21 +120,35 @@ class AlbumViewModel {
 
     _setupEvents() {
         var $eventElement = $(document);
+
+        // photo viewer
         $eventElement.on('PhotoViewer.Init', (event, photoId) => {
             msg.publish('PhotoViewer.Iframe', '/#/v/photos/viewer/' + photoId);
             msg.publish('PhotoViewer.Center');
             msg.publish('PhotoViewer.Open');
         });
 
-        $eventElement.on('EditAlbumButton.Click', (event, photoId) => {
-            msg.publish('PhotoViewer.Iframe', '/#/v/photos/viewer/' + photoId);
-            msg.publish('PhotoViewer.Center');
-            msg.publish('PhotoViewer.Open');
+        // edit album
+        // $eventElement.on('EditAlbumButton.Click', (event, photoId) => {
+        //     msg.publish('PhotoViewer.Iframe', '/#/v/photos/viewer/' + photoId);
+        //     msg.publish('PhotoViewer.Center');
+        //     msg.publish('PhotoViewer.Open');
+        // });
+    
+        // delete album
+        $eventElement.on('DeleteAlbumButton.Click', () => {
+            msg.publish('ConfirmDelete.Open');
         });
+    }
 
-        $eventElement.on('DeleteAlbumButton.Click', (event, photoId) => {
-            msg.publish('ConfirmModal.Open');
-        });
+    _deleteAlbum () {
+        http.delete('/photos/albums/' + this.albumId)
+        .then(() => {
+            msg.publish('ConfirmDelete.Close'); 
+            window.location.replace('/#/photos'); 
+        })
+        .catch((err) => { console.error('Error: Could not delete album ( ', err, ')'); })
+        .done();
     }
 }
 
