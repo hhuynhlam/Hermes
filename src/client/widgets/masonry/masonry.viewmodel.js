@@ -1,5 +1,6 @@
 'use strict';
 
+import $ from 'jquery';
 import sandbox from 'sandbox';
 import imagesLoaded from 'imagesloaded';
 import Masonry from 'masonry';
