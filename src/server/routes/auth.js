@@ -27,7 +27,7 @@ localStrategy = new LocalStrategy({
     });
     
     db.query(queryString, function (data) {
-        var _user = (data && data.length) ? data[0] : [];
+        var _user = (data && data.length) ? data[0] : null;
         return (!_user) ? done(null, false) : done(null, _user);
     }, function () { return done(null, false); });
 });
