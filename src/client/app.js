@@ -6,7 +6,9 @@ import sammy from 'sammy';
 import sandbox from 'sandbox';
 import 'bootstrap';
 
+import { destroy as __kendoDestroy } from 'k/kendo.core.min';
 import NavViewModel from 'navbar.viewmodel';
+
 
 var AppViewModel = function () {
     var _user;
@@ -40,6 +42,9 @@ app.swap = function(content, callback) {
     
     // reset all pub/sub
     sandbox.msg.reset();
+
+    // remove kendo widgets
+    __kendoDestroy(app.$element()[0]);
 
     // replace html
     app.$element().html(content);

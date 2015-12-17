@@ -82,7 +82,7 @@ class ContactsViewModel {
                     this.$grid = this.$grid || $('#UsersList').data('kendoGrid');
 
                     $target.toggleClass('k-state-selected'); 
-                    this.selectedContacts( $('.k-state-selected') );
+                    this.selectedContacts( $('#UsersList .k-state-selected') );
                 });
                 
                 msg.publish('Contacts.EmailAllButton', 'enabled');
