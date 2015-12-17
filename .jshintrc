@@ -21,7 +21,7 @@
     "esnext"        : true,
 
     // Libraries
-    "jquery"        : true,    // Enable globals exposed by jQuery JavaScript library.
+    "jquery"        : false,    // Enable globals exposed by jQuery JavaScript library.
     "node"          : true,    // Enable globals available when code is running inside of the NodeJS runtime environment.
 
     "globals"       : {       // Extra globals.

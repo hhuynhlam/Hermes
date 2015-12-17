@@ -1,0 +1,20 @@
+<div class="library-item"> 
+
+    <div> 
+        <button data-id="<%= pid %>" class="btn btn-danger edit-album-delete" style="position: absolute;"> 
+            <span type="label"><span class="glyphicon glyphicon-ban-circle"></span></span> 
+        </button> 
+    </div> 
+    
+    <img src="/photos?filePath=<%= filePath %>&thumb=true&width=<%= width %>" /> 
+    
+    <input 
+        class="form-control edit-album-caption" 
+        data-id="<%= pid %>" 
+        placeholder="Caption" 
+        style="margin-top: 5px;" 
+        type="text" 
+        value="<%= photoName %>" 
+    /> 
+
+</div>

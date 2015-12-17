@@ -7,5 +7,15 @@
 
     .library-item {
         padding: 5px;
+
+        button {
+            z-index: 100;
+        }
+        
+        &.deleted > img, 
+        &.deleted > input {
+            opacity: .25;
+            z-index: -100;
+        }
     }
 }

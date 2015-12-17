@@ -119,7 +119,8 @@ class AlbumViewModel {
     }
 
     _setupEvents() {
-        var $eventElement = $(document);
+        var _vm = this,
+            $eventElement = $(document);
 
         // photo viewer
         $eventElement.on('PhotoViewer.Init', (event, photoId) => {
@@ -129,11 +130,9 @@ class AlbumViewModel {
         });
 
         // edit album
-        // $eventElement.on('EditAlbumButton.Click', (event, photoId) => {
-        //     msg.publish('PhotoViewer.Iframe', '/#/v/photos/viewer/' + photoId);
-        //     msg.publish('PhotoViewer.Center');
-        //     msg.publish('PhotoViewer.Open');
-        // });
+        $eventElement.on('EditAlbumButton.Click', () => {
+            window.location.assign('/#/photos/album/edit/' + _vm.albumId);
+        });
     
         // delete album
         $eventElement.on('DeleteAlbumButton.Click', () => {

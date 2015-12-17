@@ -103,6 +103,16 @@ var uploader = multer({ dest: path.join(__dirname, '../public/uploaded') });
         }, function (err) { res.status(500).send('SQL Error: ' + err); });
     });
 
+    // Delete a Photo by id
+    // router.get('/', passport.authenticate('local', { session: false }),
+    router.delete('/:id',
+    function (req, res) {
+        var queryString = 'CALL pDeletePhoto(\'' + req.params.id + '\'' + ');';
+        db.query(queryString, function (data) {
+            return res.status(200).json( data );
+        }, function (err) { res.status(500).send('SQL Error: ' + err); });
+    });
+
     // Get Photo thumbnail
     // router.get('/', passport.authenticate('local', { session: false }),
     router.get('/',

@@ -7,17 +7,19 @@ import imagesLoaded from 'imagesloaded';
 
 var _ = sandbox.util;
 var http = sandbox.http;
+var msg = sandbox.msg;
 
 class PhotoGridViewModel {
     constructor(options) {
         this.options = options || {};
+        this.subscriptions = [];
     }   
 
     init() {
         sandbox.app.isLoading(true);
 
         this.$grid = $('#' + this.options.id);
-        this._setupEvents();
+        this._setupSubscriptions();
         this._getPhotos();
     }
 
@@ -26,6 +28,12 @@ class PhotoGridViewModel {
         else if (window.innerWidth >= 992) { return 178; }
         else if (window.innerWidth >= 768) { return 230; }
         else { return window.innerWidth - 40; }
+    }
+
+    refresh() {
+        sandbox.app.isLoading(true);
+        this.$grid.html('');
+        this._getPhotos();
     }
 
     _getPhotos() {
@@ -60,8 +68,22 @@ class PhotoGridViewModel {
 
     }
 
-    _setupEvents() {
+    _setupSubscriptions() {
+        if (this.options.subscribe) {
+            var _subscription;
 
+            // dispose any existing subscriptions
+            msg.dispose.apply(this, this.subscriptions);
+            
+            // refresh
+            if (this.options.subscribe.refresh) {
+                _subscription = msg.subscribe(this.options.subscribe.refresh, () => {
+                    this.refresh();
+                }, this, true);
+
+                this.subscriptions.push(_subscription);
+            }
+        }
     }
 }
 
