@@ -36,6 +36,10 @@ class EditAlbumViewModel {
         else { this._save(); }
     }
 
+    upload () {
+        window.location.assign('/#/photos/album/upload/' + this.albumId);
+    }
+
     _save () {
         var _screenVm = this;
         msg.publish('EditAlbumSave.Button', 'spinning');
@@ -73,6 +77,18 @@ class EditAlbumViewModel {
                 success: 'EditAlbumAlert.Success',
                 info: 'EditAlbumAlert.Info',
                 warning: 'EditAlbumAlert.Warning'
+            }
+        });
+
+        buttonWidget.create({
+            id: 'EditAlbumUpload',
+            label: '<span class="glyphicon glyphicon-upload"></span> Upload',
+            styles: [
+                'btn-success',
+                'btn-block'
+            ],
+            trigger: {
+                click: ['EditAlbumUpload.Click']
             }
         });
 
@@ -154,7 +170,7 @@ class EditAlbumViewModel {
 
     _setupEvents() {
         var _screenVm = this;
-    
+
         // delete photo event
         $('.edit-album-delete').on('click', (e) => {
             var _libraryItem = _.get(e.currentTarget, 'parentElement.parentElement'),

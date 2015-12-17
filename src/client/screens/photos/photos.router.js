@@ -77,6 +77,31 @@ var router = function (app) {
             
     });
 
+    app.get('/#/photos/album/upload/:id', function (context) {
+        sandbox.auth.checkIsAuth(() => {
+            System.import('screens/photos/upload/add_album.html!text').then(function (template) {
+                var viewModel = new CreateAlbumViewModel();
+
+                // hack in params to reuse this viewmodel
+                viewModel.albumId(context.params.id);
+                viewModel.step(2);
+
+                // render partial view
+                context.swap(sandbox.util.template(template));
+                
+                // apply ko bindings
+                ko.applyBindings(viewModel, document.getElementById('AddAlbum'));
+
+                // initialize view model
+                viewModel.init();
+
+                // set screen title
+                sandbox.msg.trigger('#Navbar', 'App.Screen', 'Upload to Album');
+            });
+        });
+            
+    });
+
     app.get('/#/photos/album/:id', function (context) {
         sandbox.auth.checkIsAuth(() => {
             System.import('screens/photos/album/album.html!text').then(function (template) {
