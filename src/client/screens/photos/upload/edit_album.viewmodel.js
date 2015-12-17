@@ -240,7 +240,7 @@ class EditAlbumViewModel {
             val.remove();
         });
 
-        this.imgCount( this.imgCount - _.size(this.deletedPhotos) );
+        this.imgCount( this.imgCount() - _.size(this.deletedPhotos) );
         this.updatedCaptions = {};
         this.deletedPhotos = {};
         this.promises = [];
