@@ -264,7 +264,6 @@ var uploader = multer({ dest: path.join(__dirname, '../public/uploaded') });
 
         db.query(queryString, function (data) {
             var _resolvedPath;
-            debugger;
             if (data.length) {
                 data.forEach((p) => {
                     _resolvedPath = path.join(__dirname, '../public', p.filePath);
