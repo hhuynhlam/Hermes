@@ -109,7 +109,13 @@ var uploader = multer({ dest: path.join(__dirname, '../public/uploaded') });
     function (req, res) {
         var queryString = 'CALL pDeletePhoto(\'' + req.params.id + '\'' + ');';
         db.query(queryString, function (data) {
-            return res.status(200).json( data );
+            var _resolvedPath;
+
+            if (data[0][0].filePath) {
+                _resolvedPath = path.join(__dirname, '../public', data[0][0].filePath);
+                fs.unlink(_resolvedPath); 
+            }
+            return res.status(200).json( data[0][0] );
         }, function (err) { res.status(500).send('SQL Error: ' + err); });
     });
 
@@ -244,10 +250,32 @@ var uploader = multer({ dest: path.join(__dirname, '../public/uploaded') });
         }, function (err) { res.status(500).send('SQL Error: ' + err); });
     });
 
-    // Delete a User by id
+    // Delete a Album by id
     router.delete('/albums/:id',
     function (req, res) {
-        var queryString = 'CALL pDeletePhotoGroup(\'' + req.params.id + '\'' + ');';
+        
+        // delete physical photos
+        var queryString = queryBuilder.select({ 
+            route: 'vPhoto', 
+            where: [
+                { 'key': 'pgid', 'operator': '=', 'value': req.params.id }
+            ]
+        });
+
+        db.query(queryString, function (data) {
+            var _resolvedPath;
+            debugger;
+            if (data.length) {
+                data.forEach((p) => {
+                    _resolvedPath = path.join(__dirname, '../public', p.filePath);
+                    fs.unlink(_resolvedPath); 
+                });
+            }
+        }, function (err) { res.status(500).send('SQL Error: ' + err); });
+
+
+        // delete album from db
+        queryString = 'CALL pDeletePhotoGroup(\'' + req.params.id + '\'' + ');';
         db.query(queryString, function (data) {
             return res.status(200).json( data );
         }, function (err) { res.status(500).send('SQL Error: ' + err); });
