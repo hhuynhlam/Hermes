@@ -31,6 +31,8 @@ class AlbumViewModel {
             id: 'EditAlbumButton',
             label: '<span class="glyphicon glyphicon-pencil"></span>',
             styles: [
+                'btn-circle',
+                'btn-circle-md',
                 'btn-default'
             ],
             trigger: {
@@ -40,8 +42,10 @@ class AlbumViewModel {
         
         buttonWidget.create({
             id: 'DeleteAlbumButton',
-            label: '<span class="glyphicon glyphicon-ban-circle"></span>',
+            label: '<span class="glyphicon glyphicon-trash"></span>',
             styles: [
+                'btn-circle',
+                'btn-circle-md',
                 'btn-danger'
             ],
             trigger: {

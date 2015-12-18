@@ -82,10 +82,11 @@ class EditAlbumViewModel {
 
         buttonWidget.create({
             id: 'EditAlbumUpload',
-            label: '<span class="glyphicon glyphicon-upload"></span> Upload',
+            label: '<span class="glyphicon glyphicon-plus"></span>',
             styles: [
-                'btn-success',
-                'btn-block'
+                'btn-circle',
+                'btn-circle-md',
+                'btn-success'
             ],
             trigger: {
                 click: ['EditAlbumUpload.Click']
@@ -94,10 +95,11 @@ class EditAlbumViewModel {
 
         buttonWidget.create({
             id: 'EditAlbumSave',
-            label: 'Save',
+            label: '<span class="glyphicon glyphicon-floppy-saved"></span>',
             styles: [
-                'btn-primary',
-                'btn-block'
+                'btn-circle',
+                'btn-circle-md',
+                'btn-primary'
             ],
             subscribe: ['EditAlbumSave.Button'],
             trigger: {

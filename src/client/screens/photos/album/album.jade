@@ -3,9 +3,9 @@ section#Album.container
     #ConfirmDelete
 
     .row
-        .col-sm-12.text-right.margin-sm-bottom(data-bind="visible: isCurrentUsersAlbum")
-            #EditAlbumButton.margin-sm-right(style="display: inline-block;")
-            #DeleteAlbumButton.margin-sm-right(style="display: inline-block;")
+        .col-sm-12.text-left.margin-sm-bottom(data-bind="visible: isCurrentUsersAlbum")
+            #EditAlbumButton(style="display: inline-block; padding-right: 5px;")
+            #DeleteAlbumButton(style="display: inline-block; padding-right: 5px;")
     .row
         .col-sm-12
             #PhotoViewer
