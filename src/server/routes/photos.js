@@ -137,6 +137,7 @@ var uploader = multer({ dest: path.join(__dirname, '../public/uploaded') });
 
         // set image content-type
         res.set('Content-Type', 'image/jpg');
+        res.set('Cache-Control', 'public, max-age=86400000');
 
         // read image
         _img = gm(_filePath);
