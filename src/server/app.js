@@ -51,6 +51,7 @@ app.use('/',          require('./routes/index'));
 app.use('/countries', require('./routes/countries'));
 app.use('/photos',    require('./routes/photos'));
 app.use('/states',    require('./routes/states'));
+app.use('/notifications', require('./routes/notifications'));
 
 app.use( '/public', express.static(path.join(__dirname, 'public')) );
 app.use( express.static(path.resolve(__dirname, '../client')) );
