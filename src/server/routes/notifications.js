@@ -2,7 +2,6 @@
 
 var db = require('../helpers/db_connector');
 var express = require('express');
-var jsonfile = require('jsonfile');
 var queryBuilder = require('../helpers/query_builder');
 var router = express.Router();
 
