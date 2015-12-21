@@ -19,20 +19,6 @@ function (req, res) {
     }, function (err) { res.status(500).send('SQL Error: ' + err); });
 });
 
-// Get a User by id
-router.post('/:id',
-function (req, res) {
-    var queryString = queryBuilder.select({ 
-        route: 'Users',  
-        where: [
-            { 'key': 'uid', 'operator': '=', 'value': req.params.id }
-        ]
-    });
-    db.query(queryString, function (data) {
-        return res.status(200).json( data );
-    }, function (err) { res.status(500).send('SQL Error: ' + err); });
-});
-
 // Create a User
 // router.get('/', passport.authenticate('local', { session: false }),
 router.put('/',
@@ -47,11 +33,40 @@ function (req, res) {
             'zip',
             'primaryNumber',
             'secondaryNumber',
+            'pid',
             'email',
             'password'
         ], req.body ),
         queryString = 'CALL pCreateUser(' + queryParams + ');';
     
+    db.query(queryString, function (data) {
+        return res.status(200).json( data );
+    }, function (err) { res.status(500).send('SQL Error: ' + err); });
+});
+
+// Get all of User uploaded photos
+router.post('/photos/:id',
+function (req, res) {
+    var queryString = queryBuilder.select({ 
+        route: 'vPhoto',  
+        where: [
+            { 'key': 'uid', 'operator': '=', 'value': req.params.id }
+        ]
+    });
+    db.query(queryString, function (data) {
+        return res.status(200).json( data );
+    }, function (err) { res.status(500).send('SQL Error: ' + err); });
+});
+
+// Get a User by id
+router.post('/:id',
+function (req, res) {
+    var queryString = queryBuilder.select({ 
+        route: 'Users',  
+        where: [
+            { 'key': 'uid', 'operator': '=', 'value': req.params.id }
+        ]
+    });
     db.query(queryString, function (data) {
         return res.status(200).json( data );
     }, function (err) { res.status(500).send('SQL Error: ' + err); });
@@ -70,6 +85,7 @@ function (req, res) {
             'zip',
             'primaryNumber',
             'secondaryNumber',
+            'pid',
             'email',
             'password'
         ], req.body ),

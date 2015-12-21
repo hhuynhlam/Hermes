@@ -10,8 +10,9 @@ CREATE PROCEDURE `pUpdateUser` (
     IN _state varchar(2),
     IN _city varchar(255),
     IN _zip int(5),
-    IN _homePhone int(10),
-    IN _mobilePhone int(10),
+    IN _primaryNumber int(10),
+    IN _secondaryNumber int(10),
+    IN _pid int(11),
     IN _email text,
     IN _password text
 )
@@ -25,25 +26,16 @@ BEGIN
         `state` = _state,
         `city` = _city,
         `zip` = _zip,
-        `homePhone` = _homePhone,
-        `mobilePhone` = _mobilePhone,
+        `primaryNumber` = _primaryNumber,
+        `secondaryNumber` = _secondaryNumber,
+        `pid` = _pid,
         `email` = COALESCE(_email, `email`),
         `password` = COALESCE(_password, `password`)
     WHERE `uid` = _uid;
 
     -- return updated user info
-    SELECT  `uid`, 
-            `firstName`, 
-            `lastName`, 
-            `streetAddress`, 
-            `country`, 
-            `state`, 
-            `city`, 
-            `zip`,
-            `homePhone`,
-            `mobilePhone`,
-            `email`
-    FROM Users
+    SELECT *
+    FROM vUser
     WHERE `uid` = _uid;
 
 END //

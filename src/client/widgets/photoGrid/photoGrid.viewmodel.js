@@ -19,6 +19,7 @@ class PhotoGridViewModel {
         sandbox.app.isLoading(true);
 
         this.$grid = $('#' + this.options.id);
+        this._setOptions();
         this._setupSubscriptions();
         this._getPhotos();
     }
@@ -66,6 +67,17 @@ class PhotoGridViewModel {
             sandbox.app.isLoading(false);
         }
 
+    }
+
+    _setOptions() {
+        var _vm = this,
+            _styles = _vm.options.styles;
+
+        if ( _styles && _.isArray(_styles) ) {
+            _styles.forEach((c) => {
+                _vm.$grid.addClass(c);
+            });
+        }
     }
 
     _setupSubscriptions() {

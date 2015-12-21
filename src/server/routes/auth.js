@@ -19,7 +19,7 @@ localStrategy = new LocalStrategy({
     session: true
 }, function(email, password, done) {
     var queryString = queryBuilder.select({ 
-        route: 'Users',
+        route: 'vUser',
         where: [
             { 'key': 'email', 'operator': '=', 'value': email }, 
             { 'key': 'password', 'operator': '=', 'value': password }

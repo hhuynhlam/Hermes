@@ -1,12 +1,25 @@
 section#Profile.container
+    
     #ProfileAlert
-    form(data-bind='submit: validate')
+
+    #PhotoImageContainer
+    #PhotoImageViewer.hidden
+
+    form.row(data-bind='submit: validate')
         .col-sm-6
         
             .panel.panel-default
                 //- .panel-heading Change Name
                 .panel-body
-                    .form-group.has-feedback
+                    .form-group
+
+                        //- label Profile Image
+                        img.profile-image(data-bind="attr: { src: photoPath }")
+
+                        div(data-bind="click: initChoosePhoto")
+                            #PhotoImageButton.margin-sm-bottom.pull-right
+
+                    .form-group.has-feedback.clear-both
                         label First Name
                         input.form-control(placeholder='First Name', data-bind='value: firstName')
                         span.glyphicon.glyphicon-user.form-control-feedback
@@ -16,6 +29,38 @@ section#Profile.container
                         input.form-control(placeholder='Last Name', data-bind='value: lastName')
                         span.glyphicon.glyphicon-user.form-control-feedback
                     
+            .panel.panel-default
+                //- .panel-heading Change Credentials
+                .panel-body
+                    .form-group.has-feedback
+                        label Email
+                        input.form-control(placeholder='Email', data-bind='value: email')
+                        span.glyphicon.glyphicon-envelope.form-control-feedback
+
+                    .form-group.has-feedback
+                        label Password
+                        input.form-control(type='password', placeholder='Change Password', data-bind='value: password')
+                        span.glyphicon.glyphicon-lock.form-control-feedback
+
+                    .form-group.has-feedback
+                        label Password
+                        input.form-control(type='password', placeholder='Confirm Password', data-bind='value: confirmPassword')
+                        span.glyphicon.glyphicon-lock.form-control-feedback
+
+        .col-sm-6
+            .panel.panel-default
+                //- .panel-heading Change Phone Numbers
+                .panel-body
+                    .form-group.has-feedback
+                        label Primary Phone
+                        input.form-control(placeholder='Primary Phone', data-bind='value: primaryNumber')
+                        span.glyphicon.glyphicon-earphone.form-control-feedback
+
+                    .form-group.has-feedback
+                        label Secondary Phone
+                        input.form-control(placeholder='Secondary Phone', data-bind='value: secondaryNumber')
+                        span.glyphicon.glyphicon-earphone.form-control-feedback
+
             .panel.panel-default
                 //- .panel-heading Change Address
                 .panel-body
@@ -43,38 +88,6 @@ section#Profile.container
                         label Zip
                         input.form-control(placeholder='Zip', data-bind='value: zip')
                         span.glyphicon.glyphicon-home.form-control-feedback
-
-        .col-sm-6
-            .panel.panel-default
-                //- .panel-heading Change Phone Numbers
-                .panel-body
-                    .form-group.has-feedback
-                        label Primary Phone
-                        input.form-control(placeholder='Primary Phone', data-bind='value: primaryNumber')
-                        span.glyphicon.glyphicon-earphone.form-control-feedback
-
-                    .form-group.has-feedback
-                        label Secondary Phone
-                        input.form-control(placeholder='Secondary Phone', data-bind='value: secondaryNumber')
-                        span.glyphicon.glyphicon-earphone.form-control-feedback
-
-            .panel.panel-default
-                //- .panel-heading Change Credentials
-                .panel-body
-                    .form-group.has-feedback
-                        label Email
-                        input.form-control(placeholder='Email', data-bind='value: email')
-                        span.glyphicon.glyphicon-envelope.form-control-feedback
-
-                    .form-group.has-feedback
-                        label Password
-                        input.form-control(type='password', placeholder='Change Password', data-bind='value: password')
-                        span.glyphicon.glyphicon-lock.form-control-feedback
-
-                    .form-group.has-feedback
-                        label Password
-                        input.form-control(type='password', placeholder='Confirm Password', data-bind='value: confirmPassword')
-                        span.glyphicon.glyphicon-lock.form-control-feedback
 
         .col-sm-12
             .panel.panel-default

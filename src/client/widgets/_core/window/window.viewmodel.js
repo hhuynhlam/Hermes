@@ -5,6 +5,7 @@ import sandbox from 'sandbox';
 import BaseWidgetViewModel from 'base-widget.viewmodel';
 import 'k/kendo.window.min';
 
+var _ = sandbox.util;
 var msg = sandbox.msg;
 
 class WindowViewModel extends BaseWidgetViewModel {
@@ -21,9 +22,17 @@ class WindowViewModel extends BaseWidgetViewModel {
     }
   
     setOptions() {
-        var _supportedEvents = ['activate', 'close', 'deactivate', 'dragend', 'dragstart', 'error', 'open', 'refresh', 'resize'];
-        this.$selector.html(this.options.html);
+        var _supportedEvents = ['activate', 'close', 'deactivate', 'dragend', 'dragstart', 'error', 'open', 'refresh', 'resize'],
+            _styles = this.options.styles;
         
+        if ( _styles && _.isArray(_styles) ) {
+            _styles.forEach((c) => {
+                this.$selector.addClass(c);
+            });
+        }
+
+        this.$selector.html(this.options.html);
+
         this.setupPublications(_supportedEvents);
         this.setupSubscriptions(); 
     }
