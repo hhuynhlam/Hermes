@@ -2,15 +2,16 @@ DROP PROCEDURE IF EXISTS `pDeleteNotification`;
 
 DELIMITER //
 CREATE PROCEDURE `pDeleteNotification` (
-    IN _nid int(11)
+    IN _uid int(11),
+    IN _nType varchar(12)
 )
 BEGIN
     
-    DELETE FROM Notifications
-    WHERE `nid` = _nid;
-
-    -- return number of rows affected
-    SELECT ROW_COUNT() as Notifications_Deleted; 
+    IF (_nType IS NULL) THEN 
+        DELETE FROM Notifications WHERE uid=_uid;
+    ELSE
+        DELETE FROM Notifications WHERE uid=_uid AND nType=_nType;
+    END IF;
 
 END //
 DELIMITER ;
