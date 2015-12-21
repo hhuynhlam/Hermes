@@ -10,10 +10,11 @@ var router = express.Router();
 // Routes
 //======================================
 
+    // Create Notification
     router.put('/',
     function (req, res) {
 
-        // insert into db
+        // insert into Notifications db
         var queryParams = queryBuilder.params([
                 'nType',
                 'nTarget',
@@ -27,19 +28,38 @@ var router = express.Router();
             
     });
 
+    // Get Notifications
     router.post('/',
     function (req, res) {
+
+        var whereArray = [];
+
+        var uidHash = {
+              'key': 'uid',
+              'operator': '=',
+              'value': req.body.userId
+        };
+        whereArray.push(uidHash);
+
+        if (req.body.type) {
+            var typeHash = {
+                'key': 'nType',
+                'operator': '=',
+                'value': req.body.type
+            };
+            whereArray.push(typeHash);
+        }
+
         var queryString = queryBuilder.select({ 
-            route: 'vPhoto', 
-            where: [
-                { 'key': 'pid', 'operator': '=', 'value': req.params.id }
-            ]
+            route: 'Notifications', 
+            where: whereArray 
         });
         db.query(queryString, function (data) {
             return res.status(200).json( data );
         }, function (err) { res.status(500).send('SQL Error: ' + err); });
     });
 
+    // Delete Notifications
     router.delete('/:id',
     function (req, res) {
         var queryString = 'CALL pDeleteNotification(' + req.params.id + ', NULL);';
@@ -48,6 +68,7 @@ var router = express.Router();
         }, function (err) { res.status(500).send('SQL Error: ' + err); });
     });
 
+    // Delete Notifications by type
     router.delete('/:id/:type',
     function (req, res) {
 
