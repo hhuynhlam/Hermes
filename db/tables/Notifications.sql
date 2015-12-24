@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS `Notifications`;
+
 CREATE TABLE `Notifications` (
   `nid` int(11) NOT NULL AUTO_INCREMENT,
   `nType` varchar(12) DEFAULT NULL,
