@@ -10,6 +10,10 @@ class ViewerViewModel {
     constructor(options) {
         this.options = options || {};
         this.meta = ko.observable({});
+
+        this.profileImage = ko.computed(() => {
+            return '/photos?filePath=' + this.meta().profileImage + '&thumb=true&width=75';
+        });
     }   
 
     init(photoId) {

@@ -7,7 +7,8 @@ AS
         pg.`pgid`,
         pg.`groupName`,
         p.`uid`,
-        CONCAT(u.`firstName`, ' ', u.`lastName`) as username 
+        CONCAT(u.`firstName`, ' ', u.`lastName`) as username,
+        u.filePath as profileImage 
     FROM Photos p
     JOIN PhotosGroup pg ON pg.`pgid` = p.`pgid`
-    LEFT JOIN Users u ON u.`uid` = p.`uid`;
+    LEFT JOIN vUser u ON u.`uid` = p.`uid`;
