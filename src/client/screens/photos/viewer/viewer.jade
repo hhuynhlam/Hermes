@@ -15,7 +15,7 @@ section#Viewer.container-fluid
             .panel-body
                 #ImageMeta
                     img(data-bind="attr: { src: profileImage }", style="border-radius: 50%; margin-right: 10px;")
-                    strong(data-bind="text: meta().username") Hai Huynhlam 
+                    strong(data-bind="text: meta().username") 
                     br
                     //- small 12/15/2015
                     blockquote
@@ -23,3 +23,17 @@ section#Viewer.container-fluid
 
                 
                 hr
+
+                #ImageComment(data-bind="foreach: comments")
+                    
+                    div.margin-md-bottom(style="clear: both;")
+                        img.margin-sm-right.pull-left(data-bind="attr: { src: '/photos?filePath=' + userImage + '&thumb=true&width=50' }", 
+                            style="border-radius: 50%;")
+                        span(data-bind="text: pComment")
+                        
+                        br
+                        small(data-bind="text: username")
+                        span(style="padding: 0 5px;") | 
+                        small(data-bind="text: $parent.formatDate(pUpdate)")
+                    
+

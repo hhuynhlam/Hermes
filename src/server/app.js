@@ -48,10 +48,11 @@ app.use('/users',   (devMode) ? require('./_mock/routes/users') : require('./rou
 
 // static routes
 app.use('/',          require('./routes/index'));
+app.use('/comments', require('./routes/comment'));
 app.use('/countries', require('./routes/countries'));
+app.use('/notifications', require('./routes/notifications'));
 app.use('/photos',    require('./routes/photos'));
 app.use('/states',    require('./routes/states'));
-app.use('/notifications', require('./routes/notifications'));
 
 app.use( '/public', express.static(path.join(__dirname, 'public')) );
 app.use( express.static(path.resolve(__dirname, '../client')) );
