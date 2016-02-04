@@ -15,16 +15,16 @@ class WindowViewModel extends BaseWidgetViewModel {
         this.options = options || {};
         this.value = ko.observable();
     }
-  
+
     init() {
         this.setOptions();
         this.$selector.kendoWindow(this.options);
     }
-  
+
     setOptions() {
         var _supportedEvents = ['activate', 'close', 'deactivate', 'dragend', 'dragstart', 'error', 'open', 'refresh', 'resize'],
             _styles = this.options.styles;
-        
+
         if ( _styles && _.isArray(_styles) ) {
             _styles.forEach((c) => {
                 this.$selector.addClass(c);
@@ -34,7 +34,7 @@ class WindowViewModel extends BaseWidgetViewModel {
         this.$selector.html(this.options.html);
 
         this.setupPublications(_supportedEvents);
-        this.setupSubscriptions(); 
+        this.setupSubscriptions();
     }
 
     setupSubscriptions() {
@@ -43,7 +43,7 @@ class WindowViewModel extends BaseWidgetViewModel {
 
             // dispose any existing subscriptions
             msg.dispose.apply(this, this.subscriptions);
-            
+
             // inner html subscription
             if (this.options.subscribe.html) {
                 _subscription = msg.subscribe(this.options.subscribe.html, (html) => {
@@ -56,7 +56,7 @@ class WindowViewModel extends BaseWidgetViewModel {
             // iframe subscription
             if (this.options.subscribe.iframe) {
                 _subscription = msg.subscribe(this.options.subscribe.iframe, (iframe) => {
-                    this.$selector.html('<iframe src="' + iframe + '" height="' + this.options.height + '" width="' + this.options.width + '"></iframe>');
+                    this.$selector.html('<iframe src="' + window.location.origin + iframe + '" height="' + this.options.height + '" width="' + this.options.width + '"></iframe>');
                 }, this, true);
 
                 this.subscriptions.push(_subscription);
