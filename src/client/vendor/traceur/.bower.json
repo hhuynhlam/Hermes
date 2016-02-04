@@ -1,6 +1,6 @@
 {
   "name": "traceur",
-  "version": "0.0.93",
+  "version": "0.0.95",
   "main": "./traceur.js",
   "ignore": [
     "node_modules",
@@ -10,13 +10,13 @@
     ".*"
   ],
   "homepage": "https://github.com/jmcriffey/bower-traceur",
-  "_release": "0.0.93",
+  "_release": "0.0.95",
   "_resolution": {
     "type": "version",
-    "tag": "0.0.93",
-    "commit": "20c15d5fbab6937e7fb8d6a4dfd0a6360782773b"
+    "tag": "0.0.95",
+    "commit": "0ff03c682ff8762867a86b2895b38fe7badb5e5b"
   },
   "_source": "git://github.com/jmcriffey/bower-traceur.git",
-  "_target": "0.0.93",
+  "_target": "0.0.95",
   "_originalSource": "traceur"
 }
