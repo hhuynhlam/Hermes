@@ -16,10 +16,10 @@ class AlbumViewModel {
     constructor(options) {
         this.options = options || {};
         this.isCurrentUsersAlbum = ko.observable(false);
-    }
+    }   
 
     init(albumId) {
-        this.albumId = albumId;
+        this.albumId = albumId;        
         this._createWidgets();
         this._setupEvents();
     }
@@ -39,7 +39,7 @@ class AlbumViewModel {
                 click: ['EditAlbumButton.Click']
             }
         });
-
+        
         buttonWidget.create({
             id: 'DeleteAlbumButton',
             label: '<span class="glyphicon glyphicon-trash"></span>',
@@ -76,11 +76,11 @@ class AlbumViewModel {
 
         photoGridWidget.create({
             id: 'PhotoGrid',
-            dataSource: {
-                transport: {
+            dataSource: { 
+                transport: { 
                     read: {
                         type: 'POST',
-                        url: '/photos/albums/' + this.albumId
+                        url: '/photos/albums/' + this.albumId  
                     }
                 }
             },
@@ -89,7 +89,7 @@ class AlbumViewModel {
 
                 // set screen title
                 sandbox.msg.trigger('#Navbar', 'App.Screen', data[0].groupName);
-
+                
                 // check if album is editable and deleteable
                 _vm.isCurrentUsersAlbum( (data[0].uid === auth.getCurrentUser().uid) ? true : false );
 
@@ -104,7 +104,7 @@ class AlbumViewModel {
 
                 // append image to grid
                 $photoGrid.append(_album);
-            }
+            }           
         });
 
         windowWidget.create({
@@ -128,7 +128,7 @@ class AlbumViewModel {
 
         // photo viewer
         $eventElement.on('PhotoViewer.Init', (event, photoId) => {
-            msg.publish('PhotoViewer.Iframe', '//#/v/photos/viewer/' + photoId);
+            msg.publish('PhotoViewer.Iframe', '/#/v/photos/viewer/' + photoId);
             msg.publish('PhotoViewer.Center');
             msg.publish('PhotoViewer.Open');
         });
@@ -137,7 +137,7 @@ class AlbumViewModel {
         $eventElement.on('EditAlbumButton.Click', () => {
             window.location.assign('/#/photos/album/edit/' + _vm.albumId);
         });
-
+    
         // delete album
         $eventElement.on('DeleteAlbumButton.Click', () => {
             msg.publish('ConfirmDelete.Open');
@@ -147,8 +147,8 @@ class AlbumViewModel {
     _deleteAlbum () {
         http.delete('/photos/albums/' + this.albumId)
         .then(() => {
-            msg.publish('ConfirmDelete.Close');
-            window.location.replace('/#/photos');
+            msg.publish('ConfirmDelete.Close'); 
+            window.location.replace('/#/photos'); 
         })
         .catch((err) => { console.error('Error: Could not delete album ( ', err, ')'); })
         .done();
