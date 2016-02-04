@@ -35,7 +35,7 @@ class ProfileViewModel {
         // profile image
         this.pid = ko.observable(null);
         this.photoPath = ko.observable('');
-    }   
+    }
 
     init() {
         this._setCurrentUser();
@@ -62,7 +62,7 @@ class ProfileViewModel {
 
     save() {
         msg.publish('Profile.Save', 'spinning');
-            
+
         http.put('/users/' + this.currentUser.uid, {
             pid: this.pid(),
             firstName: this.firstName(),
@@ -86,9 +86,9 @@ class ProfileViewModel {
             msg.publish('Profile.Error', 'Save Unsuccessful - Please try again later.');
         })
         .fin(() => { msg.publish('Profile.Save', 'enabled'); })
-        .done();  
+        .done();
     }
-    
+
     setupEvents() {
         var _vm = this,
             $eventElement = $(document);
@@ -178,9 +178,9 @@ class ProfileViewModel {
             change: ['Profile.Country'],
             dataTextField: 'name',
             dataValueField: 'code',
-            dataSource: { 
-                transport: { 
-                    read: '/countries' 
+            dataSource: {
+                transport: {
+                    read: '/countries'
                 }
             },
             value: this.country()
@@ -192,19 +192,19 @@ class ProfileViewModel {
             change: ['Profile.State'],
             dataTextField: 'name',
             dataValueField: 'short',
-            dataSource: { 
-                transport: { 
-                    read: '/states' 
+            dataSource: {
+                transport: {
+                    read: '/states'
                 }
-            }, 
+            },
             value: this.state()
         });
 
         photoGridWidget.create({
             id: 'PhotoImageViewer',
             styles: ['profile-image-chooser'],
-            dataSource: { 
-                transport: { 
+            dataSource: {
+                transport: {
                     read: {
                         type: 'POST',
                         url: '/users/photos/' +  auth.getCurrentUser().uid
@@ -215,7 +215,7 @@ class ProfileViewModel {
                 var _grid = '';
 
                 // no further action if no photos
-                if (!data[0].pid) { return; }
+                if (!data || !data[0] || !data[0].pid) { return; }
 
                 data.forEach((photo) => {
                     _grid += '<div class="library-item" \
@@ -229,7 +229,7 @@ class ProfileViewModel {
 
                 // set photo grid reference
                 _vm.$photoGrid = $photoGrid;
-            }           
+            }
         });
 
         windowWidget.create({
