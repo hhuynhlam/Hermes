@@ -4,7 +4,7 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-import { FaSignOutAlt, FaTachometerAlt } from 'react-icons/fa'
+import { FaAddressBook, FaSignOutAlt } from 'react-icons/fa'
 import styled from 'styled-components'
 import AnchorLink from '../../common/components/AnchorLink'
 
@@ -26,8 +26,8 @@ function Sidebar() {
     <StyledList component="nav">
       <AnchorLink to="/">
         <ListItem button>
-          <StyledListItemIcon><FaTachometerAlt /></StyledListItemIcon>
-          <StyledListItemText primary="Dashboard" />
+          <StyledListItemIcon><FaAddressBook /></StyledListItemIcon>
+          <StyledListItemText primary="Contact List" />
         </ListItem>
       </AnchorLink>
 

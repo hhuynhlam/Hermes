@@ -5,10 +5,6 @@ import styled from 'styled-components'
 import AnchorLink from '../components/AnchorLink'
 import LogoIcon from '../icons/LogoIcon'
 
-const StyledLogoIcon = styled(LogoIcon)`
-  height: 22px !important;
-  width: auto !important;
-`
 const Title = styled(Typography)`
   margin-left: 22px !important;
 `
@@ -16,8 +12,7 @@ const Title = styled(Typography)`
 function LogoLink({ showTitle }) {
   return (
     <AnchorLink to="/">
-      <StyledLogoIcon />
-      { showTitle && <Title color="primary" variant="title">Momentum</Title> }
+      { showTitle && <Title color="primary" variant="title">The Win Family</Title> }
     </AnchorLink>
   )
 }

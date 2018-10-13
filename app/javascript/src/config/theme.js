@@ -66,15 +66,15 @@ const theme = {
       A700: '#616161',
     },
     primary: {
-      light: '#5797A0',
-      main: '#00565d',
-      dark: '#042226',
+      light: '#4F5B62',
+      main: '#263238',
+      dark: '#000A12',
       contrastText: '#fff',
     },
     secondary: {
-      light: '#76371e',
-      main: '#5c1e05',
-      dark: '#2d0f02',
+      light: '#fff',
+      main: '#fff',
+      dark: '#fff',
       contrastText: '#fff',
     },
     text: {

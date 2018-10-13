@@ -43,6 +43,9 @@ RailsAdmin.config do |config|
   config.model 'User' do
     edit do
       %i[
+        address
+        first_name
+        last_name
         email
         password
         password_confirmation

@@ -1,16 +1,16 @@
 import React from 'react'
-import { ClientList } from '../../client'
+import { ContactList } from '../../contact_list'
 import { Sidebar } from '../../sidebar'
 import SidebarHeader from '../layouts/SidebarHeader'
 
-function ClientListView() {
+function ContactListView() {
   return (
     <SidebarHeader
       sidebar={<Sidebar />}
     >
-      <ClientList />
+      <ContactList />
     </SidebarHeader>
   )
 }
 
-export default ClientListView
+export default ContactListView

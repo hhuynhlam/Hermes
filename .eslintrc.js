@@ -27,6 +27,7 @@ module.exports = {
       imports: 'always-multiline',
       objects: 'always-multiline',
     }],
+    'function-paren-newline': ['error', 'consistent'],
     'import/prefer-default-export': ['off'],
     'jsx-a11y/anchor-is-valid': ['off'],
     'no-underscore-dangle': ['off'],

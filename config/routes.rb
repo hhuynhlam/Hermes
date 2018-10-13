@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   # API
   namespace :api do
     namespace :v1 do
-      # resources :dashboards, only: %w[index create]
+      resources :users, only: %w[index]
     end
   end
 
