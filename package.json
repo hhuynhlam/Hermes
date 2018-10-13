@@ -1,60 +1,74 @@
 {
-  "name": "hermes",
-  "version": "0.0.1",
-  "description": "Family Website",
+  "name": "huynhfamily",
+  "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "start": "node ./src/server/bin/www",
-    "test": "gulp test"
-  },
   "engines": {
-    "node": "4.2.2"
+    "node": "^6.11.0",
+    "yarn": "^1.0.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/hhuynhlam/Hermes"
+  "scripts": {
+    "lint:fix": "eslint --fix --config ../.eslintrc --ignore-path ../.eslintignore ./app/javascript --ext .js",
+    "lint": "eslint --config ../.eslintrc --ignore-path ../.eslintignore ./app/javascript --ext .js",
+    "test:unit:ci": "NODE_ENV=test jest --ci --runInBand",
+    "test:unit:debug": "NODE_ENV=test node --inspect-brk node_modules/.bin/jest --runInBand",
+    "test:unit:watch:debug": "NODE_ENV=test node --inspect-brk node_modules/.bin/jest --runInBand --watch",
+    "test:unit:watch": "NODE_ENV=test jest --watch",
+    "test:unit": "NODE_ENV=test jest"
   },
-  "author": "Hai Huynhlam <hhuynhlam@gmail.com>",
-  "bugs": {
-    "url": "https://github.com/hhuynhlam/Hermes/issues"
-  },
-  "homepage": "https://github.com/hhuynhlam/Ulysses",
   "dependencies": {
-    "bcrypt-nodejs": "0.0.3",
-    "body-parser": "1.13.2",
-    "cookie-parser": "1.3.5",
-    "debug": "2.2.0",
-    "express": "4.13.1",
-    "gm": "1.21.1",
-    "jade": "1.11.0",
-    "jsonfile": "2.2.3",
-    "lodash": "3.10.1",
-    "morgan": "1.6.1",
-    "multer": "1.1.0",
-    "mysql": "2.9.0",
-    "passport": "0.3.2",
-    "passport-local": "1.0.0",
-    "serve-favicon": "2.3.0"
+    "@material-ui/core": "^1.5.0",
+    "@material-ui/icons": "^2.0.3",
+    "@rails/webpacker": "3.5",
+    "axios": "^0.18.0",
+    "babel-preset-react": "^6.24.1",
+    "connected-react-router": "^4.4.1",
+    "history": "^4.7.2",
+    "immutable": "^3.8.2",
+    "lodash": "^4.17.10",
+    "mui-datatables": "^2.0.0-beta-22",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-hot-loader": "^4.3.4",
+    "react-icons": "^3.0.5",
+    "react-redux": "^5.0.7",
+    "react-resizable": "^1.7.5",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "recompose": "^0.28.2",
+    "redux": "^4.0.0",
+    "redux-immutable": "^4.0.0",
+    "redux-saga": "^0.16.0",
+    "styled-components": "^3.4.2"
   },
   "devDependencies": {
-    "del": "2.1.0",
-    "es6-module-loader": "0.17.8",
-    "gulp": "3.9.0",
-    "gulp-jade": "1.0.1",
-    "gulp-jshint": "1.11.0",
-    "gulp-less": "3.0.3",
-    "gulp-plumber": "1.0.1",
-    "gulp-shell": "0.4.2",
-    "gulp-sourcemaps": "1.5.2",
-    "jasmine-core": "2.3.4",
-    "jshint-stylish": "2.0.0",
-    "karma": "0.13.10",
-    "karma-chrome-launcher": "0.2.0",
-    "karma-jasmine": "0.3.6",
-    "karma-phantomjs2-launcher": "0.3.2",
-    "karma-spec-reporter": "0.0.20",
-    "karma-systemjs": "0.8.0",
-    "systemjs": "0.19.3",
-    "traceur": "0.0.91"
+    "babel-eslint": "^8.2.6",
+    "babel-jest": "^23.4.2",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.4",
+    "eslint": "^4.12.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^21.3.2",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.5.1",
+    "jest": "^23.4.2",
+    "jest-enzyme": "^6.0.2",
+    "webpack-dev-server": "2.11.2"
+  },
+  "jest": {
+    "automock": false,
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "setupFiles": [
+      "./test/jest/setup.js"
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.js?(x)",
+      "**/?(*.)+(spec).js?(x)"
+    ],
+    "testURL": "http://localhost/"
   }
 }

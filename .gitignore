@@ -1,16 +1,33 @@
-*.config.json
-*.bak
-*.log
-*.pid
-*.seed
+# See https://help.github.com/ignore-files/ for more about ignoring files.
 
-.grunt
-.lock-wscript
+# dependencies
+node_modules/
 
-_dist
-coverage
-lib-cov
-logs
-node_modules
-pids
-src/server/public/uploaded/images
+# testing
+.byebug_history
+coverage/
+
+# production
+build/
+
+# misc
+!log/.keep
+!tmp/.keep
+.bin
+.bundle
+.DS_Store
+.env
+.env.development.local
+.env.json
+.env.local
+.env.production.local
+.env.test.local
+config.json
+log/*
+master.key
+npm-debug.log*
+public/packs/*
+seed.csv
+tmp/*
+yarn-debug.log*
+yarn-error.log*

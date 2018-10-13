@@ -1,0 +1,46 @@
+import React from 'react'
+import Divider from '@material-ui/core/Divider'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import { FaSignOutAlt, FaTachometerAlt } from 'react-icons/fa'
+import styled from 'styled-components'
+import AnchorLink from '../../common/components/AnchorLink'
+
+const StyledList = styled(List)`
+  padding-bottom: 0 !important;
+  padding-top: 0 !important;
+`
+const StyledListItemIcon = styled(ListItemIcon)`
+  height: 2em;
+  width: 2em;
+`
+const StyledListItemText = styled(ListItemText)`
+  padding-left: 0 !important;
+  padding-right: 16px !important;
+`
+
+function Sidebar() {
+  return (
+    <StyledList component="nav">
+      <AnchorLink to="/">
+        <ListItem button>
+          <StyledListItemIcon><FaTachometerAlt /></StyledListItemIcon>
+          <StyledListItemText primary="Dashboard" />
+        </ListItem>
+      </AnchorLink>
+
+      <Divider />
+
+      <AnchorLink href="/users/sign_out">
+        <ListItem button>
+          <StyledListItemIcon><FaSignOutAlt /></StyledListItemIcon>
+          <StyledListItemText primary="Logout" />
+        </ListItem>
+      </AnchorLink>
+    </StyledList>
+  )
+}
+
+export default Sidebar

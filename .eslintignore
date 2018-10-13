@@ -1,0 +1,5 @@
+__stories__
+build
+coverage
+node_modules
+registerServiceWorker.js
