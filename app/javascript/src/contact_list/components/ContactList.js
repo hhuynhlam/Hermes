@@ -72,12 +72,14 @@ class ContactList extends React.Component {
     'First Name',
     'Last Name',
     'Email',
+    'Phone',
     'Address',
   ]
   columnMapping = datum => [
     datum.firstName,
     datum.lastName,
     datum.email,
+    datum.phone,
     datum.address,
   ]
 

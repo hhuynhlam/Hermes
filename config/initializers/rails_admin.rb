@@ -44,11 +44,12 @@ RailsAdmin.config do |config|
     edit do
       %i[
         address
+        email
         first_name
         last_name
-        email
         password
         password_confirmation
+        phone
       ].map { |field_name| field field_name }
     end
 
