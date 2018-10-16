@@ -12,6 +12,9 @@ Lint/AmbiguousOperator:
 Rails:
   Enabled: true
 
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
 Style/ClassAndModuleChildren:
   Enabled: false
 

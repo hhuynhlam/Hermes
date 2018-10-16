@@ -28,10 +28,24 @@ The Huynh Family social website.
   gem install bundler
   ```
 
+1. [imagemagick](https://www.imagemagick.org/script/command-line-processing.php)
+
+  ```sh
+  brew install imagemagick
+  ```
+
 1. Create `.env` file for local development environment variables. Example:
 
   ```sh
+  # Required
   MONGO_URL=mongodb://localhost:27017/huynhfamily
+
+  # Optional
+  AWS_ACCESS_KEY_ID=...
+  AWS_SECRET_ACCESS_KEY=...
+  AWS_S3_BUCKET=huynhfamily-production
+  AWS_S3_HOST_ALIAS=s3-us-west-2.amazonaws.com/huynhfamily-production
+  AWS_S3_REGION=us-west-2
   ```
 
 
