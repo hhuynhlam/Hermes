@@ -5,8 +5,10 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import { FaAddressBook, FaSignOutAlt } from 'react-icons/fa'
+import { MdPerson } from 'react-icons/md'
 import styled from 'styled-components'
 import AnchorLink from '../../common/components/AnchorLink'
+import getCurrentUser from '../../common/services/getCurrentUser'
 
 const StyledList = styled(List)`
   padding-bottom: 0 !important;
@@ -24,6 +26,15 @@ const StyledListItemText = styled(ListItemText)`
 function Sidebar() {
   return (
     <StyledList component="nav">
+      <AnchorLink to={`/users/${getCurrentUser().id}`}>
+        <ListItem button>
+          <StyledListItemIcon><MdPerson /></StyledListItemIcon>
+          <StyledListItemText primary="Edit Profile" />
+        </ListItem>
+      </AnchorLink>
+
+      <Divider />
+
       <AnchorLink to="/">
         <ListItem button>
           <StyledListItemIcon><FaAddressBook /></StyledListItemIcon>
