@@ -50,6 +50,7 @@ RailsAdmin.config do |config|
         password
         password_confirmation
         phone
+        active
       ].map { |field_name| field field_name }
     end
 

@@ -8,6 +8,8 @@ class User
   field :last_name, type: String
   field :phone, type: Integer
 
+  field :active, type: Boolean, default: true
+
   ##############################################################################
   # DEVISE
   ##############################################################################
