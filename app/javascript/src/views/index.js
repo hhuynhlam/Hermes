@@ -1,5 +1,5 @@
 import React from 'react'
-import { ConnectedRouter } from 'connected-react-router'
+import { ConnectedRouter } from 'connected-react-router/immutable'
 import { Route, Switch } from 'react-router-dom'
 import history from '../config/history'
 

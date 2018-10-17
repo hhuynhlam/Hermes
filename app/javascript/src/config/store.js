@@ -1,5 +1,5 @@
-import { connectRouter, routerMiddleware } from 'connected-react-router'
-import Immutable, { fromJS } from 'immutable'
+import { connectRouter, routerMiddleware } from 'connected-react-router/immutable'
+import Immutable from 'immutable'
 import { applyMiddleware, compose, createStore } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import history from './history'
@@ -16,7 +16,7 @@ const enhancers = (devToolsExtension) ?
 
 const store = createStore(
   connectRouter(history)(reducer),
-  fromJS({}),
+  Immutable.Map(),
   enhancers,
 )
 

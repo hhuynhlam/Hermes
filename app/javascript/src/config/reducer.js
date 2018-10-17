@@ -1,4 +1,6 @@
-// import { combineReducers } from 'redux-immutable'
+import { combineReducers } from 'redux-immutable'
+import { reducer as form } from 'redux-form/immutable'
 
-// export default combineReducers({})
-export default () => ({})
+export default combineReducers({
+  form,
+})
