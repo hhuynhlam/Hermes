@@ -2,7 +2,6 @@
 
 class Api::V1::PhotosController < ApiController
   def index
-    page = index_params.dig(:page, :number) || 1
     photos = policy_scope(Photo)
 
     render json: photos.page(page), meta: { count: photos.count }
@@ -37,10 +36,6 @@ class Api::V1::PhotosController < ApiController
   end
 
   private
-
-  def index_params
-    params.permit(page: [:number])
-  end
 
   def create_params
     {

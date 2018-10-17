@@ -10,4 +10,8 @@ class ApiController < ApplicationController
   def attributes(options = {})
     ActiveModelSerializers::Deserialization.jsonapi_parse(params, options)
   end
+
+  def page
+    params.permit(page: [:number]).dig(:page, :number) || 1
+  end
 end
