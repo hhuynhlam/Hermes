@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   # API
   namespace :api do
     namespace :v1 do
+      resources :photos, only: %w[index show create update destroy]
       resources :users, only: %w[index update]
     end
   end

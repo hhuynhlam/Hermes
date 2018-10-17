@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ApiController < ApplicationController
+  include Pundit
   protect_from_forgery with: :null_session
 
   # FIXME: implement a token auth strategy

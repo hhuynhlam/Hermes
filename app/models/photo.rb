@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Photo
+class Photo < ApplicationRecord
   include Mongoid::Document
   include Mongoid::Paperclip
 
