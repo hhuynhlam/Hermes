@@ -5,7 +5,7 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import { FaAddressBook, FaSignOutAlt } from 'react-icons/fa'
-import { MdPerson } from 'react-icons/md'
+import { MdCameraAlt, MdPerson } from 'react-icons/md'
 import styled from 'styled-components'
 import AnchorLink from '../../common/components/AnchorLink'
 import getCurrentUser from '../../common/services/getCurrentUser'
@@ -44,6 +44,14 @@ function Sidebar() {
 
       <Divider />
 
+      <AnchorLink to="/photos">
+        <ListItem button>
+          <StyledListItemIcon><MdCameraAlt /></StyledListItemIcon>
+          <StyledListItemText primary="Photos" />
+        </ListItem>
+      </AnchorLink>
+
+      <Divider />
       <AnchorLink href="/users/sign_out">
         <ListItem button>
           <StyledListItemIcon><FaSignOutAlt /></StyledListItemIcon>
