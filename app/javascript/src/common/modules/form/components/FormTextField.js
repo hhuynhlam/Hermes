@@ -1,60 +1,75 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { noop } from 'lodash/fp'
 import FormControl from '@material-ui/core/FormControl'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
-import FormContext from '../contexts/FormContext'
+import { Field } from 'redux-form/immutable'
 
-
-function FormTextField(props) {
+function TextField(props) {
   const {
-    fullWidth,
     label,
-    name,
-    onBlur,
-    onChange,
-    ...restOfProps
+    input: {
+      name,
+      onBlur,
+      onChange,
+      onFocus,
+      value,
+    },
+    meta: {
+      error,
+      initial,
+      touched,
+    },
+    ...ownProps
   } = props
 
   return (
-    <FormContext.Consumer>
-      {
-        ({ form }) => (
-          <FormControl error={!!form.errors[name]} fullWidth={fullWidth}>
-            <InputLabel htmlFor={name}>{label}</InputLabel>
+    <FormControl error={touched && error} fullWidth>
+      <InputLabel htmlFor={name}>{label}</InputLabel>
 
-            <Input
-              {...restOfProps}
-              id={name}
-              onBlur={form.fieldBlur(name, onBlur)}
-              onChange={form.fieldChange(name, onChange)}
-              value={form.values[name]}
-            />
+      <Input
+        id={name}
+        onBlur={onBlur}
+        onChange={onChange}
+        onFocus={onFocus}
+        value={value || initial}
+        {...ownProps}
+      />
 
-            <FormHelperText id={`${name}HelperText`}>
-              {form.errors[name]}
-            </FormHelperText>
-          </FormControl>
-        )
-      }
-    </FormContext.Consumer>
-
+      <FormHelperText id={`${name}HelperText`}>
+        {error}
+      </FormHelperText>
+    </FormControl>
   )
 }
-FormTextField.defaultProps = {
-  fullWidth: true,
-  label: '',
-  onBlur: noop,
-  onChange: noop,
+TextField.defaultProps = {
+  label: null,
 }
-FormTextField.propTypes = {
-  fullWidth: PropTypes.bool,
+TextField.propTypes = {
   label: PropTypes.string,
-  onBlur: PropTypes.func,
-  onChange: PropTypes.func,
-  name: PropTypes.string.isRequired,
+  input: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    onBlur: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
+    onFocus: PropTypes.func.isRequired,
+    value: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+    ]),
+  }).isRequired,
+  meta: PropTypes.shape({
+    error: PropTypes.bool,
+    initial: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+    ]),
+    touched: PropTypes.bool,
+  }).isRequired,
+}
+
+function FormTextField(props) {
+  return <Field component={TextField} {...props} />
 }
 
 export default FormTextField

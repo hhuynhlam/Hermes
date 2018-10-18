@@ -10,7 +10,7 @@ import { FaAddressBook, FaSignOutAlt } from 'react-icons/fa'
 import { MdCameraAlt, MdPerson } from 'react-icons/md'
 import styled from 'styled-components'
 import AnchorLink from '../../common/components/AnchorLink'
-import getCurrentUser from '../../common/selectors/getCurrentUser'
+import { getCurrentUser } from '../../profile'
 
 const StyledList = styled(List)`
   padding-bottom: 0 !important;

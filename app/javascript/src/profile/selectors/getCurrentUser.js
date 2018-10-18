@@ -1,5 +1,5 @@
 function getCurrentUser(state) {
-  const path = 'data.currentUser.data'
+  const path = 'profile.data'
 
   const pathToId = `${path}.id`.split('.')
   const pathToAttributes = `${path}.attributes`.split('.')

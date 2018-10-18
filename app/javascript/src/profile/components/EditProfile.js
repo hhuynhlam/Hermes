@@ -5,6 +5,7 @@ import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import CardHeader from '@material-ui/core/CardHeader'
+import { compose } from 'recompose'
 import { withRouter } from 'react-router'
 import { FormTextField, withForm } from '../../common/modules/form'
 
@@ -60,21 +61,17 @@ function EditProfile(props) {
     </Card>
   )
 }
-EditProfile.defaultProps = {
-  pristine: true,
-}
 EditProfile.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
-  pristine: PropTypes.bool,
+  pristine: PropTypes.bool.isRequired,
 }
 
-export default withForm(
-  withRouter(EditProfile),
-  {
-    validations: {
-      firstName: value => !value && 'First Name is required!',
-    },
-  },
-)
+export default compose(
+  withRouter,
+  withForm({
+    form: 'EditProfile',
+    enableReinitialize: true,
+  }),
+)(EditProfile)
