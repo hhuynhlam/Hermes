@@ -16,7 +16,7 @@ const enhancers = (devToolsExtension) ?
 
 const store = createStore(
   connectRouter(history)(reducer),
-  Immutable.Map(),
+  Immutable.fromJS(window.__STORE__),
   enhancers,
 )
 

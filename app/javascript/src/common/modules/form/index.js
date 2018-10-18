@@ -1,2 +1,2 @@
 export { default as FormTextField } from './components/FormTextField'
-export { default as withForm } from './hocs/withForm'
+export { reduxForm as withForm } from 'redux-form'

@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import Divider from '@material-ui/core/Divider'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
@@ -8,7 +10,7 @@ import { FaAddressBook, FaSignOutAlt } from 'react-icons/fa'
 import { MdCameraAlt, MdPerson } from 'react-icons/md'
 import styled from 'styled-components'
 import AnchorLink from '../../common/components/AnchorLink'
-import getCurrentUser from '../../common/services/getCurrentUser'
+import getCurrentUser from '../../common/selectors/getCurrentUser'
 
 const StyledList = styled(List)`
   padding-bottom: 0 !important;
@@ -23,10 +25,10 @@ const StyledListItemText = styled(ListItemText)`
   padding-right: 16px !important;
 `
 
-function Sidebar() {
+function Sidebar({ currentUser }) {
   return (
     <StyledList component="nav">
-      <AnchorLink to={`/users/${getCurrentUser().id}`}>
+      <AnchorLink to={`/users/${currentUser.id}`}>
         <ListItem button>
           <StyledListItemIcon><MdPerson /></StyledListItemIcon>
           <StyledListItemText primary="Edit Profile" />
@@ -61,5 +63,12 @@ function Sidebar() {
     </StyledList>
   )
 }
+Sidebar.propTypes = {
+  currentUser: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+  }).isRequired,
+}
 
-export default Sidebar
+export default connect(state => ({
+  currentUser: getCurrentUser(state),
+}))(Sidebar)
