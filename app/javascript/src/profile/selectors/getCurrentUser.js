@@ -1,11 +1,9 @@
+import { getEntityAttributesById } from '../../data'
+
 function getCurrentUser(state) {
-  const path = 'profile.data'
+  const id = state.getIn(['profile', 'currentUser'])
 
-  const pathToId = `${path}.id`.split('.')
-  const pathToAttributes = `${path}.attributes`.split('.')
-
-  const attributes = state.getIn(pathToAttributes).toJS()
-  const id = state.getIn(pathToId)
+  const attributes = getEntityAttributesById('users', id)(state)
 
   return {
     id,

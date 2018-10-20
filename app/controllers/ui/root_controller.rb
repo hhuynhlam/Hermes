@@ -7,9 +7,10 @@ class Ui::RootController < ApplicationController
                 .map(&:name)
                 .map { |feature| [feature, FEATURE.enabled?(feature.to_sym)] }
                 .to_h
-    @store = {
-      profile: ActiveModelSerializers::SerializableResource.new(current_user, {})
-    }
+
+    @store = StoreBuilder.build do |store|
+      store.with_current_user(current_user)
+    end
 
     render :show
   end
