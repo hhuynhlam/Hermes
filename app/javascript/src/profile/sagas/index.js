@@ -1,13 +1,14 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects'
 import { invoke } from 'lodash/fp'
 import axios from 'axios'
+import immutableToJS from '../../common/services/immutableToJS'
 import * as actions from '../actions'
 
 function* updateProfileSaga({ payload }) {
   yield put({ type: actions.UPDATE_PROFILE_REQUEST })
 
   try {
-    const { id, ...attributes } = invoke('toJS')(payload) || payload
+    const { id, ...attributes } = immutableToJS(payload)
 
     const body = {
       data: {
