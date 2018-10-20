@@ -7,13 +7,20 @@ import CardContent from '@material-ui/core/CardContent'
 import CardHeader from '@material-ui/core/CardHeader'
 import { compose } from 'recompose'
 import { withRouter } from 'react-router'
-import { FormTextField, withForm } from '../../common/modules/form'
+import { FormTextField, validations, withForm } from '../../common/modules/form'
 
 function EditProfile(props) {
   const {
     history,
     pristine,
+    valid,
   } = props
+
+  const {
+    isEmail,
+    isPhoneNumber,
+    isRequired,
+  } = validations
 
   return (
     <Card>
@@ -25,19 +32,40 @@ function EditProfile(props) {
       <CardContent>
         <div className="row">
           <div className="col-xs-12 col-sm-6">
-            <FormTextField label="First Name" name="firstName" />
+            <FormTextField
+              label="First Name"
+              name="firstName"
+              validate={[isRequired]}
+            />
           </div>
           <div className="col-xs-12 col-sm-6">
-            <FormTextField label="Last Name" name="lastName" />
+            <FormTextField
+              label="Last Name"
+              name="lastName"
+              validate={[isRequired]}
+            />
           </div>
           <div className="col-xs-12 col-sm-6">
-            <FormTextField label="Email" name="email" />
+            <FormTextField
+              label="Email"
+              name="email"
+              validate={[isRequired, isEmail]}
+            />
           </div>
           <div className="col-xs-12 col-sm-6">
-            <FormTextField label="Phone" name="phone" />
+            <FormTextField
+              label="Phone"
+              name="phone"
+              validate={[isRequired, isPhoneNumber]}
+            />
           </div>
           <div className="col-xs-12">
-            <FormTextField label="Address" name="address" multiline />
+            <FormTextField
+              label="Address"
+              name="address"
+              multiline
+              validate={[isRequired]}
+            />
           </div>
         </div>
       </CardContent>
@@ -51,7 +79,7 @@ function EditProfile(props) {
         </Button>
         <Button
           color="primary"
-          disabled={pristine}
+          disabled={pristine || !valid}
           type="submit"
           variant="contained"
         >
@@ -66,6 +94,7 @@ EditProfile.propTypes = {
     push: PropTypes.func.isRequired,
   }).isRequired,
   pristine: PropTypes.bool.isRequired,
+  valid: PropTypes.bool.isRequired,
 }
 
 export default compose(

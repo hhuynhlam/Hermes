@@ -5,6 +5,11 @@ import FormHelperText from '@material-ui/core/FormHelperText'
 import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
 import { Field } from 'redux-form/immutable'
+import styled from 'styled-components'
+
+const StyledFormHelperText = styled(FormHelperText)`
+  margin-bottom: 8px !important;
+`
 
 function TextField(props) {
   const {
@@ -18,14 +23,13 @@ function TextField(props) {
     },
     meta: {
       error,
-      initial,
       touched,
     },
     ...ownProps
   } = props
 
   return (
-    <FormControl error={touched && error} fullWidth>
+    <FormControl error={touched && !!error} fullWidth>
       <InputLabel htmlFor={name}>{label}</InputLabel>
 
       <Input
@@ -33,13 +37,13 @@ function TextField(props) {
         onBlur={onBlur}
         onChange={onChange}
         onFocus={onFocus}
-        value={value || initial}
+        value={value}
         {...ownProps}
       />
 
-      <FormHelperText id={`${name}HelperText`}>
-        {error}
-      </FormHelperText>
+      <StyledFormHelperText id={`${name}HelperText`}>
+        { touched && error }
+      </StyledFormHelperText>
     </FormControl>
   )
 }
@@ -59,7 +63,7 @@ TextField.propTypes = {
     ]),
   }).isRequired,
   meta: PropTypes.shape({
-    error: PropTypes.bool,
+    error: PropTypes.string,
     initial: PropTypes.oneOfType([
       PropTypes.number,
       PropTypes.string,
