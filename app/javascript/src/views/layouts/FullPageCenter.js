@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { get } from 'lodash/fp'
 import { withTheme } from '@material-ui/core/styles'
 import styled from 'styled-components'
+import { Snackbar } from '../../snackbar'
 
 const Layout = styled.div`
   align-items: center;
@@ -18,7 +19,12 @@ function FullPageCenter({
   className,
   theme,
 }) {
-  return <Layout className={className} theme={theme}>{children}</Layout>
+  return (
+    <React.Fragment>
+      <Layout className={className} theme={theme}>{children}</Layout>
+      <Snackbar />
+    </React.Fragment>
+  )
 }
 FullPageCenter.defaultProps = {
   children: null,

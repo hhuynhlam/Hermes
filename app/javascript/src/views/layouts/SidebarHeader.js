@@ -8,6 +8,7 @@ import { withTheme } from '@material-ui/core/styles'
 import Toolbar from '@material-ui/core/Toolbar'
 import styled from 'styled-components'
 import LogoLink from '../../common/components/LogoLink'
+import { Snackbar } from '../../snackbar'
 
 const SIDEBAR_WIDTH = 215
 
@@ -85,13 +86,17 @@ function SidebarHeader({
   theme,
 }) {
   return (
-    <Layout className={className}>
-      <Header theme={theme}>{header}</Header>
-      <Sidebar theme={theme}>{sidebar}</Sidebar>
+    <React.Fragment>
+      <Layout className={className}>
+        <Header theme={theme}>{header}</Header>
+        <Sidebar theme={theme}>{sidebar}</Sidebar>
 
-      <StyledToolbar theme={theme} />
-      <Content header={header}>{children}</Content>
-    </Layout>
+        <StyledToolbar theme={theme} />
+        <Content header={header}>{children}</Content>
+      </Layout>
+
+      <Snackbar />
+    </React.Fragment>
   )
 }
 SidebarHeader.defaultProps = {
