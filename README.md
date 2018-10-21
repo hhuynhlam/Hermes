@@ -100,13 +100,13 @@ The Huynh Family social website.
   ```
 
 ## Deployment
-1. Setup remote SSH access to `dokku@45.33.40.30`
+1. Setup remote SSH access to `dokku@23.92.25.245`
   https://github.com/dokku/dokku/blob/master/docs/deployment/user-management.md
 
 1. Add production Git remote
 
   ```sh
-  git remote add production dokku@45.33.40.30:huynhfamily
+  git remote add production dokku@23.92.25.245:huynhfamily
   ```
 
 1. Push branch to remote
