@@ -430,7 +430,7 @@ DEPENDENCIES
   mongoid-paperclip (~> 0.0.11)
   mongoid-rspec
   paperclip (~> 6.1)
-  pry-rails (~> 0.3)
+  pry-rails (~> 0.3.6)
   puma (~> 3.11)
   pundit (~> 2.0)
   rack-cors
