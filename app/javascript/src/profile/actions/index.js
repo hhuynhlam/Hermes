@@ -1,5 +1,0 @@
-export const UPDATE_PROFILE = 'PROFILE.UPDATE'
-export const UPDATE_PROFILE_REQUEST = 'PROFILE.UPDATE_REQUEST'
-export const UPDATE_PROFILE_FAILED = 'PROFILE.UPDATE_FAILED'
-export const UPDATE_PROFILE_SUCCESS = 'PROFILE.UPDATE_SUCCESS'
-export const updateProfile = payload => ({ type: UPDATE_PROFILE, payload })

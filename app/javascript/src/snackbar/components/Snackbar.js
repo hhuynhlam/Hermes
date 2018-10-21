@@ -5,7 +5,8 @@ import theme from '../../config/theme'
 
 const StyledSnackbar = styled(MUISnackbar)`
   > div:first-child {
-    background-color: ${({ variant }) => theme.palette[variant].main} !important;
+    background-color:
+      ${({ variant }) => variant && theme.palette[variant].main} !important;
   }
 `
 

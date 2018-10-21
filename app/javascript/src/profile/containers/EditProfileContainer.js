@@ -1,6 +1,8 @@
 import { connect } from 'react-redux'
+import immutableToJS from '../../common/services/immutableToJS'
+import { updateResource } from '../../data'
 import { getCurrentUser } from '../../profile'
-import { updateProfile } from '../actions'
+import { openSnackbar } from '../../snackbar'
 import EditProfile from '../components/EditProfile'
 
 function mapStateToProps(state) {
@@ -11,7 +13,33 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onSubmit: value => dispatch(updateProfile(value)),
+    onSubmit: async (value) => {
+      const { id, ...attributes } = immutableToJS(value)
+
+      const body = {
+        data: {
+          attributes,
+        },
+      }
+
+      try {
+        await dispatch(updateResource({
+          type: 'users',
+          id,
+          body,
+        }))
+
+        dispatch(openSnackbar({
+          message: 'Profile Updated!',
+          variant: 'success',
+        }))
+      } catch (error) {
+        dispatch(openSnackbar({
+          message: error,
+          variant: 'error',
+        }))
+      }
+    },
   }
 }
 
