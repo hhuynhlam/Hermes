@@ -1,0 +1,43 @@
+AllCops:
+  Exclude:
+    - 'bin/*'
+    - 'doc/*'
+    - 'config/boot.rb'
+    - 'Guardfile'
+  TargetRubyVersion: 2.3
+
+Lint/AmbiguousOperator:
+  Enabled: false
+
+Rails:
+  Enabled: true
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/SignalException:
+  EnforcedStyle: only_raise
+
+Style/Lambda:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 100
+
+Metrics/MethodLength:
+  Enabled: false
+
+Performance/Casecmp:
+  Enabled: false

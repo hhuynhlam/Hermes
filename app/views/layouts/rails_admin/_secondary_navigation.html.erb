@@ -1,0 +1,10 @@
+<ul class="nav navbar-nav navbar-right root_links">
+  <% actions(:root).each do |action| %>
+    <li class="<%= action.action_name %>_root_link">
+      <%= link_to wording_for(:menu, action), { action: action.action_name, controller: 'rails_admin/main' }, class: action.pjax? ? "pjax" : "" %>
+    </li>
+  <% end %>
+  <li class="logout_root_link">
+    <a class="pjax" href="/admin/logout">Logout</a>
+  </li>
+</ul>

@@ -1,3 +1,0 @@
-#!/bin/bash
-
-cd /home/webservice/hermes/ && PORT=9191 node src/server/bin/www
