@@ -6,7 +6,7 @@ class User < ApplicationRecord
   field :address, type: String
   field :first_name, type: String
   field :last_name, type: String
-  field :phone, type: Integer
+  field :phone, type: String
 
   field :active, type: Boolean, default: true
 
@@ -51,6 +51,5 @@ class User < ApplicationRecord
 
   # FIXME: temporary workaround for undefined method error when saving record
   #        in Rails Admin (https://github.com/plataformatec/devise/issues/4542)
-  def will_save_change_to_email?
-  end
+  def will_save_change_to_email?; end
 end

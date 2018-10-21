@@ -8,7 +8,7 @@ class Ui::RootController < ApplicationController
                 .map { |feature| [feature, FEATURE.enabled?(feature.to_sym)] }
                 .to_h
 
-    @store = StoreBuilder.build do |store|
+    @store = ::Ui::StoreBuilder.build do |store|
       store.with_current_user(current_user)
     end
 
