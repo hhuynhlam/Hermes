@@ -11,6 +11,10 @@ class ApiController < ApplicationController
     ActiveModelSerializers::Deserialization.jsonapi_parse(params, options)
   end
 
+  def includes
+    params.permit(:include).dig(:include)
+  end
+
   def page
     params.permit(page: [:number]).dig(:page, :number) || 1
   end

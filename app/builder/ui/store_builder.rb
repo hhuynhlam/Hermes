@@ -4,6 +4,7 @@ class Ui::StoreBuilder < ApplicationBuilder
   def default
     {
       data: {
+        photos: {},
         users: {}
       },
       profile: {
@@ -17,6 +18,6 @@ class Ui::StoreBuilder < ApplicationBuilder
 
     @output[:profile][:currentUser] = user_id
     @output[:data][:users][user_id] =
-      ActiveModelSerializers::SerializableResource.new(user, {})
+      ActiveModelSerializers::SerializableResource.new(user, {}).as_json[:data]
   end
 end

@@ -5,7 +5,7 @@
  */
 function getEntityAttributesById(entity, id) {
   return state =>
-    state.getIn(['data', entity, id, 'data', 'attributes']).toJS()
+    state.getIn(['data', entity, id, 'attributes']).toJS()
 }
 
 export default getEntityAttributesById

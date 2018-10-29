@@ -43,6 +43,7 @@ RailsAdmin.config do |config|
   config.model 'Photo' do
     edit do
       field :image, :paperclip
+      field :caption
       field :owner
       field :tags
     end

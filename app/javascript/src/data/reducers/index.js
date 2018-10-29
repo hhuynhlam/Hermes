@@ -1,15 +1,18 @@
-import { fromJS, Map } from 'immutable'
-import { handleActions } from 'redux-actions'
+import { Map } from 'immutable'
+import normalize from 'json-api-normalizer'
+import { combineActions, handleActions } from 'redux-actions'
 import * as actions from '../actions'
 
 export const initialState = Map()
 
-function updateResourceSuccessReducer(state, { payload }) {
-  const { data } = payload
-
-  return state.setIn([data.type, data.id], fromJS(payload))
+function resourceSuccessReducer(state, { payload }) {
+  return state.mergeDeep(normalize(payload))
 }
 
 export default handleActions({
-  [actions.UPDATE_RESOURCE_SUCCESS]: updateResourceSuccessReducer,
+  [combineActions(
+    actions.INDEX_RESOURCE_SUCCESS,
+    actions.CREATE_RESOURCE_SUCCESS,
+    actions.UPDATE_RESOURCE_SUCCESS,
+  )]: resourceSuccessReducer,
 }, initialState)
