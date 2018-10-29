@@ -1,16 +1,16 @@
 import React from 'react'
-import { Photo } from '../../photo'
+import { PhotosAdd } from '../../photo'
 import { Sidebar } from '../../sidebar'
 import SidebarHeader from '../layouts/SidebarHeader'
 
-function PhotoView() {
+function PhotosView() {
   return (
     <SidebarHeader
       sidebar={<Sidebar />}
     >
-      <Photo />
+      <PhotosAdd />
     </SidebarHeader>
   )
 }
 
-export default PhotoView
+export default PhotosView

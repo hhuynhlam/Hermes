@@ -4,7 +4,9 @@ class Api::V1::PhotosController < ApiController
   def index
     photos = policy_scope(Photo)
 
-    render json: photos.page(page), meta: { count: photos.count }
+    render json: photos.page(page),
+           meta: { count: photos.count },
+           include: includes
   end
 
   def show
@@ -39,8 +41,9 @@ class Api::V1::PhotosController < ApiController
 
   def create_params
     {
-      image: params.require(:image),
-      owner: User.find(params.require(:owner))
+      caption: attributes[:caption],
+      image: attributes[:image],
+      owner: User.find(attributes[:owner])
     }
   end
 end

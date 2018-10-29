@@ -1,2 +1,2 @@
-export const Photo = () => null
-export const Photos = () => null
+export { default as Photos } from './containers/PhotosContainer'
+export { default as PhotosAdd } from './containers/PhotosAddContainer'

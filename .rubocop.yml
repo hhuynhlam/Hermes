@@ -4,6 +4,7 @@ AllCops:
     - 'doc/*'
     - 'config/boot.rb'
     - 'Guardfile'
+    - 'node_modules/**/*'
   TargetRubyVersion: 2.3
 
 Lint/AmbiguousOperator:

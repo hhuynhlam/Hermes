@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import Typography from '@material-ui/core/Typography'
 import styled from 'styled-components'
 import AnchorLink from '../components/AnchorLink'
-import LogoIcon from '../icons/LogoIcon'
 
 const Title = styled(Typography)`
   margin-left: 22px !important;
